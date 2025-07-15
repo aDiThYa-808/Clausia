@@ -14,63 +14,88 @@ export default function StepTwo() {
   const productType = watch("productType") || "app";
 
   return (
-    <div className="space-y-6">
-
+    <div className="space-y-20">
+  
       {/* Q1: Collects data? */}
-      <div>
-        <label className="block font-medium mb-1">Does your {productType} collect personal data?</label>
-        <div className="space-x-4">
-          <label>
-            <input type="radio" value="yes" {...register('collectsData')} />
-            <span className="ml-1">Yes</span>
-          </label>
-          <label>
-            <input type="radio" value="no" {...register('collectsData')} />
-            <span className="ml-1">No</span>
-          </label>
+      <div className="space-y-2">
+        <h2 className="text-lg font-medium text-slate-800">
+          Does your {productType} collect personal data?
+        </h2>
+        <div className="flex gap-4">
+          {["yes", "no"].map((option) => (
+            <label key={option} className="flex items-center gap-2 text-sm">
+              <input
+                type="radio"
+                value={option}
+                {...register("collectsData", {
+                  required: "Please select an option",
+                })}
+                className="accent-indigo-600"
+              />
+              {option === "yes" ? "Yes" : "No"}
+            </label>
+          ))}
         </div>
         {errors.collectsData && (
-          <p className="text-red-500 text-sm">{String(errors.collectsData.message)}</p>
+          <p className="text-red-500 text-sm">
+            {String(errors.collectsData.message)}
+          </p>
         )}
       </div>
-
-      {/* Q2: If yes, what data types? */}
-      {collectsData === 'yes' && (
-        <div>
-          <label className="block font-medium mb-1">What types of personal data do you collect?</label>
-          <div className="space-y-1">
-            {['Name', 'Email', 'Phone', 'Location', 'Device ID', 'Usage Data'].map((item) => (
-              <label key={item} className="block">
+  
+      {/* Q2: What types of data (if yes) */}
+      {collectsData === "yes" && (
+        <div className="space-y-2">
+          <h2 className="text-lg font-medium text-slate-800">
+            What types of personal data do you collect?
+          </h2>
+          <div className="grid grid-cols-2 gap-y-2 max-w-md">
+            {[
+              "Name",
+              "Email",
+              "Phone",
+              "Location",
+              "Device ID",
+              "Usage Data",
+            ].map((item) => (
+              <label key={item} className="flex items-center gap-2 text-sm">
                 <input
                   type="checkbox"
                   value={item}
-                  {...register('collectedDataTypes')}
+                  {...register("collectedDataTypes")}
+                  className="accent-indigo-600"
                 />
-                <span className="ml-2">{item}</span>
+                {item}
               </label>
             ))}
           </div>
         </div>
       )}
-
-      {/* Q3: How is data collected? */}
-      {collectsData === 'yes' && (
-        <div>
-          <label className="block font-medium mb-1">How is data collected?</label>
-          <div className="space-y-1">
-            {['User input', 'Automatically', 'Via 3rd party SDKs'].map((item) => (
-              <label key={item} className="block">
-                <input
-                  type="checkbox"
-                  value={item}
-                  {...register('dataCollectionMethods')}
-                />
-                <span className="ml-2">{item}</span>
-              </label>
-            ))}
+  
+      {/* Q3: Collection methods (if yes) */}
+      {collectsData === "yes" && (
+        <div className="space-y-2">
+          <h2 className="text-lg font-medium text-slate-800">
+            How is this data collected?
+          </h2>
+          <div className="grid grid-cols-2 gap-y-2 max-w-md">
+            {["User input", "Automatically", "Via 3rd party SDKs"].map(
+              (item) => (
+                <label key={item} className="flex items-center gap-2 text-sm">
+                  <input
+                    type="checkbox"
+                    value={item}
+                    {...register("dataCollectionMethods")}
+                    className="accent-indigo-600"
+                  />
+                  {item}
+                </label>
+              )
+            )}
           </div>
         </div>
       )}
     </div>
   );
+  
 }

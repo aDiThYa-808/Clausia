@@ -23,17 +23,17 @@ export default function FormWizard() {
     resolver: zodResolver(fullSchema),
     mode: "onTouched",
     defaultValues: {
-      productType: undefined,
+      productType: 'app',
       productName: "",
       productDescription: "",
-      ageGroup:undefined,
+      ageGroup: undefined,
       contactEmail: "",
       collectsData: undefined,
       collectedDataTypes: [],
       dataCollectionMethods: [],
       usesSDKs: undefined,
       thirdPartySDKs: [],
-      otherthirdPartySDKs:"",
+      otherthirdPartySDKs: "",
       dataStorageRegion: "",
       supportsDeletion: undefined,
       contactMethods: [],
@@ -50,7 +50,13 @@ export default function FormWizard() {
 
   const validateStep = async () => {
     if (step === 1)
-      return await trigger(["productType","productName", "productDescription","ageGroup","contactEmail"]);
+      return await trigger([
+        "productType",
+        "productName",
+        "productDescription",
+        "ageGroup",
+        "contactEmail",
+      ]);
     if (step === 2)
       return await trigger([
         "collectsData",
@@ -82,45 +88,70 @@ export default function FormWizard() {
     // TODO: Send to API or move to Step 3
   };
 
+  const steps = [
+    { id: 1, label: "About Your Product" },
+    { id: 2, label: "Data You Collect" },
+    { id: 3, label: "Third-Party Tools" },
+    { id: 4, label: "Contact Details" },
+  ];
+
   return (
     <FormProvider {...methods}>
-      <form onSubmit={handleSubmit(onFinalSubmit)} className="space-y-6">
-        {step === 1 && <StepOne />}
-        {step === 2 && <StepTwo />}
-        {step === 3 && <StepThree />}
-        {step === 4 && <StepFour />}
-
-        <div className="flex justify-between mt-6">
-          {step > 1 && (
-            <button
-              type="button"
-              onClick={handleBack}
-              className="bg-gray-200 px-4 py-2 rounded hover:bg-gray-300"
-            >
-              Back
-            </button>
-          )}
-
-          {step < 4 && (
-            <button
-              type="button"
-              onClick={handleNext}
-              className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700"
-            >
-              Next
-            </button>
-          )}
-
-          {step === 4 && (
-            <button
-              type="submit"
-              className="bg-green-600 text-white px-6 py-2 rounded hover:bg-green-700"
-            >
-              Submit
-            </button>
-          )}
+      <div className="space-y-20">
+        {/* Progress */}
+        <div className="space-y-1 mb-12">
+          <div className="flex justify-between text-xs font-medium text-slate-500">
+            <span>
+              Step {step} of {steps.length}
+            </span>
+            <span>{steps[step - 1]?.label}</span>
+          </div>
+          <div className="w-full bg-slate-200 h-1 rounded-full">
+            <div
+              className="h-1 bg-indigo-600 rounded-full transition-all duration-300"
+              style={{ width: `${(step / steps.length) * 100}%` }}
+            />
+          </div>
         </div>
-      </form>
+
+        <form onSubmit={handleSubmit(onFinalSubmit)} className="space-y-20">
+          {step === 1 && <StepOne />}
+          {step === 2 && <StepTwo />}
+          {step === 3 && <StepThree />}
+          {step === 4 && <StepFour />}
+
+          <div className="flex justify-between items-center pt-8">
+            {step > 1 ? (
+              <button
+                type="button"
+                onClick={handleBack}
+                className="text-sm text-slate-500 hover:text-slate-800 transition px-4 py-2"
+              >
+                ← Back
+              </button>
+            ) : (
+              <div />
+            )}
+
+            {step < steps.length ? (
+              <button
+                type="button"
+                onClick={handleNext}
+                className="bg-indigo-600 text-white text-sm px-5 py-2 rounded-md hover:bg-indigo-700 transition"
+              >
+                Next
+              </button>
+            ) : (
+              <button
+                type="submit"
+                className="bg-green-600 text-white text-sm px-5 py-2 rounded-md hover:bg-green-700 transition"
+              >
+                Generate Policy
+              </button>
+            )}
+          </div>
+        </form>
+      </div>
     </FormProvider>
   );
 }

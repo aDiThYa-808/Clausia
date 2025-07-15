@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useFormContext, useWatch } from 'react-hook-form';
-import { useState } from 'react';
+import { useFormContext, useWatch } from "react-hook-form";
+import { useState } from "react";
 
 export default function StepFour() {
   const {
@@ -10,57 +10,85 @@ export default function StepFour() {
     control,
   } = useFormContext();
 
-  const contactMethods = useWatch({ control, name: 'contactMethods' }) || [];
+  const contactMethods = useWatch({ control, name: "contactMethods" }) || [];
 
   return (
-    <div className="space-y-6">
-      {/* Q1: Supports deletion */}
-      <div>
-        <label className="block font-medium mb-1">Can users request data deletion?</label>
-        <div className="space-x-4">
-          <label>
-            <input type="radio" value="yes" {...register('supportsDeletion')} />
-            <span className="ml-1">Yes</span>
-          </label>
-          <label>
-            <input type="radio" value="no" {...register('supportsDeletion')} />
-            <span className="ml-1">No</span>
-          </label>
+    <div className="space-y-20">
+      {/* Q1: Supports data deletion */}
+      <div className="space-y-2">
+        <h2 className="text-lg font-medium text-slate-800">
+          Can users request data deletion?
+        </h2>
+        <div className="flex gap-4">
+          {["yes", "no"].map((val) => (
+            <label key={val} className="flex items-center gap-2 text-sm">
+              <input
+                type="radio"
+                value={val}
+                {...register("supportsDeletion", {
+                  required: "Please select an option",
+                })}
+                className="accent-indigo-600"
+              />
+              {val === "yes" ? "Yes" : "No"}
+            </label>
+          ))}
         </div>
-        {errors.supportsDeletion && <p className="text-red-500 text-sm">{String(errors.supportsDeletion.message)}</p>}
+        {errors.supportsDeletion && (
+          <p className="text-red-500 text-sm">
+            {String(errors.supportsDeletion.message)}
+          </p>
+        )}
       </div>
 
       {/* Q2: Contact methods */}
-      <div>
-        <label className="block font-medium mb-1">How can users contact you?</label>
-        <div className="space-y-1">
-          {['Email', 'In-app support', 'Web contact form'].map((method) => (
-            <label key={method} className="block">
-              <input type="checkbox" value={method} {...register('contactMethods')} />
-              <span className="ml-2">{method}</span>
-            </label>
-          ))}
+      <div className="space-y-4">
+        <div className="space-y-2">
+          <h2 className="text-lg font-medium text-slate-800">
+            How can users contact you?
+          </h2>
+          <div className="grid grid-cols-2 gap-y-2 max-w-md">
+            {["Email", "In-app support", "Web contact form"].map((method) => (
+              <label key={method} className="flex items-center gap-2 text-sm">
+                <input
+                  type="checkbox"
+                  value={method}
+                  {...register("contactMethods")}
+                  className="accent-indigo-600"
+                />
+                {method}
+              </label>
+            ))}
+          </div>
+        </div>
 
-          <label className="block mt-2">
+        {/* Optional: Other contact method */}
+        <div className="space-y-2">
+          <label className="flex items-center gap-2 text-sm">
             <input
               type="checkbox"
               value="Other"
-              {...register('contactMethods')}
+              {...register("contactMethods")}
+              className="accent-indigo-600"
             />
-            <span className="ml-2">Other (specify below)</span>
+            Other (specify below)
           </label>
 
-          {contactMethods.includes('Other') && (
+          {contactMethods.includes("Other") && (
             <input
               type="text"
               placeholder="e.g., Telegram @handle"
-              {...register('otherContactMethod')}
-              className="mt-2 w-full border px-3 py-2 rounded-md"
+              {...register("otherContactMethod")}
+              className="w-full text-base px-3 py-1.5 border-b border-slate-300 focus:outline-none focus:border-indigo-600 bg-transparent placeholder-slate-400"
             />
           )}
         </div>
 
-        {errors.contactMethods && <p className="text-red-500 text-sm">{String(errors.contactMethods.message)}</p>}
+        {errors.contactMethods && (
+          <p className="text-red-500 text-sm">
+            {String(errors.contactMethods.message)}
+          </p>
+        )}
       </div>
     </div>
   );
