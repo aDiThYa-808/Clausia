@@ -23,8 +23,9 @@ export default function FormWizard() {
     resolver: zodResolver(fullSchema),
     mode: "onTouched",
     defaultValues: {
-      appName: "",
-      appDescription: "",
+      productType: undefined,
+      productName: "",
+      productDescription: "",
       ageGroup:undefined,
       contactEmail: "",
       collectsData: undefined,
@@ -32,6 +33,7 @@ export default function FormWizard() {
       dataCollectionMethods: [],
       usesSDKs: undefined,
       thirdPartySDKs: [],
+      otherthirdPartySDKs:"",
       dataStorageRegion: "",
       supportsDeletion: undefined,
       contactMethods: [],
@@ -48,7 +50,7 @@ export default function FormWizard() {
 
   const validateStep = async () => {
     if (step === 1)
-      return await trigger(["appName", "appDescription","ageGroup","contactEmail"]);
+      return await trigger(["productType","productName", "productDescription","ageGroup","contactEmail"]);
     if (step === 2)
       return await trigger([
         "collectsData",

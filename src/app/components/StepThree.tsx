@@ -3,21 +3,25 @@
 import { useFormContext, useWatch } from 'react-hook-form';
 import { useState } from 'react';
 
+
 export default function StepThree() {
   const {
     register,
+    watch,
     formState: { errors },
     control,
   } = useFormContext();
 
   const usesSDKs = useWatch({ control, name: 'usesSDKs' });
+  const thirdPartySDKs = useWatch({control, name:"thirdPartySDKs"}) || [];
   const [customSDK, setCustomSDK] = useState('');
+  const productType = watch("productType") || "app";
 
   return (
     <div className="space-y-6">
       {/* Q1: Uses third-party SDKs */}
       <div>
-        <label className="block font-medium mb-1">Does your app use third-party SDKs?</label>
+        <label className="block font-medium mb-1">Does your {productType} use third-party SDKs?</label>
         <div className="space-x-4">
           <label>
             <input type="radio" value="yes" {...register('usesSDKs')} />
@@ -45,30 +49,23 @@ export default function StepThree() {
           </div>
 
           {/* Optional: Add custom SDK */}
-          <div className="mt-2 flex items-center gap-2">
+          <label className="block mt-2">
             <input
-              type="text"
-              value={customSDK}
-              onChange={(e) => setCustomSDK(e.target.value)}
-              placeholder="Other SDK..."
-              className="border px-2 py-1 rounded-md"
+              type="checkbox"
+              value="Other"
+              {...register('thirdPartySDKs')}
             />
-            <button
-              type="button"
-              onClick={() => {
-                if (customSDK.trim()) {
-                  const event = {
-                    target: { value: customSDK.trim(), checked: true, name: 'thirdPartySDKs' },
-                  };
-                  register('thirdPartySDKs').onChange(event);
-                  setCustomSDK('');
-                }
-              }}
-              className="text-sm bg-gray-200 px-3 py-1 rounded hover:bg-gray-300"
-            >
-              Add
-            </button>
-          </div>
+            <span className="ml-2">Other (specify below)</span>
+          </label>
+
+          {thirdPartySDKs.includes('Other') && (
+             <input
+             type="text"
+             placeholder="e.g., supabase"
+             {...register('otherthirdPartySDKs')}
+             className="mt-2 w-full border px-3 py-2 rounded-md"
+           />
+          ) }
 
           {errors.thirdPartySDKs && <p className="text-red-500 text-sm">{String(errors.thirdPartySDKs.message)}</p>}
         </div>

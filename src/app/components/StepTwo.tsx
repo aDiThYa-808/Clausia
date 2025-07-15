@@ -5,18 +5,20 @@ import { useFormContext, useWatch } from 'react-hook-form';
 export default function StepTwo() {
   const {
     register,
+    watch,
     formState: { errors },
     control,
   } = useFormContext();
 
   const collectsData = useWatch({ control, name: 'collectsData' });
+  const productType = watch("productType") || "app";
 
   return (
     <div className="space-y-6">
 
       {/* Q1: Collects data? */}
       <div>
-        <label className="block font-medium mb-1">Does your app collect personal data?</label>
+        <label className="block font-medium mb-1">Does your {productType} collect personal data?</label>
         <div className="space-x-4">
           <label>
             <input type="radio" value="yes" {...register('collectsData')} />
