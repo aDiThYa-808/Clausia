@@ -26,7 +26,7 @@ export default function DashboardPage() {
     <div className="min-h-screen bg-slate-50 text-slate-900">
       {/* Navbar */}
       <header className="flex items-center justify-between p-4 border-b border-slate-200 bg-white shadow-sm">
-        <h1 className="text-xl font-bold text-indigo-600">LegalZap</h1>
+        <h1 className="text-xl font-bold text-indigo-600">Clausia</h1>
         <div className="flex items-center gap-4">
           <span className="bg-indigo-100 text-indigo-600 text-sm px-3 py-1 rounded-full">
             Credits: 10
