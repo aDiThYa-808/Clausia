@@ -12,7 +12,7 @@ import {
   stepTwoSchema,
   fullSchema,
   FullFormData,
-} from "@/lib/zodSchemas";
+} from "@/lib/zod/zodSchemas";
 import StepThree from "./StepThree";
 import StepFour from "./StepFour";
 import StepFive from "./StepFive";

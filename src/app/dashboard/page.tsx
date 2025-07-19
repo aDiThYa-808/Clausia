@@ -1,6 +1,9 @@
-'use client';
+'use client'
 
 import { useRouter } from 'next/navigation';
+import { useUser } from '@/lib/supabase/useUser';
+import { useEffect, useRef, useState } from 'react';
+import { supabase } from '@/lib/supabase/supabaseClient';
 
 const mockPolicies = [
   {
@@ -21,18 +24,71 @@ const mockPolicies = [
 
 export default function DashboardPage() {
   const router = useRouter();
+  const { user, loading } = useUser();
+
+  const [open, setOpen] = useState(false);
+  const menuRef = useRef(null);
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    router.push('/');
+  };
+
+  // close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (menuRef.current && !(menuRef.current as any).contains(event.target)) {
+        setOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  if (loading) return <p>Loading...</p>;
+  if (!user) return <p>Not logged in</p>;
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900">
       {/* Navbar */}
-      <header className="flex items-center justify-between p-4 border-b border-slate-200 bg-white shadow-sm">
+      <header className="flex items-center justify-between p-4 border-b border-slate-200 bg-white shadow-sm relative">
         <h1 className="text-xl font-bold text-indigo-600">Clausia</h1>
         <div className="flex items-center gap-4">
           <span className="bg-indigo-100 text-indigo-600 text-sm px-3 py-1 rounded-full">
             Credits: 10
           </span>
-          <div className="w-8 h-8 bg-slate-100 rounded-full flex items-center justify-center text-sm text-slate-500">
-            A
+          <div className="relative" ref={menuRef}>
+            {user?.user_metadata?.avatar_url ? (
+              <img
+                src={user.user_metadata.avatar_url}
+                alt="Profile"
+                onClick={() => setOpen(!open)}
+                className="w-8 h-8 rounded-full object-cover cursor-pointer"
+              />
+            ) : (
+              <div
+                onClick={() => setOpen(!open)}
+                className="w-8 h-8 bg-slate-100 rounded-full flex items-center justify-center text-sm text-slate-500 cursor-pointer"
+              >
+                ?
+              </div>
+            )}
+
+            {open && (
+              <div className="absolute right-0 mt-2 w-48 bg-white border border-slate-200 rounded-xl shadow-lg p-4 text-sm z-50">
+                <p className="font-medium text-slate-800">
+                  {user?.user_metadata?.full_name || 'User'}
+                </p>
+                <p className="text-slate-500 text-xs truncate">{user?.email}</p>
+                <button
+                  onClick={handleLogout}
+                  className="mt-3 w-full text-left text-red-600 hover:underline"
+                >
+                  Log out
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </header>
