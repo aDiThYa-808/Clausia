@@ -15,6 +15,7 @@ import {
 } from "@/lib/zodSchemas";
 import StepThree from "./StepThree";
 import StepFour from "./StepFour";
+import StepFive from "./StepFive";
 
 export default function FormWizard() {
   const [step, setStep] = useState(1);
@@ -38,6 +39,10 @@ export default function FormWizard() {
       supportsDeletion: undefined,
       contactMethods: [],
       otherContactMethod: "",
+      monetizationMethod:undefined,
+      adPlatforms:[],
+      adsArePersonalized:undefined,
+      otherMonetizationExplanation:undefined
     },
   });
 
@@ -71,6 +76,14 @@ export default function FormWizard() {
         "contactMethods",
         "otherContactMethod",
       ]);
+
+    if(step === 5)
+    return await trigger([
+      "monetizationMethod",
+      "adPlatforms",
+      "adsArePersonalized",
+      "otherMonetizationExplanation"
+    ])
     return false;
   };
 
@@ -103,6 +116,7 @@ export default function FormWizard() {
     { id: 2, label: "Data You Collect" },
     { id: 3, label: "Third-Party Tools" },
     { id: 4, label: "Contact Details" },
+    {id: 5, label: "Monetization Details"}
   ];
 
   return (
@@ -129,6 +143,7 @@ export default function FormWizard() {
           {step === 2 && <StepTwo />}
           {step === 3 && <StepThree />}
           {step === 4 && <StepFour />}
+          {step === 5 && <StepFive/>}
 
           <div className="flex justify-between items-center pt-8">
             {step > 1 ? (

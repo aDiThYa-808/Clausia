@@ -82,13 +82,63 @@ export const stepThreeSchema = z.object({
     }
   );
 
+  export const stepFiveSchema = z
+    .object({
+      monetizationMethod: z.enum(["none", "ads", "in-app-purchases", "other"], {
+        message: "Please select a monetization method.",
+      }),
+  
+      adPlatforms: z.array(z.string()).optional(),
+  
+      adsArePersonalized: z
+        .enum(["personalized", "contextual", "not_sure"], {
+          message: "Please specify whether ads are personalized.",
+        })
+        .optional(),
+  
+      otherMonetizationExplanation: z.string().optional(),
+    })
+    .superRefine((data, ctx) => {
+      if (data.monetizationMethod === "ads") {
+        if (!data.adPlatforms || data.adPlatforms.length === 0) {
+          ctx.addIssue({
+            path: ["adPlatforms"],
+            code: z.ZodIssueCode.custom,
+            message: "Please specify at least one ad platform.",
+          });
+        }
+  
+        if (!data.adsArePersonalized) {
+          ctx.addIssue({
+            path: ["adsArePersonalized"],
+            code: z.ZodIssueCode.custom,
+            message: "Please specify whether the ads are personalized.",
+          });
+        }
+      }
+  
+      if (data.monetizationMethod === "other") {
+        if (!data.otherMonetizationExplanation || data.otherMonetizationExplanation.trim() === "") {
+          ctx.addIssue({
+            path: ["otherMonetizationExplanation"],
+            code: z.ZodIssueCode.custom,
+            message: "Please describe your monetization method.",
+          });
+        }
+      }
+    });
+  
+  
+
 export const fullSchema = stepOneSchema
   .merge(stepTwoSchema)
   .merge(stepThreeSchema)
-  .merge(stepFourSchema);
+  .merge(stepFourSchema)
+  .merge(stepFiveSchema);
 
 
 export type StepOneData = z.infer<typeof stepOneSchema>;
 export type StepTwoData = z.infer<typeof stepTwoSchema>;
 export type StepThreeData = z.infer<typeof stepThreeSchema>;
+
 export type FullFormData = z.infer<typeof fullSchema>;
