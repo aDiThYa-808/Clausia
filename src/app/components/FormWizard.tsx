@@ -83,9 +83,19 @@ export default function FormWizard() {
     setStep((prev) => prev - 1);
   };
 
-  const onFinalSubmit = (data: FullFormData) => {
+  //called when generate policy is clicked
+  const onFinalSubmit = async (data: FullFormData) => {
     console.log("✅ Final Submission:", data);
-    // TODO: Send to API or move to Step 3
+
+    //calls openAIs gpt-4.1-mini
+    const res = await fetch('/api/generate-policy', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    })
+  
+    const { result } = await res.json()
+    console.log(result)
   };
 
   const steps = [
