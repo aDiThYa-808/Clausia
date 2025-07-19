@@ -16,15 +16,18 @@ import {
 import StepThree from "./StepThree";
 import StepFour from "./StepFour";
 import StepFive from "./StepFive";
+import { useRouter } from "next/navigation";
+
 
 export default function FormWizard() {
+  const router = useRouter();
   const [step, setStep] = useState(1);
 
   const methods = useForm<FullFormData>({
     resolver: zodResolver(fullSchema),
     mode: "onTouched",
     defaultValues: {
-      productType: 'app',
+      productType: "app",
       productName: "",
       productDescription: "",
       ageGroup: undefined,
@@ -39,10 +42,10 @@ export default function FormWizard() {
       supportsDeletion: undefined,
       contactMethods: [],
       otherContactMethod: "",
-      monetizationMethod:undefined,
-      adPlatforms:[],
-      adsArePersonalized:undefined,
-      otherMonetizationExplanation:undefined
+      monetizationMethod: undefined,
+      adPlatforms: [],
+      adsArePersonalized: undefined,
+      otherMonetizationExplanation: undefined,
     },
   });
 
@@ -77,13 +80,13 @@ export default function FormWizard() {
         "otherContactMethod",
       ]);
 
-    if(step === 5)
-    return await trigger([
-      "monetizationMethod",
-      "adPlatforms",
-      "adsArePersonalized",
-      "otherMonetizationExplanation"
-    ])
+    if (step === 5)
+      return await trigger([
+        "monetizationMethod",
+        "adPlatforms",
+        "adsArePersonalized",
+        "otherMonetizationExplanation",
+      ]);
     return false;
   };
 
@@ -101,14 +104,14 @@ export default function FormWizard() {
     console.log("✅ Final Submission:", data);
 
     //calls openAIs gpt-4.1-mini
-    const res = await fetch('/api/generate-policy', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+    const res = await fetch("/api/generate-policy", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
-    })
-  
-    const { result } = await res.json()
-    console.log(result)
+    });
+
+    const { result } = await res.json();
+    console.log(result);
   };
 
   const steps = [
@@ -116,7 +119,7 @@ export default function FormWizard() {
     { id: 2, label: "Data You Collect" },
     { id: 3, label: "Third-Party Tools" },
     { id: 4, label: "Contact Details" },
-    {id: 5, label: "Monetization Details"}
+    { id: 5, label: "Monetization Details" },
   ];
 
   return (
@@ -143,7 +146,7 @@ export default function FormWizard() {
           {step === 2 && <StepTwo />}
           {step === 3 && <StepThree />}
           {step === 4 && <StepFour />}
-          {step === 5 && <StepFive/>}
+          {step === 5 && <StepFive />}
 
           <div className="flex justify-between items-center pt-8">
             {step > 1 ? (
