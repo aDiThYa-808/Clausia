@@ -12,12 +12,11 @@ import {
   stepTwoSchema,
   fullSchema,
   FullFormData,
-} from "@/lib/zod/zodSchemas";
+} from "@/lib/zod/formSchemas";
 import StepThree from "./StepThree";
 import StepFour from "./StepFour";
 import StepFive from "./StepFive";
 import { useRouter } from "next/navigation";
-
 
 export default function FormWizard() {
   const router = useRouter();
@@ -103,15 +102,30 @@ export default function FormWizard() {
   const onFinalSubmit = async (data: FullFormData) => {
     console.log("✅ Final Submission:", data);
 
-    //calls openAIs gpt-4.1-mini
-    const res = await fetch("/api/generate-policy", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    });
+    try {
+      const res = await fetch("/api/generate-policy", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
 
-    const { result } = await res.json();
-    console.log(result);
+      const json = await res.json();
+
+      if (!res.ok) {
+        console.error("❌ Server Error:", json.error);
+        // Optionally: show toast or UI feedback
+        return;
+      }
+
+      console.log("🎉 Policy Generated:", json.result);
+      if (res) {
+        localStorage.setItem("previewPolicy", JSON.stringify(res));
+        router.push("/preview");
+      }
+    } catch (err) {
+      console.error("❌ Network or Unexpected Error:", err);
+      // Optionally: show toast or retry
+    }
   };
 
   const steps = [

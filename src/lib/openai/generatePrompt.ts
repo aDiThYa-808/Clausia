@@ -71,6 +71,6 @@ export type PolicyInput = {
     
     ${JSON.stringify(data, null, 2)}
     
-    Output only the JSON object and nothing else.
+    Return only a valid JSON object matching this structure. Do not include Markdown formatting, code fences, or explanation.
     `.trim();
   }
