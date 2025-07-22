@@ -29,48 +29,68 @@ export type PolicyInput = {
   
     return `
     You are a legal AI writing assistant.
+
+    Based on the structured input provided below, write a clear, professional, and user-friendly Privacy Policy for an Indian digital product. The tone should be formal but accessible. Avoid legal jargon unless absolutely necessary.
     
-    Based on the structured input provided below, generate a clear, professional, and user-friendly Privacy Policy for an Indian digital product. The tone should be formal but accessible. Avoid legal jargon unless absolutely necessary.
+    You must follow this **strict plain text format**, without any Markdown, bullet points, code blocks, or explanation. Do not use quotes, curly braces, or JSON formatting.
     
-    Output ONLY a JSON object with this exact structure:
+    Return the policy in the following structure and **do not deviate** from it:
     
-    {
-      "productName": string,
-      "lastUpdated": string,
-      "introduction": string,
-      "sections": [
-        {
-          "title": string,
-          "content": string
-        }
-        // ... more sections if applicable
-      ]
-    }
+    PRODUCT NAME:
+    <Insert product name>
+
+    PRODUCT TYPE:
+    <Insert product type>
     
-    Start the policy with the following values:
-    - "productName": ${data.productName}
-    - "lastUpdated": "${formattedDate}"
-    - "introduction": (3–4 lines that explain this policy governs the use of ${data.productName}, users agree to it by using the product, and that it may be updated)
+    LAST UPDATED:
+    ${formattedDate}
     
-    Then include relevant sections (only if applicable) using these exact titles:
-    - Information We Collect
-    - Collection Methods
-    - Use of Third-Party SDKs
-    - Purpose of Data Collection
-    - Data Storage and Security
-    - Data Retention
-    - Your Rights
-    - Children’s Privacy
-    - Monetization and Advertising
-    - Contact Us
-    - Changes to This Privacy Policy
+    INTRODUCTION:
+    <Write a 3–4 line introduction that explains this Privacy Policy governs the use of the product, users agree to it by using the product, and that it may be updated periodically.>
     
-    Use complete sentences and short paragraphs for the "content" of each section.
+    SECTION 1: Information We Collect
+    <Short paragraph explaining what user data is collected.>
     
-    Here is the structured input:
+    SECTION 2: Collection Methods
+    <Short paragraph explaining how the data is collected (e.g., user input, device data, etc.).>
     
+    SECTION 3: Use of Third-Party SDKs
+    <Short paragraph about third-party SDKs, if used, and their data implications.>
+    
+    SECTION 4: Purpose of Data Collection
+    <Why data is collected – e.g., to provide core functionality, improve experience, etc.>
+    
+    SECTION 5: Data Storage and Security
+    <How the data is stored, what measures are taken to keep it secure.>
+    
+    SECTION 6: Data Retention
+    <How long data is kept and how it is deleted or archived.>
+    
+    SECTION 7: Your Rights
+    <Explain what rights users have over their data – access, deletion, etc.>
+    
+    SECTION 8: Children’s Privacy
+    <Whether the product is for children, and protections in place if applicable.>
+    
+    SECTION 9: Monetization and Advertising
+    <Mention if the product is monetized or uses advertising SDKs.>
+    
+    SECTION 10: Contact Us
+    <Provide the contact email or method for users to raise privacy concerns.>
+    
+    SECTION 11: Changes to This Privacy Policy
+    <Explain that the policy may change and how users will be notified.>
+    
+    ---
+    
+    IMPORTANT:
+    - **Include all 11 sections in order**, even if some are empty or say "Not applicable".
+    - Keep each section under 5 lines.
+    - Do not output anything else except the policy in this format.
+    - Do not include JSON, Markdown, quotation marks, or code blocks.
+    
+    Structured input:
     ${JSON.stringify(data, null, 2)}
     
-    Return only a valid JSON object matching this structure. Do not include Markdown formatting, code fences, or explanation.
     `.trim();
   }

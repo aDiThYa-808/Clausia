@@ -100,33 +100,33 @@ export default function FormWizard() {
 
   //called when generate policy is clicked
   const onFinalSubmit = async (data: FullFormData) => {
-    console.log("✅ Final Submission:", data);
-
+    console.log("✅ Final Submission Data:", data)
+  
     try {
       const res = await fetch("/api/generate-policy", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
-      });
-
-      const json = await res.json();
-
+      })
+  
       if (!res.ok) {
-        console.error("❌ Server Error:", json.error);
-        // Optionally: show toast or UI feedback
-        return;
+        const errorText = await res.text()
+        console.error("❌ Server Error:", errorText)
+        return
       }
-
-      console.log("🎉 Policy Generated:", json.result);
-      if (res) {
-        localStorage.setItem("previewPolicy", JSON.stringify(res));
-        router.push("/preview");
-      }
+  
+      const { id } = await res.json()
+      console.log("✅ Policy ID:", id)
+  
+      // Navigate to the preview page
+      //router.push(`/policy/${id}`)
+  
     } catch (err) {
-      console.error("❌ Network or Unexpected Error:", err);
-      // Optionally: show toast or retry
+      console.error("❌ Network or Unexpected Error:", err)
     }
-  };
+  }
+  
+  
 
   const steps = [
     { id: 1, label: "About Your Product" },

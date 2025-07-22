@@ -1,10 +1,10 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useUser } from "@/lib/supabase/useUser";
+import { useUser } from "@/lib/supabase/auth/useUser";
 import { useEffect, useRef, useState } from "react";
-import { supabase } from "@/lib/supabase/supabaseClient";
-import { syncProfile } from "@/lib/supabase/syncUserProfile";
+import { supabase } from "@/lib/supabase/auth/supabaseClient";
+import { syncProfile } from "@/lib/supabase/auth/syncUserProfile";
 
 const mockPolicies = [
   {
@@ -174,7 +174,6 @@ export default function DashboardPage() {
           </button>
           <h1 className="text-xl font-bold text-indigo-600">Dashboard</h1>
         </div>
-
       </header>
 
       {/* Main Content */}

@@ -2,8 +2,8 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-import { supabase } from "@/lib/supabase/supabaseClient";
-import { useUser } from "@/lib/supabase/useUser";
+import { supabase } from "@/lib/supabase/auth/supabaseClient";
+import { useUser } from "@/lib/supabase/auth/useUser";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -45,12 +45,12 @@ export default function LoginPage() {
     <main className="flex min-h-screen items-center justify-center bg-slate-50 px-4">
       <div className="w-full max-w-sm bg-white rounded-2xl shadow-sm px-6 py-10 space-y-8">
         <div className="space-y-2 text-center">
-          <h1 className="text-2xl font-semibold text-slate-800">Welcome to Clausia</h1>
-          <p className="text-sm text-slate-500">
-            Sign in to continue
-          </p>
+          <h1 className="text-2xl font-semibold text-slate-800">
+            Welcome to Clausia
+          </h1>
+          <p className="text-sm text-slate-500">Sign in to continue</p>
         </div>
-  
+
         <div className="space-y-4">
           <button
             onClick={signInWithGoogle}
@@ -59,7 +59,7 @@ export default function LoginPage() {
             <img src="/icons/google.svg" alt="Google" className="w-5 h-5" />
             Sign in with Google
           </button>
-  
+
           <button
             onClick={signInWithGitHub}
             className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-gray-900 text-white rounded-lg text-sm font-medium hover:bg-gray-800 transition"
@@ -68,13 +68,11 @@ export default function LoginPage() {
             Sign in with GitHub
           </button>
         </div>
-  
+
         <p className="text-xs text-center text-slate-400">
           By signing in, you agree to our privacy policy.
         </p>
       </div>
     </main>
   );
-  
-  
 }
