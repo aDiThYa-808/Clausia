@@ -5,10 +5,7 @@ import { parseRawPolicy } from '@/lib/parseRawPolicy'
 import { createSupabaseServerClient } from '@/lib/supabase/supabaseServer'
 
 export async function POST(req: Request) {
-
-
   try {
-    // ✅ Validate API key
     const openaiKey = process.env.OPENAI_SECRET_KEY
     if (!openaiKey) {
       console.error('❌ Missing OPENAI_SECRET_KEY')
@@ -17,8 +14,7 @@ export async function POST(req: Request) {
 
     const openai = new OpenAI({ apiKey: openaiKey })
 
-    // ✅ Get Supabase user
-    const supabase = createSupabaseServerClient()
+    const supabase = await createSupabaseServerClient()
     const {
       data: { user },
       error: authError,
@@ -29,13 +25,11 @@ export async function POST(req: Request) {
       return new NextResponse('Unauthorized', { status: 401 })
     }
 
-    // ✅ Parse and log request input
     const data: PolicyInput = await req.json()
     console.log('📥 Policy input received:', data)
 
     const prompt = generatePrivacyPrompt(data)
 
-    // ✅ Call OpenAI with safe guards
     const response = await openai.chat.completions.create({
       model: 'gpt-4.1-mini',
       messages: [
@@ -61,7 +55,6 @@ export async function POST(req: Request) {
     const tokensUsed = response.usage?.total_tokens ?? 0
     const creditsUsed = 10
 
-    // ✅ Parse raw policy with guard
     let parsed
     try {
       parsed = parseRawPolicy(raw)
@@ -71,33 +64,34 @@ export async function POST(req: Request) {
       return new NextResponse('Parsing error', { status: 500 })
     }
 
-    // ✅ Insert into Supabase
+    // ✅ Supabase insert (with correct types + snake_case)
     const { error: insertError, data: inserted } = await supabase
-      .from('policies')
+      .from('Policy')
       .insert({
-        profileId: user.id,
-        productName: parsed.productName,
-        productType: parsed.productType,
-        lastUpdated: new Date(parsed.lastUpdated),
+        profile_id: user.id,
+        product_name: parsed.productName,
+        product_type: parsed.productType,
+        last_updated: new Date(parsed.lastUpdated).toISOString(),
         introduction: parsed.introduction,
-        sectionTitles: parsed.sections.map((s) => s.title),
-        sectionBodies: parsed.sections.map((s) => s.content),
-        tokensUsed,
-        creditsUsed,
+        section_titles: parsed.sections.map((s) => s.title),
+        section_bodies: parsed.sections.map((s) => s.content),
+        tokens_used: tokensUsed,
+        credits_used: creditsUsed,
+        updated_at: new Date() ,
         status: 'completed',
       })
       .select('id')
       .single()
 
     if (insertError) {
-      console.error('[INSERT_ERROR]', insertError)
+      console.error('[INSERT_ERROR]', insertError.message || insertError.details || insertError)
       return new NextResponse('Failed to save policy', { status: 500 })
     }
 
     console.log('✅ Policy created with ID:', inserted.id)
     return NextResponse.json({ id: inserted.id })
-  } catch (error) {
-    console.error('[SERVER_ERROR]', error)
+  } catch (error: any) {
+    console.error('[SERVER_ERROR]', error.message || error)
     return new NextResponse('Internal Server Error', { status: 500 })
   }
 }

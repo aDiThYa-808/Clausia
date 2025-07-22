@@ -2,9 +2,9 @@
 import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 
-export function createSupabaseServerClient() {
-  const cookieStore = cookies() // ✅ no await — this returns sync-access cookie store
-
+export async function createSupabaseServerClient() {
+  const cookieStore = await cookies()
+  
   return createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_PROJECT_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
@@ -14,10 +14,10 @@ export function createSupabaseServerClient() {
           return cookieStore.get(name)?.value
         },
         set(name: string, value: string, options: any) {
-          // You can implement this later if needed — optional for basic SSR
+          cookieStore.set(name, value, options)
         },
         remove(name: string, options: any) {
-          // Optional
+          cookieStore.set(name, '', { ...options, maxAge: 0 })
         },
       },
     }
