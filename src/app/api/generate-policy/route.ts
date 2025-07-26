@@ -64,7 +64,7 @@ export async function POST(req: Request) {
       return new NextResponse('Parsing error', { status: 500 })
     }
 
-    // ✅ Supabase insert (with correct types + snake_case)
+    // Supabase insert (with correct types + snake_case)
     const { error: insertError, data: inserted } = await supabase
       .from('Policy')
       .insert({

@@ -116,10 +116,8 @@ export default function FormWizard() {
       }
   
       const { id } = await res.json()
-      console.log("✅ Policy ID:", id)
-  
-      // Navigate to the preview page
-      //router.push(`/policy/${id}`)
+
+      router.push(`/privacypolicy/${id}`)
   
     } catch (err) {
       console.error("❌ Network or Unexpected Error:", err)
