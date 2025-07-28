@@ -85,7 +85,7 @@ export type PolicyInput = {
     
     IMPORTANT:
     - **Include all 11 sections in order**, even if some are empty or say "Not applicable".
-    - Keep each section under 5 lines.
+    - Each section must provide detailed explanations relevant to the provided product details — do not keep things vague or overly generic.
     - Do not output anything else except the policy in this format.
     - Do not include JSON, Markdown, quotation marks, or code blocks.
     
