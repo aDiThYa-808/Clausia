@@ -136,55 +136,53 @@ export default function FormWizard() {
 
   return (
     <FormProvider {...methods}>
-      <div className="space-y-20">
+      <div className="space-y-12 max-w-3xl mx-auto">
         {/* Progress */}
-        <div className="space-y-1 mb-12">
-          <div className="flex justify-between text-xs font-medium text-slate-500">
-            <span>
-              Step {step} of {steps.length}
-            </span>
-            <span>{steps[step - 1]?.label}</span>
+        <div className="space-y-2 mb-8">
+          <div className="flex justify-between text-sm font-medium text-slate-600">
+            <span>Step {step} of {steps.length}</span>
+            <span className=" text-slate-600">{steps[step - 1]?.label}</span>
           </div>
-          <div className="w-full bg-slate-200 h-1 rounded-full">
+          <div className="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
             <div
-              className="h-1 bg-indigo-600 rounded-full transition-all duration-300"
+              className="h-full bg-[#BC3FDE] transition-all duration-300 ease-in-out"
               style={{ width: `${(step / steps.length) * 100}%` }}
             />
           </div>
         </div>
-
-        <form onSubmit={handleSubmit(onFinalSubmit)} className="space-y-20">
+  
+        <form onSubmit={handleSubmit(onFinalSubmit)} className="space-y-12">
           {step === 1 && <StepOne />}
           {step === 2 && <StepTwo />}
           {step === 3 && <StepThree />}
           {step === 4 && <StepFour />}
           {step === 5 && <StepFive />}
-
-          <div className="flex justify-between items-center pt-8">
+  
+          <div className="flex justify-between items-center pt-6 border-t border-slate-200">
             {step > 1 ? (
               <button
                 type="button"
                 onClick={handleBack}
-                className="text-sm text-slate-500 hover:text-slate-800 transition px-4 py-2"
+                className="text-sm text-slate-500 hover:text-slate-700 transition px-4 py-2"
               >
                 ← Back
               </button>
             ) : (
               <div />
             )}
-
+  
             {step < steps.length ? (
               <button
                 type="button"
                 onClick={handleNext}
-                className="bg-indigo-600 text-white text-sm px-5 py-2 rounded-md hover:bg-indigo-700 transition"
+                className="bg-[#BC3FDE] text-white text-sm font-medium px-5 py-2.5 rounded-lg hover:bg-[#a930c9] transition"
               >
                 Next
               </button>
             ) : (
               <button
                 type="submit"
-                className="bg-green-600 text-white text-sm px-5 py-2 rounded-md hover:bg-green-700 transition"
+                className="bg-green-600 text-white text-sm font-medium px-5 py-2.5 rounded-lg hover:bg-green-700 transition"
               >
                 Generate Policy
               </button>
@@ -194,4 +192,5 @@ export default function FormWizard() {
       </div>
     </FormProvider>
   );
+  
 }

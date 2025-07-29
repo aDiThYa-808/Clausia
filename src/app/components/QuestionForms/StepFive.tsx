@@ -9,7 +9,10 @@ export default function StepFive() {
     control,
   } = useFormContext();
 
-  const monetizationMethod = useWatch({ control, name: "monetizationMethod" }) || "";
+  const monetizationMethod =
+    useWatch({ control, name: "monetizationMethod" }) || "";
+  const adsArePersonalized =
+    useWatch({ control, name: "adsArePersonalized" }) || "";
 
   const showAdsFields = monetizationMethod === "ads";
   const showOtherField = monetizationMethod === "other";
@@ -21,25 +24,38 @@ export default function StepFive() {
         <h2 className="text-lg font-medium text-slate-800">
           How do you monetize this product?
         </h2>
-        <div className="flex flex-col gap-2">
-          {["none", "ads", "in-app-purchases", "other"].map((val) => (
-            <label key={val} className="flex items-center gap-2 text-sm">
-              <input
-                type="radio"
-                value={val}
-                {...register("monetizationMethod", {
-                  required: "Please select a monetization method.",
-                })}
-                className="accent-indigo-600"
-              />
-              {{
-                none: "None",
-                ads: "Ads",
-                "in-app-purchases": "In-app purchases",
-                other: "Other",
-              }[val]}
-            </label>
-          ))}
+        <div className="flex flex-wrap gap-3">
+          {["none", "ads", "in-app-purchases", "other"].map((val) => {
+            const labelText: Record<string, string> = {
+              none: "None",
+              ads: "Ads",
+              "in-app-purchases": "In-app purchases",
+              other: "Other",
+            };
+
+            const isSelected = monetizationMethod === val;
+
+            return (
+              <label
+                key={val}
+                className={`px-4 py-2 rounded-full border text-sm cursor-pointer transition-colors ${
+                  isSelected
+                    ? "border-[#BC3FDE] bg-[#BC3FDE]/10 text-[#BC3FDE]"
+                    : "border-slate-300 hover:border-[#BC3FDE]"
+                }`}
+              >
+                <input
+                  type="radio"
+                  value={val}
+                  {...register("monetizationMethod", {
+                    required: "Please select a monetization method.",
+                  })}
+                  className="hidden"
+                />
+                {labelText[val]}
+              </label>
+            );
+          })}
         </div>
         {errors.monetizationMethod && (
           <p className="text-red-500 text-sm">
@@ -54,14 +70,17 @@ export default function StepFive() {
           <h2 className="text-lg font-medium text-slate-800">
             Which ad platforms do you use?
           </h2>
-          <div className="grid grid-cols-2 gap-y-2 max-w-md">
+          <div className="grid grid-cols-2 gap-3 max-w-md">
             {["AdMob", "Unity Ads", "Facebook Audience Network"].map((sdk) => (
-              <label key={sdk} className="flex items-center gap-2 text-sm">
+              <label
+                key={sdk}
+                className="flex items-center gap-2 px-4 py-2 border border-slate-300 rounded-lg text-sm cursor-pointer transition-colors hover:border-[#BC3FDE]"
+              >
                 <input
                   type="checkbox"
                   value={sdk}
                   {...register("adPlatforms")}
-                  className="accent-indigo-600"
+                  className="accent-[#BC3FDE]"
                 />
                 {sdk}
               </label>
@@ -81,22 +100,35 @@ export default function StepFive() {
           <h2 className="text-lg font-medium text-slate-800">
             Are the ads personalized or contextual?
           </h2>
-          <div className="flex flex-col gap-2">
-            {["personalized", "contextual", "not_sure"].map((type) => (
-              <label key={type} className="flex items-center gap-2 text-sm">
-                <input
-                  type="radio"
-                  value={type}
-                  {...register("adsArePersonalized")}
-                  className="accent-indigo-600"
-                />
-                {{
-                  personalized: "Personalized",
-                  contextual: "Contextual only",
-                  not_sure: "Not sure",
-                }[type]}
-              </label>
-            ))}
+          <div className="flex flex-wrap gap-3">
+            {["personalized", "contextual", "not_sure"].map((val) => {
+              const labelText: Record<string, string> = {
+                personalized: "Personalized",
+                contextual: "Contextual only",
+                not_sure: "Not sure",
+              };
+
+              const isSelected = adsArePersonalized === val;
+
+              return (
+                <label
+                  key={val}
+                  className={`px-4 py-2 rounded-full border text-sm cursor-pointer transition-colors ${
+                    isSelected
+                      ? "border-[#BC3FDE] bg-[#BC3FDE]/10 text-[#BC3FDE]"
+                      : "border-slate-300 hover:border-[#BC3FDE]"
+                  }`}
+                >
+                  <input
+                    type="radio"
+                    value={val}
+                    {...register("adsArePersonalized")}
+                    className="hidden"
+                  />
+                  {labelText[val]}
+                </label>
+              );
+            })}
           </div>
           {errors.adsArePersonalized && (
             <p className="text-red-500 text-sm">
@@ -116,7 +148,7 @@ export default function StepFive() {
             type="text"
             placeholder="e.g., Paid app with email-based access"
             {...register("otherMonetizationExplanation")}
-            className="w-full text-base px-3 py-1.5 border-b border-slate-300 focus:outline-none focus:border-indigo-600 bg-transparent placeholder-slate-400"
+            className="w-full text-base px-3 py-1.5 border-b border-slate-300 focus:outline-none focus:border-[#BC3FDE] bg-transparent placeholder-slate-400"
           />
           {errors.otherMonetizationExplanation && (
             <p className="text-red-500 text-sm">

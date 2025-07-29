@@ -23,7 +23,7 @@ export default function LoginPage() {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
-        redirectTo:`${origin}/auth/callback`,
+        redirectTo: `${origin}/auth/callback`,
       },
     });
 
@@ -42,35 +42,65 @@ export default function LoginPage() {
   };
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-slate-50 px-4">
-      <div className="w-full max-w-sm bg-white rounded-2xl shadow-sm px-6 py-10 space-y-8">
-        <div className="space-y-2 text-center">
-          <h1 className="text-2xl font-semibold text-slate-800">
-            Welcome to Clausia
-          </h1>
-          <p className="text-sm text-slate-500">Sign in to continue</p>
+    <main className="relative flex min-h-screen items-center justify-center bg-gradient-to-br from-[#F8F5FC] to-[#f1e9fb] px-4">
+      {/* Subtle background shape */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-[-50px] left-[-100px] w-[300px] h-[300px] bg-[#BC3FDE]/10 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-[-80px] right-[-80px] w-[250px] h-[250px] bg-[#BC3FDE]/20 rounded-full blur-2xl"></div>
+      </div>
+
+      {/* Auth Card */}
+      <div className="relative w-full max-w-sm bg-white rounded-3xl shadow-2xl px-8 py-12 space-y-10 border border-slate-100">
+        {/* Logo / Brand Icon */}
+        <div className="flex justify-center">
+          <div className="w-12 h-12 rounded-full bg-[#BC3FDE]/10 flex items-center justify-center">
+            <img src="/icons/shield.svg" alt="Clausia" className="w-6 h-6" />
+          </div>
         </div>
 
+        {/* Heading */}
+        <div className="space-y-1 text-center">
+          <h1 className="text-3xl font-bold text-slate-900">
+            Welcome to Clausia
+          </h1>
+          <p className="text-sm text-slate-500">Your AI legal assistant</p>
+        </div>
+
+        {/* Auth buttons */}
         <div className="space-y-4">
           <button
             onClick={signInWithGoogle}
-            className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-white border border-slate-200 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50 transition"
+            className="w-full flex items-center justify-center gap-2 px-4 py-3 border border-slate-200 rounded-xl text-sm font-medium text-slate-700 bg-white hover:bg-slate-100 transition shadow-sm hover:shadow-md"
           >
             <img src="/icons/google.svg" alt="Google" className="w-5 h-5" />
             Sign in with Google
           </button>
 
+          {/* Divider */}
+          <div className="flex items-center gap-4">
+            <div className="h-px flex-1 bg-slate-200" />
+            <span className="text-xs text-slate-400 uppercase tracking-wide">
+              or
+            </span>
+            <div className="h-px flex-1 bg-slate-200" />
+          </div>
+
           <button
             onClick={signInWithGitHub}
-            className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-gray-900 text-white rounded-lg text-sm font-medium hover:bg-gray-800 transition"
+            className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-sm font-medium text-white bg-slate-900 hover:bg-slate-800 transition shadow-sm hover:shadow-md"
           >
             <img src="/icons/github.svg" alt="GitHub" className="w-5 h-5" />
             Sign in with GitHub
           </button>
         </div>
 
+        {/* Tagline */}
         <p className="text-xs text-center text-slate-400">
-          By signing in, you agree to our privacy policy.
+          By signing in, you agree to our{" "}
+          <span className="underline underline-offset-2 decoration-[#BC3FDE] hover:text-[#BC3FDE] transition cursor-pointer">
+            privacy policy
+          </span>
+          .
         </p>
       </div>
     </main>

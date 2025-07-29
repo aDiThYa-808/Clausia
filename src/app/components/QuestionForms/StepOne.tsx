@@ -15,21 +15,19 @@ export default function StepOne() {
   
 
   return (
-    <div className="space-y-20">
+    <div className="space-y-16">
       {/* Product Type */}
-      <div className="space-y-3">
-        <h2 className="text-lg font-medium text-slate-800">
-          What type of product is this?
-        </h2>
+      <div className="space-y-4">
+        <h2 className="text-base font-medium text-slate-700">What type of product is this?</h2>
         <div className="flex flex-wrap gap-2">
           {["app", "game", "website"].map((type) => (
             <label
               key={type}
-              className={`px-3 py-1.5 rounded-full border text-sm cursor-pointer transition
+              className={`px-4 py-2 rounded-full border text-sm font-medium transition cursor-pointer
                 ${
                   productType === type
-                    ? "bg-indigo-600 text-white border-indigo-600"
-                    : "bg-white text-slate-700 border-slate-300 hover:border-slate-500"
+                    ? "bg-[#BC3FDE] text-white border-[#BC3FDE]"
+                    : "bg-white text-slate-700 border-slate-300 hover:border-slate-400"
                 }`}
             >
               <input
@@ -45,55 +43,47 @@ export default function StepOne() {
           ))}
         </div>
         {errors.productType && (
-          <p className="text-red-500 text-sm">
-            {errors.productType.message as string}
-          </p>
+          <p className="text-sm text-red-500">{errors.productType.message as string}</p>
         )}
       </div>
-
+  
       {/* Product Name */}
-      <div className="space-y-2">
-        <h2 className="text-lg font-medium text-slate-800">
+      <div className="space-y-3">
+        <label className="block text-base font-medium text-slate-700">
           What is your {productType || "product"} called?
-        </h2>
+        </label>
         <input
           {...register("productName", { required: "Product name is required" })}
-          className="w-full text-base px-3 py-1.5 border-b border-slate-300 focus:outline-none focus:border-indigo-600 bg-transparent placeholder-slate-400"
+          className="w-full px-4 py-2 text-sm rounded-xl border border-slate-300 focus:outline-none focus:border-[#BC3FDE] bg-white placeholder-slate-400"
           placeholder="e.g. Whatsapp"
         />
         {errors.productName && (
-          <p className="text-red-500 text-sm">
-            {errors.productName.message as string}
-          </p>
+          <p className="text-sm text-red-500">{errors.productName.message as string}</p>
         )}
       </div>
-
+  
       {/* Description */}
-      <div className="space-y-2">
-        <h2 className="text-lg font-medium text-slate-800">
+      <div className="space-y-3">
+        <label className="block text-base font-medium text-slate-700">
           Describe your {productType || "product"} in one line
-        </h2>
+        </label>
         <textarea
           {...register("productDescription", {
             required: "Description is required",
           })}
-          className="w-full text-base px-3 py-2 border border-slate-300 rounded-md focus:outline-none focus:border-indigo-600 placeholder-slate-400"
           rows={3}
+          className="w-full px-4 py-2 text-sm rounded-xl border border-slate-300 focus:outline-none focus:border-[#BC3FDE] placeholder-slate-400"
           placeholder="e.g. A group chat app for close friends"
         />
         {errors.productDescription && (
-          <p className="text-red-500 text-sm">
-            {errors.productDescription.message as string}
-          </p>
+          <p className="text-sm text-red-500">{errors.productDescription.message as string}</p>
         )}
       </div>
-
-      {/* Target Age Group */}
-      <div className="space-y-2">
-        <h2 className="text-lg font-medium text-slate-800">
-          Who is this {productType || "product"} for?
-        </h2>
-        <div className="grid grid-cols-2 gap-2 max-w-md">
+  
+      {/* Age Group */}
+      <div className="space-y-4">
+        <h2 className="text-base font-medium text-slate-700">Who is this {productType || "product"} for?</h2>
+        <div className="flex flex-wrap gap-2">
           {[
             { value: "under13", label: "Under 13" },
             { value: "13to17", label: "13–17" },
@@ -101,41 +91,46 @@ export default function StepOne() {
             { value: "all", label: "All age groups" },
             { value: "unsure", label: "Not sure" },
           ].map(({ value, label }) => (
-            <label key={value} className="flex items-center gap-2 text-sm">
+            <label
+              key={value}
+              className={`px-4 py-2 rounded-full border text-sm font-medium transition cursor-pointer
+                ${
+                  watch("ageGroup") === value
+                    ? "bg-[#BC3FDE] text-white border-[#BC3FDE]"
+                    : "bg-white text-slate-700 border-slate-300 hover:border-slate-400"
+                }`}
+            >
               <input
                 type="radio"
                 value={value}
                 {...register("ageGroup", { required: "Select an age group" })}
-                className="accent-indigo-600"
+                className="sr-only"
               />
               {label}
             </label>
           ))}
         </div>
         {errors.ageGroup && (
-          <p className="text-red-500 text-sm">
-            {errors.ageGroup.message as string}
-          </p>
+          <p className="text-sm text-red-500">{errors.ageGroup.message as string}</p>
         )}
       </div>
-
+  
       {/* Contact Email */}
-      <div className="space-y-2">
-        <h2 className="text-lg font-medium text-slate-800">
+      <div className="space-y-3">
+        <label className="block text-base font-medium text-slate-700">
           Where can users contact you?
-        </h2>
+        </label>
         <input
           type="email"
           {...register("contactEmail", { required: "Email is required" })}
           placeholder="you@example.com"
-          className="w-full text-base px-3 py-1.5 border-b border-slate-300 bg-transparent focus:outline-none focus:border-indigo-600 placeholder-slate-400"
+          className="w-full px-4 py-2 text-sm rounded-xl border border-slate-300 focus:outline-none focus:border-[#BC3FDE] bg-white placeholder-slate-400"
         />
         {errors.contactEmail && (
-          <p className="text-red-500 text-sm">
-            {errors.contactEmail.message as string}
-          </p>
+          <p className="text-sm text-red-500">{errors.contactEmail.message as string}</p>
         )}
       </div>
     </div>
   );
+  
 }
