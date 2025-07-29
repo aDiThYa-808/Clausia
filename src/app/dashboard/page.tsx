@@ -1,23 +1,38 @@
 import { createSupabaseServerClient } from "@/lib/supabase/supabaseServer";
 import DashboardClient from "../components/DashboardClient";
+import { redirect } from "next/navigation";
 
 export default async function DashboardPage() {
   const supabase = await createSupabaseServerClient();
+  
   const {
     data: userData,
     error: userError,
   } = await supabase.auth.getUser();
 
-  if (!userData?.user) {
-    // redirect to login
-    return <p>Not logged in</p>;
+  // Handle auth errors
+  if (userError) {
+    console.error("Auth error:", userError);
+    redirect("/login");
   }
 
-  const { data: policies, error } = await supabase
+  // Redirect if not authenticated
+  if (!userData?.user) {
+    redirect("/login");
+  }
+
+  // Fetch policies with error handling
+  const { data: policies, error: policiesError } = await supabase
     .from("Policy")
     .select("id, product_name, product_type, last_updated, status")
     .eq("profile_id", userData.user.id)
     .order("created_at", { ascending: false });
+
+  // Handle policies fetch error
+  if (policiesError) {
+    console.error("Error fetching policies:", policiesError);
+    // You might want to show an error page or empty state
+  }
 
   return (
     <DashboardClient

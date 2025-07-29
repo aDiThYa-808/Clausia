@@ -23,7 +23,7 @@ export default function LoginPage() {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
-        redirectTo: `${origin}/dashboard`,
+        redirectTo:`${origin}/auth/callback`,
       },
     });
 
@@ -35,7 +35,7 @@ export default function LoginPage() {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "github",
       options: {
-        redirectTo: `${origin}/dashboard`,
+        redirectTo: `${origin}/auth/callback`,
       },
     });
     if (error) console.error("GitHub login error:", error);
