@@ -78,7 +78,7 @@ export async function POST(req: Request) {
         tokens_used: tokensUsed,
         credits_used: creditsUsed,
         updated_at: new Date() ,
-        status: 'completed',
+        status: 'draft',
       })
       .select('id')
       .single()

@@ -117,7 +117,7 @@ export default function FormWizard() {
   
       const { id } = await res.json()
 
-      router.push(`/privacypolicy/${id}`)
+      router.push(`/privacypolicy/preview/${id}`)
   
     } catch (err) {
       console.error("❌ Network or Unexpected Error:", err)

@@ -178,7 +178,7 @@ export default function DashboardClient({ user, policies }: Props) {
           {policies?.map((data) => (
             <div
               key={data.id}
-              onClick={() => router.push(`/preview/${data.id}`)}
+              onClick={() => router.push(`/privacypolicy/preview/${data.id}`)}
               className="bg-white shadow-sm rounded-xl p-4 hover:shadow-md cursor-pointer transition"
             >
               <div className="text-lg font-semibold truncate">
