@@ -4,7 +4,7 @@ export default function PolicyRenderer({ data }: { data: any }) {
   return (
     <div className="px-6 md:px-12 py-16 max-w-4xl mx-auto">
       <div className="mb-16">
-        <h1 className="text-5xl font-extrabold tracking-tight mb-4">Privacy Policy</h1>
+        <h1 className="text-5xl font-extrabold tracking-tight text-black mb-4">Privacy Policy</h1>
         <p className="text-sm text-slate-500">
           Last updated on {dayjs(data.last_updated).format("MMMM D, YYYY")}
         </p>

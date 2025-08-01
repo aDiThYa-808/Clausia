@@ -6,13 +6,15 @@ import { redirect } from "next/navigation";
 export default async function PolicyPreviewPage({ params }: { params: { id: string } }) {
   const supabase = await createSupabaseServerClient();
 
-  const { data, error } = await supabase
+  const { data:PolicyData, error } = await supabase
     .from("Policy")
     .select("*")
     .eq("id", params.id)
     .single();
 
-  if (error || !data) {
+
+
+  if (error || !PolicyData) {
     return <div className="p-6 text-red-600">Error loading policy.</div>;
   }
 
@@ -23,10 +25,12 @@ export default async function PolicyPreviewPage({ params }: { params: { id: stri
 
   return (
 <EditorDashboardLayout
-  productName={data.product_name}
-  policyId={data.id}
+  productName={PolicyData.product_name}
+  policyId={PolicyData.id}
+  tokensUsed={PolicyData.tokens_used}
+  date={PolicyData.created_at}
 >
-  <PolicyRenderer data={data} />
+  <PolicyRenderer data={PolicyData} />
 </EditorDashboardLayout>
   );
 }

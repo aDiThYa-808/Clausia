@@ -2,7 +2,7 @@
 
 import { useForm, FormProvider } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import StepOne from "./StepOne";
 import StepTwo from "./StepTwo";
@@ -21,6 +21,7 @@ import { useRouter } from "next/navigation";
 export default function FormWizard() {
   const router = useRouter();
   const [step, setStep] = useState(1);
+  const [loading, setLoading] = useState(false);
 
   const methods = useForm<FullFormData>({
     resolver: zodResolver(fullSchema),
@@ -100,31 +101,32 @@ export default function FormWizard() {
 
   //called when generate policy is clicked
   const onFinalSubmit = async (data: FullFormData) => {
-    console.log("✅ Final Submission Data:", data)
-  
+    //console.log("✅ Final Submission Data:", data)
+
     try {
+      setLoading(true);
       const res = await fetch("/api/generate-policy", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
-      })
-  
-      if (!res.ok) {
-        const errorText = await res.text()
-        console.error("❌ Server Error:", errorText)
-        return
-      }
-  
-      const { id } = await res.json()
+      });
 
-      router.push(`/privacypolicy/preview/${id}`)
-  
+      if (!res.ok) {
+        const errorText = await res.text();
+        console.error("❌ Server Error:", errorText);
+        setLoading(false);
+        return;
+      }
+
+      const { id } = await res.json();
+
+      router.push(`/privacypolicy/preview/${id}`);
     } catch (err) {
-      console.error("❌ Network or Unexpected Error:", err)
-    }
-  }
-  
-  
+      console.error("❌ Network or Unexpected Error:", err);
+    } //finally {
+    //   setLoading(false);
+    // }
+  };
 
   const steps = [
     { id: 1, label: "About Your Product" },
@@ -134,63 +136,103 @@ export default function FormWizard() {
     { id: 5, label: "Monetization Details" },
   ];
 
-  return (
-    <FormProvider {...methods}>
-      <div className="space-y-12 max-w-3xl mx-auto">
-        {/* Progress */}
-        <div className="space-y-2 mb-8">
-          <div className="flex justify-between text-sm font-medium text-slate-600">
-            <span>Step {step} of {steps.length}</span>
-            <span className=" text-slate-600">{steps[step - 1]?.label}</span>
-          </div>
-          <div className="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
-            <div
-              className="h-full bg-[#BC3FDE] transition-all duration-300 ease-in-out"
-              style={{ width: `${(step / steps.length) * 100}%` }}
-            />
-          </div>
-        </div>
-  
-        <form onSubmit={handleSubmit(onFinalSubmit)} className="space-y-12">
-          {step === 1 && <StepOne />}
-          {step === 2 && <StepTwo />}
-          {step === 3 && <StepThree />}
-          {step === 4 && <StepFour />}
-          {step === 5 && <StepFive />}
-  
-          <div className="flex justify-between items-center pt-6 border-t border-slate-200">
-            {step > 1 ? (
-              <button
-                type="button"
-                onClick={handleBack}
-                className="text-sm text-slate-500 hover:text-slate-700 transition px-4 py-2"
-              >
-                ← Back
-              </button>
-            ) : (
-              <div />
-            )}
-  
-            {step < steps.length ? (
-              <button
-                type="button"
-                onClick={handleNext}
-                className="bg-[#BC3FDE] text-white text-sm font-medium px-5 py-2.5 rounded-lg hover:bg-[#a930c9] transition"
-              >
-                Next
-              </button>
-            ) : (
-              <button
-                type="submit"
-                className="bg-green-600 text-white text-sm font-medium px-5 py-2.5 rounded-lg hover:bg-green-700 transition"
-              >
-                Generate Policy
-              </button>
-            )}
-          </div>
-        </form>
+  const messages = [
+    "Summoning your clauses...",
+    "Consulting the IT Act...",
+    "Finalizing your policy draft...",
+    "Formatting to perfection...",
+  ];
+
+  const [messageIndex, setMessageIndex] = useState(0);
+
+  useEffect(() => {
+    if (!loading) return;
+
+    const interval = setInterval(() => {
+      setMessageIndex((prev) => (prev + 1) % messages.length);
+    }, 2500);
+
+    return () => clearInterval(interval);
+  }, [loading]);
+
+  //conditional redendering the ui.
+  if (loading) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center bg-slate-50 text-center px-6 space-y-6">
+        {/* Spinner with brand color */}
+        <div className="h-12 w-12 border-4 border-[#BC3FDE] border-t-transparent rounded-full animate-spin" />
+
+        {/* Rotating fun message */}
+        <h2 className="text-xl font-medium text-slate-800">
+          {messages[messageIndex]}
+        </h2>
+
+        {/* Subtext */}
+        <p className="text-slate-500 text-sm">
+          Hang tight, this won’t take long.
+        </p>
       </div>
-    </FormProvider>
-  );
-  
+    );
+  } else {
+    return (
+      <FormProvider {...methods}>
+        <div className="space-y-12 max-w-3xl mx-auto">
+          {/* Progress */}
+          <div className="space-y-2 mb-8">
+            <div className="flex justify-between text-sm font-medium text-slate-600">
+              <span>
+                Step {step} of {steps.length}
+              </span>
+              <span className=" text-slate-600">{steps[step - 1]?.label}</span>
+            </div>
+            <div className="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
+              <div
+                className="h-full bg-[#BC3FDE] transition-all duration-300 ease-in-out"
+                style={{ width: `${(step / steps.length) * 100}%` }}
+              />
+            </div>
+          </div>
+
+          <form onSubmit={handleSubmit(onFinalSubmit)} className="space-y-12">
+            {step === 1 && <StepOne />}
+            {step === 2 && <StepTwo />}
+            {step === 3 && <StepThree />}
+            {step === 4 && <StepFour />}
+            {step === 5 && <StepFive />}
+
+            <div className="flex justify-between items-center pt-6 border-t border-slate-200">
+              {step > 1 ? (
+                <button
+                  type="button"
+                  onClick={handleBack}
+                  className="text-sm text-slate-500 hover:text-slate-700 transition px-4 py-2"
+                >
+                  ← Back
+                </button>
+              ) : (
+                <div />
+              )}
+
+              {step < steps.length ? (
+                <button
+                  type="button"
+                  onClick={handleNext}
+                  className="bg-[#BC3FDE] text-white text-sm font-medium px-5 py-2.5 rounded-lg hover:bg-[#a930c9] transition"
+                >
+                  Next
+                </button>
+              ) : (
+                <button
+                  type="submit"
+                  className="bg-green-600 text-white text-sm font-medium px-5 py-2.5 rounded-lg hover:bg-green-700 transition"
+                >
+                  Generate Policy
+                </button>
+              )}
+            </div>
+          </form>
+        </div>
+      </FormProvider>
+    );
+  }
 }
