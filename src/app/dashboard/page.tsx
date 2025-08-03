@@ -34,10 +34,21 @@ export default async function DashboardPage() {
     // You might want to show an error page or empty state
   }
 
+  const {data:creditsData,error:creditsError}= await supabase
+  .from("profiles")
+  .select("credits")
+  .eq("id",userData.user.id)
+  .single()
+
+  if(creditsError){
+    console.error("error fetching credits:",creditsError)
+  }
+
   return (
     <DashboardClient
       user={userData.user}
       policies={policies || []}
+      credits={creditsData?.credits ?? 0}
     />
   );
 }

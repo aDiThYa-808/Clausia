@@ -13,7 +13,7 @@ export const syncProfile = async (user: any) => {
       id: user.id,
       email: user.email ?? "", // if NOT NULL
       fullName: fullName,
-      credits: 0, // ensure this column exists and is not nullable
+      credits: 2000,
     },
     { onConflict: "id" }
   );

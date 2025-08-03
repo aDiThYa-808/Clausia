@@ -10,12 +10,14 @@ export default function EditorDashboardLayout({
   productName,
   policyId,
   tokensUsed,
+  credits,
   date,
   children,
 }: {
   productName: string;
   policyId: string;
   tokensUsed: number;
+  credits:number
   date:string;
   children: React.ReactNode;
 }) {
@@ -77,7 +79,7 @@ export default function EditorDashboardLayout({
                 <div className="flex items-center px-3 py-1.5 bg-slate-100 rounded-full">
                   <Coins className="w-4 h-4 text-[#BC3FDE] mr-2" />
                   <span className="font-medium text-slate-700 text-sm">
-                    {tokensUsed} used
+                    {tokensUsed} / {credits} used
                   </span>
                 </div>
               </div>
@@ -130,7 +132,7 @@ export default function EditorDashboardLayout({
       <div className="md:hidden bg-slate-50 border-b border-slate-200 px-4 py-3">
         <div className="flex items-center text-sm">
           <Coins className="w-4 h-4 text-[#BC3FDE] mr-2" />
-          <span className="font-medium text-slate-700">{tokensUsed} credits used</span>
+          <span className="font-medium text-slate-700">{tokensUsed} / {credits} credits used</span>
         </div>
       </div>
 

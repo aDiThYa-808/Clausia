@@ -26,9 +26,10 @@ type Props = {
     last_updated: string;
     status: string;
   }[];
+  credits: number | null;
 };
 
-export default function DashboardClient({ user, policies }: Props) {
+export default function DashboardClient({ user, policies, credits }: Props) {
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -130,7 +131,7 @@ export default function DashboardClient({ user, policies }: Props) {
               <div className="hidden sm:flex items-center px-3 py-1.5 bg-slate-100 rounded-full">
                 <div className="w-2 h-2 bg-[#BC3FDE] rounded-full mr-2"></div>
                 <span className="text-sm font-medium text-slate-700">
-                  {user?.credits || 0} credits
+                  {credits ?? 0} credits
                 </span>
               </div>
 
