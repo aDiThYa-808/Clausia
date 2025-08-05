@@ -40,13 +40,13 @@ export async function POST(req: NextRequest) {
 
     if(creditsError) return NextResponse.json({ error: creditsError.message }, { status: 500 });
 
-    if(tokensData?.status == 'completed') return NextResponse.json({error: "policy already completed"},{status:400})
+    if(tokensData?.status == 'completed') return NextResponse.json({error: "This policy is already published"},{status:400})
 
-    if(tokensData?.tokens_used == null || creditsData?.credits == null) return NextResponse.json({error:"missing tokens or credits data"},{status:500})
+    if(tokensData?.tokens_used == null || creditsData?.credits == null) return NextResponse.json({error:"Missing tokens or credits data"},{status:500})
 
     const updatedCredits = creditsData?.credits - tokensData?.tokens_used;
 
-    if(updatedCredits < 0) return NextResponse.json({ error: "Insufficient credits" }, { status: 400 });
+    if(updatedCredits < 0) return NextResponse.json({ error: "You don’t have enough credits to publish this policy. Please purchase more to continue." }, { status: 400 });
 
     const{error:creditsUpdateError} =await supabase
     .from("profiles")

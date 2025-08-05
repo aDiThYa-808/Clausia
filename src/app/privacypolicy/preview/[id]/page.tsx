@@ -30,10 +30,10 @@ export default async function PolicyPreviewPage({
     .eq("id",userData.user?.id)
     .single()
 
-  // Redirect if already published
-  //   if (data.status === "completed") {
-  //     redirect(`/privacypolicy/${params.id}`);
-  //   }
+ // Redirect if already published
+    if (PolicyData.status === "completed") {
+      redirect(`/privacypolicy/${params.id}`);
+    }
 
   return (
     <EditorDashboardLayout

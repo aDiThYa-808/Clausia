@@ -1,8 +1,9 @@
-'use client';
+"use client";
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
+import { Toaster } from "sonner";
 import { ArrowLeft, FileText, Coins, CheckCircle, Eye } from "lucide-react";
 import dayjs from "dayjs";
 
@@ -17,8 +18,8 @@ export default function EditorDashboardLayout({
   productName: string;
   policyId: string;
   tokensUsed: number;
-  credits:number
-  date:string;
+  credits: number;
+  date: string;
   children: React.ReactNode;
 }) {
   const router = useRouter();
@@ -26,18 +27,27 @@ export default function EditorDashboardLayout({
 
   const handlePublish = async () => {
     setLoading(true);
-    const res = await fetch("/api/publish-policy", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ policyId }),
-    });
+    try {
+      const res = await fetch("/api/publish-policy", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ policyId }),
+      });
 
-    if (res.ok) {
-      const result = await res.json();
-      router.push(`/privacypolicy/${result.id}`);
-    } else {
-      toast.error("Failed to publish policy");
-      setLoading(false);
+      if (res.ok) {
+        const result = await res.json();
+        router.push(`/privacypolicy/${result.id}`);
+      } else {
+        const errorData = await res.json();
+        toast.error("Failed to publish policy", {
+          description: errorData?.error,
+        });
+        setLoading(false);
+      }
+    } catch (err) {
+      toast.error("Failed to publish policy", {
+        description: "Network/Server error",
+      });
     }
   };
 
@@ -45,10 +55,9 @@ export default function EditorDashboardLayout({
     router.push("/dashboard");
   };
 
-  const creditsRemaining = 0;
-
   return (
     <div className="min-h-screen bg-slate-50">
+      <Toaster richColors />
       {/* Top Navigation */}
       <nav className="sticky top-0 z-50 bg-white border-b border-slate-200 shadow-sm">
         <div className="w-full px-4 sm:px-6 lg:px-8">
@@ -60,15 +69,21 @@ export default function EditorDashboardLayout({
                 className="flex items-center text-slate-600 hover:text-slate-900 transition-colors flex-shrink-0"
               >
                 <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2" />
-                <span className="text-xs sm:text-sm font-medium hidden xs:block">Back</span>
-                <span className="text-xs sm:text-sm font-medium xs:hidden">Dashboard</span>
+                <span className="text-xs sm:text-sm font-medium hidden xs:block">
+                  Back
+                </span>
+                <span className="text-xs sm:text-sm font-medium xs:hidden">
+                  Dashboard
+                </span>
               </button>
               <div className="h-4 sm:h-6 w-px bg-slate-300 flex-shrink-0" />
               <div className="flex items-center space-x-1 sm:space-x-2 min-w-0">
-                <h1 className="text-lg sm:text-2xl font-bold text-[#BC3FDE]  flex-shrink-0" style={{fontFamily:"chillax"}}>
+                <h1
+                  className="text-lg sm:text-2xl font-bold text-[#BC3FDE]  flex-shrink-0"
+                  style={{ fontFamily: "chillax" }}
+                >
                   Clausia
                 </h1>
-                
               </div>
             </div>
 
@@ -76,10 +91,21 @@ export default function EditorDashboardLayout({
             <div className="flex items-center space-x-2 sm:space-x-4 flex-shrink-0">
               {/* Credits Info - Desktop only */}
               <div className="hidden md:flex items-center">
-                <div className="flex items-center px-3 py-1.5 bg-slate-100 rounded-full">
-                  <Coins className="w-4 h-4 text-[#BC3FDE] mr-2" />
-                  <span className="font-medium text-slate-700 text-sm">
-                    {tokensUsed} / {credits} used
+                <div
+                  className={`flex items-center px-3 py-1.5 rounded-full 
+                      ${tokensUsed > credits ? "bg-red-50" : "bg-slate-100"}`}
+                >
+                  <Coins
+                    className={`w-4 h-4 mr-2 ${
+                      tokensUsed > credits ? "text-red-500" : "text-[#BC3FDE]"
+                    }`}
+                  />
+                  <span
+                    className={`font-medium text-sm ${
+                      tokensUsed > credits ? "text-red-700" : "text-slate-700"
+                    }`}
+                  >
+                    {tokensUsed} / {credits} credits
                   </span>
                 </div>
               </div>
@@ -114,11 +140,16 @@ export default function EditorDashboardLayout({
         <div className="w-full px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
           <div className="flex items-start sm:items-center space-x-3 mb-2">
             <FileText className="w-5 h-5 sm:w-6 sm:h-6 text-[#BC3FDE] flex-shrink-0 mt-0.5 sm:mt-0" />
-            <h2 className="text-xl sm:text-2xl font-bold text-slate-900">Privacy Policy Preview</h2>
+            <h2 className="text-xl sm:text-2xl font-bold text-slate-900">
+              Privacy Policy Preview
+            </h2>
           </div>
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-2 sm:space-y-0">
             <p className="text-slate-600 text-sm sm:text-base">
-              Review your generated privacy policy for <span className="font-semibold text-slate-800">{productName}</span>
+              Review your generated privacy policy for{" "}
+              <span className="font-semibold text-slate-800">
+                {productName}
+              </span>
             </p>
             <div className="flex items-center text-xs sm:text-sm text-slate-500">
               <Eye className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />
@@ -132,7 +163,9 @@ export default function EditorDashboardLayout({
       <div className="md:hidden bg-slate-50 border-b border-slate-200 px-4 py-3">
         <div className="flex items-center text-sm">
           <Coins className="w-4 h-4 text-[#BC3FDE] mr-2" />
-          <span className="font-medium text-slate-700">{tokensUsed} / {credits} credits used</span>
+          <span className="font-medium text-slate-700">
+            {tokensUsed} / {credits} credits used
+          </span>
         </div>
       </div>
 
@@ -144,8 +177,12 @@ export default function EditorDashboardLayout({
             <div className="bg-slate-50 border-b border-slate-200 px-4 sm:px-8 py-4 sm:py-6">
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-2 sm:space-y-0">
                 <div>
-                  <h3 className="text-lg sm:text-xl font-bold text-slate-900">Privacy Policy</h3>
-                  <p className="text-slate-600 mt-1 text-sm sm:text-base">{productName}</p>
+                  <h3 className="text-lg sm:text-xl font-bold text-slate-900">
+                    Privacy Policy
+                  </h3>
+                  <p className="text-slate-600 mt-1 text-sm sm:text-base">
+                    {productName}
+                  </p>
                 </div>
                 <div className="text-left sm:text-right text-xs sm:text-sm text-slate-500">
                   <p>Created: {dayjs(date).format("MMMM D, YYYY")}</p>
@@ -154,16 +191,17 @@ export default function EditorDashboardLayout({
             </div>
 
             {/* Document Content */}
-            <div className="px-4 sm:px-8 py-6 sm:py-8">
-              {children}
-            </div>
+            <div className="px-4 sm:px-8 py-6 sm:py-8">{children}</div>
           </div>
 
           {/* Bottom Actions */}
           <div className="mt-6 sm:mt-8 flex flex-col space-y-4 p-4 sm:p-6 bg-white rounded-lg sm:rounded-xl border border-slate-200">
             <div className="text-sm text-slate-600 text-center">
               <p className="font-medium">Ready to publish?</p>
-              <p className="mt-1">Your privacy policy will be made publicly accessible once published.</p>
+              <p className="mt-1">
+                Your privacy policy will be made publicly accessible once
+                published.
+              </p>
             </div>
             <button
               onClick={handlePublish}

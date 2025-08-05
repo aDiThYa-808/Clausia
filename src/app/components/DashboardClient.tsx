@@ -58,10 +58,10 @@ export default function DashboardClient({ user, policies, credits }: Props) {
 
   dayjs.extend(utc);
   dayjs.extend(relativeTime);
-
+  
   const getRelativeTime = (dateString: string): string => {
-    const date = dayjs.utc(dateString);
-    const now = dayjs.utc();
+    const date = dayjs.utc(dateString).local(); // Convert from UTC to local time
+    const now = dayjs(); // already local
   
     const diffMinutes = now.diff(date, 'minute');
   
@@ -80,6 +80,8 @@ export default function DashboardClient({ user, policies, credits }: Props) {
     const diffMonths = now.diff(date, 'month');
     return `${diffMonths} months ago`;
   };
+  
+  
 
   const getUserInitials = (name: string) => {
     return name
@@ -113,7 +115,7 @@ export default function DashboardClient({ user, policies, credits }: Props) {
   return (
     <div className="min-h-screen bg-slate-50">
       {/* Top Navigation */}
-      <nav className="bg-white border-b border-slate-200 shadow-sm">
+      <nav className="w-full sticky top-0 z-20 bg-white/80 backdrop-blur-sm border-b border-slate-200 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
@@ -180,7 +182,7 @@ export default function DashboardClient({ user, policies, credits }: Props) {
                       </p>
                       <p className="text-xs text-slate-500">{user?.email}</p>
                       <p className="text-xs text-[#BC3FDE] mt-1">
-                        {user?.credits || 0} credits remaining
+                        {credits ?? 0} credits remaining
                       </p>
                     </div>
                     <button
@@ -212,7 +214,7 @@ export default function DashboardClient({ user, policies, credits }: Props) {
                 className="font-semibold text-[#BC3FDE]"
                 style={{ fontFamily: "Chillax" }}
               >
-                {user?.credits || 0} credits
+                {credits ?? 0} credits
               </span>{" "}
               remaining.
             </p>
