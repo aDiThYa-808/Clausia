@@ -4,21 +4,14 @@ import { useRouter } from "next/navigation";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase/auth/supabaseClient";
 import { syncProfile } from "@/lib/supabase/auth/syncUserProfile";
-import {
-  User,
-  LogOut,
-  Plus,
-  Calendar,
-  Tag,
-  CheckCircle,
-  Clock,
-} from "lucide-react";
+import { User } from "@supabase/supabase-js";
+import { LogOut, Plus, Calendar, Tag, CheckCircle, Clock } from "lucide-react";
 
 type Props = {
-  user: any;
+  user: User | null;
   policies: {
     id: string;
     product_name: string;
@@ -31,22 +24,26 @@ type Props = {
 
 export default function DashboardClient({ user, policies, credits }: Props) {
   const router = useRouter();
-  const [open, setOpen] = useState(false);
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-  const menuRef = useRef(null);
-  const sidebarRef = useRef(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const handleLogout = async () => {
-    await supabase.auth.signOut();
-    router.push("/login");
+    if (!user) return;
+
+    console.log("Logging out...");
+    const { error } = await supabase.auth.signOut();
+
+    if (error) {
+      console.error("Logout failed:", error.message);
+    } else {
+      router.push("/login");
+    }
   };
 
   useEffect(() => {
     if (user) {
       void syncProfile(user);
     }
-  }, []);
+  }, [user]);
 
   const handleNewPolicy = () => {
     router.push("/new");
@@ -58,30 +55,28 @@ export default function DashboardClient({ user, policies, credits }: Props) {
 
   dayjs.extend(utc);
   dayjs.extend(relativeTime);
-  
+
   const getRelativeTime = (dateString: string): string => {
     const date = dayjs.utc(dateString).local(); // Convert from UTC to local time
     const now = dayjs(); // already local
-  
-    const diffMinutes = now.diff(date, 'minute');
-  
-    if (diffMinutes < 1) return 'Just now';
+
+    const diffMinutes = now.diff(date, "minute");
+
+    if (diffMinutes < 1) return "Just now";
     if (diffMinutes < 60) return `${diffMinutes} minutes ago`;
-  
-    const diffHours = now.diff(date, 'hour');
+
+    const diffHours = now.diff(date, "hour");
     if (diffHours < 24) return `${diffHours} hours ago`;
-  
-    const diffDays = now.diff(date, 'day');
+
+    const diffDays = now.diff(date, "day");
     if (diffDays < 7) return `${diffDays} days ago`;
-  
-    const diffWeeks = now.diff(date, 'week');
+
+    const diffWeeks = now.diff(date, "week");
     if (diffWeeks < 4) return `${diffWeeks} weeks ago`;
-  
-    const diffMonths = now.diff(date, 'month');
+
+    const diffMonths = now.diff(date, "month");
     return `${diffMonths} months ago`;
   };
-  
-  
 
   const getUserInitials = (name: string) => {
     return name
@@ -91,31 +86,10 @@ export default function DashboardClient({ user, policies, credits }: Props) {
       .toUpperCase();
   };
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (menuRef.current && !(menuRef.current as any).contains(event.target)) {
-        setOpen(false);
-      }
-      if (
-        sidebarRef.current &&
-        !(sidebarRef.current as any).contains(event.target)
-      ) {
-        setSidebarOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-
-  const avatar =
-    user?.user_metadata?.avatar_url ||
-    user?.user_metadata?.picture ||
-    "/default-avatar.png";
-
   return (
     <div className="min-h-screen bg-slate-50">
       {/* Top Navigation */}
-      <nav className="w-full sticky top-0 z-20 bg-white/80 backdrop-blur-sm border-b border-slate-200 shadow-sm">
+      <nav className="sticky top-0 z-50 bg-white border-b border-slate-200 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}

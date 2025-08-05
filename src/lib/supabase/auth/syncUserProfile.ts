@@ -1,6 +1,7 @@
 import { supabase } from "./supabaseClient";
+import { User } from "@/lib/types/userType";
 
-export const syncProfile = async (user: any) => {
+export const syncProfile = async (user: User | null) => {
   if (!user) return;
 
   const { data, error: fetchError } = await supabase

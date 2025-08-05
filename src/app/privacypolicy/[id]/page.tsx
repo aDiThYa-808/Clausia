@@ -1,10 +1,6 @@
 
 import PolicyRenderer from "@/app/components/PolicyRenderer";
 import { createSupabaseServerClient } from "@/lib/supabase/supabaseServer";
-import { toast } from "sonner";
-import { Toaster } from "sonner";
-import dayjs from "dayjs";
-import Link from "next/link";
 
 export default async function PolicyPage(props: { params: { id: string } }) {
   

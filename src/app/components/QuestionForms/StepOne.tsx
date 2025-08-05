@@ -10,7 +10,6 @@ export default function StepOne() {
   } = useFormContext();
 
   const productType = watch("productType") || "app";
-  const label = productType.charAt(0).toUpperCase() + productType.slice(1);
 
   
 

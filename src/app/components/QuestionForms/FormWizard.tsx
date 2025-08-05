@@ -8,8 +8,6 @@ import StepOne from "./StepOne";
 import StepTwo from "./StepTwo";
 
 import {
-  stepOneSchema,
-  stepTwoSchema,
   fullSchema,
   FullFormData,
 } from "@/lib/zod/formSchemas";
@@ -51,9 +49,8 @@ export default function FormWizard() {
 
   const {
     trigger,
-    getValues,
     handleSubmit,
-    formState: { errors },
+    formState: {},
   } = methods;
 
   const validateStep = async () => {

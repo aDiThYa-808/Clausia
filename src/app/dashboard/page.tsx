@@ -31,7 +31,6 @@ export default async function DashboardPage() {
   // Handle policies fetch error
   if (policiesError) {
     console.error("Error fetching policies:", policiesError);
-    // You might want to show an error page or empty state
   }
 
   const {data:creditsData,error:creditsError}= await supabase
@@ -40,15 +39,19 @@ export default async function DashboardPage() {
   .eq("id",userData.user.id)
   .single()
 
-  if(creditsError){
+  if(creditsError && !creditsData){
     console.error("error fetching credits:",creditsError)
+
   }
+
+  const credits = creditsData?.credits ?? 0
+
 
   return (
     <DashboardClient
       user={userData.user}
       policies={policies || []}
-      credits={creditsData?.credits ?? 0}
+      credits={credits}
     />
   );
 }

@@ -1,7 +1,6 @@
 "use client";
 
 import { useFormContext, useWatch } from "react-hook-form";
-import { useState } from "react";
 
 export default function StepThree() {
   const {
@@ -13,7 +12,6 @@ export default function StepThree() {
 
   const usesSDKs = useWatch({ control, name: "usesSDKs" });
   const thirdPartySDKs = useWatch({ control, name: "thirdPartySDKs" }) || [];
-  const [customSDK, setCustomSDK] = useState("");
   const productType = watch("productType") || "app";
 
   return (

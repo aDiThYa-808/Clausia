@@ -90,8 +90,10 @@ export async function POST(req: Request) {
 
     console.log('✅ Policy created with ID:', inserted.id)
     return NextResponse.json({ id: inserted.id })
-  } catch (error: any) {
-    console.error('[SERVER_ERROR]', error.message || error)
-    return new NextResponse('Internal Server Error', { status: 500 })
+  } catch (error) {
+    const message =
+      error instanceof Error ? error.message : 'Unknown error';
+    console.error('[SERVER_ERROR]', message);
+    return new NextResponse('Internal Server Error', { status: 500 });
   }
 }

@@ -30,6 +30,8 @@ export default async function PolicyPreviewPage({
     .eq("id",userData.user?.id)
     .single()
 
+    if(creditsError) return <div className="p-6 text-red-600">Error loading credits.</div>;
+
  // Redirect if already published
     if (PolicyData.status === "completed") {
       redirect(`/privacypolicy/${params.id}`);

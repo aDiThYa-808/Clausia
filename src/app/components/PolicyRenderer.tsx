@@ -1,6 +1,11 @@
 import dayjs from "dayjs";
+import { Policy } from "@/lib/types/policyType";
 
-export default function PolicyRenderer({ data }: { data: any }) {
+type Props = {
+  data: Policy;
+};
+
+export default function PolicyRenderer({ data }: Props) {
   return (
     <div className="px-6 md:px-12 py-16 max-w-4xl mx-auto">
       <div className="mb-16">
@@ -12,7 +17,7 @@ export default function PolicyRenderer({ data }: { data: any }) {
 
       <div className="mb-12">
         <p className="text-lg text-slate-700 leading-relaxed">
-          Welcome to <span className="font-semibold text-black">{data.product_name}</span>'s Privacy Policy.
+          Welcome to <span className="font-semibold text-black">{data.product_name}</span>&rsquo;s Privacy Policy.
           Please read it carefully to understand how your data is collected and used.
         </p>
       </div>
