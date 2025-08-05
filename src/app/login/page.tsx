@@ -6,7 +6,6 @@ import { supabase } from "@/lib/supabase/auth/supabaseClient";
 import { useUser } from "@/lib/supabase/auth/useUser";
 
 export default function LoginPage() {
-  const router = useRouter();
   const { user, loading } = useUser();
 
   useEffect(() => {

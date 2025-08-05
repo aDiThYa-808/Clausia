@@ -26,6 +26,7 @@ export default function DashboardClient({ user, policies, credits }: Props) {
   const router = useRouter();
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
+
   const handleLogout = async () => {
     if (!user) return;
 
@@ -52,6 +53,8 @@ export default function DashboardClient({ user, policies, credits }: Props) {
   const handlePolicyClick = (id: string) => {
     router.push(`/privacypolicy/preview/${id}`);
   };
+
+  
 
   dayjs.extend(utc);
   dayjs.extend(relativeTime);

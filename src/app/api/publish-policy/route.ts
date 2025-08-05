@@ -1,6 +1,6 @@
 // api/generate-policy/route.ts
 
-import { createSupabaseServerClient } from "@/lib/supabase/supabaseServer";
+import { createSupabaseServerClient } from "@/lib/supabase/supabaseServerClient";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {

@@ -1,14 +1,11 @@
-import { createSupabaseServerClient } from "@/lib/supabase/supabaseServer";
+import { createSupabaseServerClient } from "@/lib/supabase/supabaseServerClient";
 import DashboardClient from "../components/DashboardClient";
 import { redirect } from "next/navigation";
 
 export default async function DashboardPage() {
   const supabase = await createSupabaseServerClient();
-  
-  const {
-    data: userData,
-    error: userError,
-  } = await supabase.auth.getUser();
+
+  const { data: userData, error: userError } = await supabase.auth.getUser();
 
   // Handle auth errors
   if (userError) {
@@ -33,19 +30,17 @@ export default async function DashboardPage() {
     console.error("Error fetching policies:", policiesError);
   }
 
-  const {data:creditsData,error:creditsError}= await supabase
-  .from("profiles")
-  .select("credits")
-  .eq("id",userData.user.id)
-  .single()
+  const { data: creditsData, error: creditsError } = await supabase
+    .from("profiles")
+    .select("credits")
+    .eq("id", userData.user.id)
+    .single();
 
-  if(creditsError && !creditsData){
-    console.error("error fetching credits:",creditsError)
-
+  if (creditsError && !creditsData) {
+    console.error("error fetching credits:", creditsError);
   }
 
-  const credits = creditsData?.credits ?? 0
-
+  const credits = creditsData?.credits ?? 0;
 
   return (
     <DashboardClient

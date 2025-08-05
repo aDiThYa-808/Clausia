@@ -30,9 +30,3 @@ export async function createSupabaseServerClient() {
   )
 }
 
-// export function createSupabaseAdminClient() {
-//   return createClient(
-//     process.env.NEXT_PUBLIC_SUPABASE_PROJECT_URL!,
-//     process.env.SUPABASE_SERVICE_ROLE_KEY!
-//   )
-// }
