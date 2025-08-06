@@ -8,38 +8,11 @@ import { useUser } from "@/lib/supabase/auth/useUser";
 export default function LoginPage() {
   const { user, loading } = useUser();
 
-  // useEffect(() => {
-  //   const syncAndRedirect = async () => {
-  //     if (!loading && user) {
-  //       // Wait a bit for session to fully establish
-  //       await new Promise(resolve => setTimeout(resolve, 1000));
-        
-  //       try {
-  //         const response = await fetch('/api/sync-profile', { 
-  //           method: 'POST',
-  //           headers: {
-  //             'Content-Type': 'application/json'
-  //           }
-  //         });
-          
-  //         if (response.ok) {
-  //           const data = await response.json();
-  //           console.log('✅ Profile sync response:', data);
-  //         }
-          
-  //         // Redirect regardless of sync success/failure
-  //         window.location.href = '/dashboard';
-          
-  //       } catch (error) {
-  //         console.error('❌ Sync error:', error);
-  //         // Still redirect even if sync fails
-  //         window.location.href = '/dashboard';
-  //       }
-  //     }
-  //   };
-  
-  //   syncAndRedirect();
-  // }, [user, loading]);
+  useEffect(() => {
+    if (!loading && user) {
+      window.location.href = '/dashboard';
+    }
+  }, [user, loading]);
 
   if (loading) return <p>Loading...</p>;
   if (user) return null;
@@ -68,66 +41,107 @@ export default function LoginPage() {
   };
 
   return (
-    <main className="relative flex min-h-screen items-center justify-center bg-gradient-to-br from-[#F8F5FC] to-[#f1e9fb] px-4">
-      {/* Subtle background shape */}
+    <main className="relative flex min-h-screen items-center justify-center bg-gradient-to-br from-slate-50 via-white to-purple-50 px-4">
+      {/* Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-[-50px] left-[-100px] w-[300px] h-[300px] bg-[#BC3FDE]/10 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-[-80px] right-[-80px] w-[250px] h-[250px] bg-[#BC3FDE]/20 rounded-full blur-2xl"></div>
+        <div className="absolute top-1/4 -left-12 w-72 h-72 bg-purple-200/30 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-1/4 -right-12 w-96 h-96 bg-pink-200/20 rounded-full blur-3xl"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-conic from-purple-200/10 via-transparent to-pink-200/10 rounded-full blur-2xl"></div>
       </div>
-
-      {/* Auth Card */}
-      <div className="relative w-full max-w-sm bg-white rounded-3xl shadow-2xl px-8 py-12 space-y-10 border border-slate-100">
-        {/* Logo / Brand Icon */}
-        <div className="flex justify-center">
-          <div className="w-12 h-12 rounded-full bg-[#BC3FDE]/10 flex items-center justify-center">
-            <img src="/icons/shield.svg" alt="Clausia" className="w-6 h-6" />
+  
+      <div className="relative w-full max-w-6xl grid lg:grid-cols-2 gap-12 items-center">
+        {/* Left Side - Illustration */}
+        <div className="hidden lg:flex items-center justify-center">
+          <div className="relative max-w-lg w-full">
+            <img
+              src="illustrations/hero-image.svg"
+              alt="Clausia Illustration"
+              className="w-full h-auto"
+            />
           </div>
         </div>
-
-        {/* Heading */}
-        <div className="space-y-1 text-center">
-          <h1 className="text-3xl font-bold text-slate-900">
-            Welcome to Clausia
-          </h1>
-          <p className="text-sm text-slate-500">Your AI legal assistant</p>
-        </div>
-
-        {/* Auth buttons */}
-        <div className="space-y-4">
-          <button
-            onClick={signInWithGoogle}
-            className="w-full flex items-center justify-center gap-2 px-4 py-3 border border-slate-200 rounded-xl text-sm font-medium text-slate-700 bg-white hover:bg-slate-100 transition shadow-sm hover:shadow-md"
-          >
-            <img src="/icons/google.svg" alt="Google" className="w-5 h-5" />
-            Sign in with Google
-          </button>
-
-          {/* Divider */}
-          <div className="flex items-center gap-4">
-            <div className="h-px flex-1 bg-slate-200" />
-            <span className="text-xs text-slate-400 uppercase tracking-wide">
-              or
-            </span>
-            <div className="h-px flex-1 bg-slate-200" />
+  
+        {/* Right Side - Auth Card */}
+        <div className="flex items-center justify-center">
+          <div className="w-full max-w-sm bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl px-6 py-8 space-y-6 border border-purple-200/30">
+            {/* Wordmark Logo */}
+            <div className="text-center">
+              <h1
+                className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent"
+                style={{ fontFamily: "chillax" }}
+              >
+                Clausia
+              </h1>
+            </div>
+  
+            {/* Heading */}
+            <div className="space-y-1 text-center">
+              <h2 className="text-xl font-bold text-slate-900">
+                Welcome back
+              </h2>
+              <p className="text-sm text-slate-600">
+                Sign in to continue creating policies
+              </p>
+            </div>
+  
+            {/* Auth buttons */}
+            <div className="space-y-3">
+              <button
+                onClick={signInWithGoogle}
+                className="w-full flex items-center justify-center gap-2 px-4 py-3 border-2 border-slate-200 rounded-xl text-sm font-medium text-slate-700 bg-white hover:bg-slate-50 hover:border-purple-300 hover:shadow-md transition-all duration-200"
+              >
+                <img src="/icons/google.svg" alt="Google" className="w-5 h-5" />
+                Continue with Google
+              </button>
+  
+              {/* Divider */}
+              <div className="flex items-center gap-3">
+                <div className="h-px flex-1 bg-gradient-to-r from-transparent via-slate-300 to-transparent" />
+                <span className="text-xs text-slate-500 uppercase tracking-wide font-medium">
+                  or
+                </span>
+                <div className="h-px flex-1 bg-gradient-to-r from-transparent via-slate-300 to-transparent" />
+              </div>
+  
+              <button
+                onClick={signInWithGitHub}
+                className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-sm font-medium text-white bg-gradient-to-r from-slate-800 to-slate-900 hover:from-slate-900 hover:to-black hover:shadow-md transition-all duration-200"
+              >
+                <img src="/icons/github.svg" alt="GitHub" className="w-5 h-5" />
+                Continue with GitHub
+              </button>
+            </div>
+  
+            {/* Benefits */}
+            <div className="pt-2">
+              <div className="space-y-2 text-center">
+                <div className="flex items-center justify-center gap-2 text-xs text-slate-600">
+                  <div className="w-1 h-1 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full"></div>
+                  Generate policies in minutes
+                </div>
+                <div className="flex items-center justify-center gap-2 text-xs text-slate-600">
+                  <div className="w-1 h-1 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full"></div>
+                  100% compliant with Indian regulations
+                </div>
+              </div>
+            </div>
+  
+            {/* Footer */}
+            <div className="pt-3 border-t border-slate-100">
+              <p className="text-xs text-center text-slate-500 leading-relaxed">
+                By signing in, you agree to our{" "}
+                <span className="font-medium text-purple-600 hover:text-purple-700 cursor-pointer underline underline-offset-2">
+                  Terms
+                </span>{" "}
+                and{" "}
+                <span className="font-medium text-purple-600 hover:text-purple-700 cursor-pointer underline underline-offset-2">
+                  Privacy Policy
+                </span>
+                .
+              </p>
+            </div>
           </div>
-
-          <button
-            onClick={signInWithGitHub}
-            className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-sm font-medium text-white bg-slate-900 hover:bg-slate-800 transition shadow-sm hover:shadow-md"
-          >
-            <img src="/icons/github.svg" alt="GitHub" className="w-5 h-5" />
-            Sign in with GitHub
-          </button>
         </div>
-
-        {/* Tagline */}
-        <p className="text-xs text-center text-slate-400">
-          By signing in, you agree to our{" "}
-          <span className="underline underline-offset-2 decoration-[#BC3FDE] hover:text-[#BC3FDE] transition cursor-pointer">
-            privacy policy
-          </span>
-          .
-        </p>
       </div>
     </main>
   );
