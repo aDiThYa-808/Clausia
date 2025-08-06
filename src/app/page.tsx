@@ -169,7 +169,7 @@ export default function LandingPage() {
             <div className={`space-y-8 transform transition-all duration-1000 ${animatedElements.hero ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-100 text-purple-700 text-sm font-medium">
                 <Star className="w-4 h-4 fill-current" />
-                Trusted by 1000+ Indian developers
+                Built with feedback from Indian founders
               </div>
               
               <h1 className="text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight">
