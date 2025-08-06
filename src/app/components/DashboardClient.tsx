@@ -6,7 +6,6 @@ import utc from "dayjs/plugin/utc";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase/auth/supabaseClient";
-import { syncProfile } from "@/lib/supabase/auth/syncUserProfile";
 import { User } from "@supabase/supabase-js";
 import { LogOut, Plus, Calendar, Tag, CheckCircle, Clock } from "lucide-react";
 
@@ -26,7 +25,6 @@ export default function DashboardClient({ user, policies, credits }: Props) {
   const router = useRouter();
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
-
   const handleLogout = async () => {
     if (!user) return;
 
@@ -40,12 +38,6 @@ export default function DashboardClient({ user, policies, credits }: Props) {
     }
   };
 
-  useEffect(() => {
-    if (user) {
-      void syncProfile(user);
-    }
-  }, [user]);
-
   const handleNewPolicy = () => {
     router.push("/new");
   };
@@ -53,8 +45,6 @@ export default function DashboardClient({ user, policies, credits }: Props) {
   const handlePolicyClick = (id: string) => {
     router.push(`/privacypolicy/preview/${id}`);
   };
-
-  
 
   dayjs.extend(utc);
   dayjs.extend(relativeTime);

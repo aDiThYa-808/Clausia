@@ -2,7 +2,6 @@
 import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 import { NextRequest, NextResponse } from 'next/server'
-import { syncProfile } from "@/lib/supabase/auth/syncUserProfile"
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url)
@@ -31,22 +30,8 @@ export async function GET(request: NextRequest) {
     const { error } = await supabase.auth.exchangeCodeForSession(code)
     
     if (!error) {
-      // Get the authenticated user
-      const { data: { user }, error: userError } = await supabase.auth.getUser()
+      console.log('✅ Session established, redirecting to dashboard')
       
-      if (user && !userError) {
-        try {
-          // Sync profile after successful authentication
-          console.log('✅ User authenticated, syncing profile...')
-          await syncProfile(user)
-          console.log('✅ Profile sync completed')
-        } catch (syncError) {
-          console.error('❌ Profile sync failed:', syncError)
-          // Don't fail the login, just log the error
-          // The dashboard can handle missing profiles gracefully
-        }
-      }
-
       const forwardedHost = request.headers.get('x-forwarded-host')
       const isLocalEnv = process.env.NODE_ENV === 'development'
       if (isLocalEnv) {

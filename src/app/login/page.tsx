@@ -8,11 +8,38 @@ import { useUser } from "@/lib/supabase/auth/useUser";
 export default function LoginPage() {
   const { user, loading } = useUser();
 
-  useEffect(() => {
-    if (!loading && user) {
-      window.location.href = '/dashboard';
-    }
-  }, [user, loading]);
+  // useEffect(() => {
+  //   const syncAndRedirect = async () => {
+  //     if (!loading && user) {
+  //       // Wait a bit for session to fully establish
+  //       await new Promise(resolve => setTimeout(resolve, 1000));
+        
+  //       try {
+  //         const response = await fetch('/api/sync-profile', { 
+  //           method: 'POST',
+  //           headers: {
+  //             'Content-Type': 'application/json'
+  //           }
+  //         });
+          
+  //         if (response.ok) {
+  //           const data = await response.json();
+  //           console.log('✅ Profile sync response:', data);
+  //         }
+          
+  //         // Redirect regardless of sync success/failure
+  //         window.location.href = '/dashboard';
+          
+  //       } catch (error) {
+  //         console.error('❌ Sync error:', error);
+  //         // Still redirect even if sync fails
+  //         window.location.href = '/dashboard';
+  //       }
+  //     }
+  //   };
+  
+  //   syncAndRedirect();
+  // }, [user, loading]);
 
   if (loading) return <p>Loading...</p>;
   if (user) return null;
