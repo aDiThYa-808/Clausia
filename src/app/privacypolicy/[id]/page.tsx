@@ -1,14 +1,14 @@
 import PolicyRenderer from "@/app/components/PolicyRenderer";
 import { createSupabaseServerClient } from "@/lib/supabase/supabaseServerClient";
 
-export default async function PolicyPage(props: { params: { id: string } }) {
-  const { params } = await props;
+export default async function PolicyPage(props: { params: Promise<{ id: string }> }) {
+  const { id } = await props.params;
   const supabase = await createSupabaseServerClient();
 
   const { data, error } = await supabase
     .from("Policy")
     .select("*")
-    .eq("id", params.id)
+    .eq("id", id)
     .single();
 
   if (error) {

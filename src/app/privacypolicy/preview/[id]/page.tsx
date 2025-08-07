@@ -3,11 +3,8 @@ import EditorDashboardLayout from "@/app/components/EditorDashboard";
 import PolicyRenderer from "@/app/components/PolicyRenderer";
 import { redirect } from "next/navigation";
 
-export default async function PolicyPreviewPage({
-  params,
-}: {
-  params: { id: string };
-}) {
+export default async function PolicyPreviewPage(props: { params: Promise<{ id: string }> }) {
+  const { id } = await props.params;
   const supabase = await createSupabaseServerClient();
 
   const { data: userData, error: userError } = await supabase.auth.getUser();
@@ -17,7 +14,7 @@ export default async function PolicyPreviewPage({
   const { data: PolicyData, error: policyError } = await supabase
     .from("Policy")
     .select("*")
-    .eq("id", params.id)
+    .eq("id", id)
     .single();
 
   if (policyError || !PolicyData) {
@@ -35,7 +32,7 @@ export default async function PolicyPreviewPage({
 
   // Redirect if already published
   if (PolicyData.status === "completed") {
-    redirect(`/privacypolicy/${params.id}`);
+    redirect(`/privacypolicy/${id}`);
   }
 
   return (
