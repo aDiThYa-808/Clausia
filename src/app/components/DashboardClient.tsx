@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { supabase } from "@/lib/supabase/auth/supabaseClient";
 import { User } from "@supabase/supabase-js";
 import { LogOut, Plus, Calendar, Tag, CheckCircle, Clock } from "lucide-react";

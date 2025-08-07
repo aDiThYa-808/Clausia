@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import { ArrowRight, CheckCircle, Zap, Shield, Clock, Star, Menu, X, ChevronDown } from 'lucide-react';
+import Link from 'next/link';
 
 export default function LandingPage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -19,7 +20,7 @@ export default function LandingPage() {
       const scrollY = window.scrollY;
       const windowHeight = window.innerHeight;
       
-      setAnimatedElements(prev => ({
+      setAnimatedElements(() => ({
         hero: true, // Hero animates immediately
         features: scrollY > windowHeight * 0.2,
         pricing: scrollY > windowHeight * 0.8
@@ -102,9 +103,9 @@ export default function LandingPage() {
         isScrolled ? 'bg-white/80 backdrop-blur-md border-b border-white/20 shadow-lg' : 'bg-transparent'
       }`}>
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <a href="/" className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent" style={{fontFamily:"chillax"}}>
+          <Link href="/" className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent" style={{fontFamily:"chillax"}}>
             Clausia
-          </a>
+          </Link>
           
           <nav className="hidden lg:flex items-center gap-8 text-sm font-medium text-slate-700">
             <a href="#how-it-works" className="hover:text-purple-600 transition-colors relative group">
