@@ -130,11 +130,15 @@ export default function LoginPage() {
               <p className="text-xs text-center text-slate-500 leading-relaxed">
                 By signing in, you agree to our{" "}
                 <span className="font-medium text-purple-600 hover:text-purple-700 cursor-pointer underline underline-offset-2">
+                  <a href="/legal/termsofservice">
                   Terms
+                  </a>
                 </span>{" "}
                 and{" "}
                 <span className="font-medium text-purple-600 hover:text-purple-700 cursor-pointer underline underline-offset-2">
+                  <a href="/legal/privacypolicy">
                   Privacy Policy
+                  </a>
                 </span>
                 .
               </p>

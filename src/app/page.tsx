@@ -721,18 +721,13 @@ export default function LandingPage() {
               <h5 className="font-semibold mb-4 text-white">Legal</h5>
               <ul className="space-y-3 text-slate-400">
                 <li>
-                  <a href="#" className="hover:text-white transition-colors">
+                  <a href="/legal/privacypolicy" className="hover:text-white transition-colors">
                     Privacy Policy
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-white transition-colors">
+                  <a href="/legal/termsofservice" className="hover:text-white transition-colors">
                     Terms of Service
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white transition-colors">
-                    Refund Policy
                   </a>
                 </li>
               </ul>
