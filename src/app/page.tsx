@@ -736,7 +736,7 @@ export default function LandingPage() {
 
           <div className="border-t border-slate-800 mt-12 pt-8 text-center">
             <p className="text-slate-400">
-              © 2024 Clausia. Made with ❤️ for Indian developers.
+              © 2025 Clausia. Made with ❤️ for Indian developers.
             </p>
           </div>
         </div>
