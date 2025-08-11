@@ -1,6 +1,7 @@
 import { createSupabaseServerClient } from "@/lib/supabase/supabaseServerClient";
-import DashboardClient from "../components/DashboardClient";
+import DashboardPolicyList from "../components/MainDashboard/DashboardPolicyList";
 import { redirect } from "next/navigation";
+import DashboardNavbar from "../components/MainDashboard/DashboardNavbar";
 
 export default async function DashboardPage() {
   const supabase = await createSupabaseServerClient();
@@ -20,8 +21,8 @@ export default async function DashboardPage() {
 
   // SYNC PROFILE LOGIC
   try {
-    console.log('🔄 Checking/syncing profile for user:', userData.user.id);
-    
+    console.log("🔄 Checking/syncing profile for user:", userData.user.id);
+
     const { data: existingProfile, error: fetchError } = await supabase
       .from("profiles")
       .select("id")
@@ -37,14 +38,12 @@ export default async function DashboardPage() {
         userData.user.user_metadata?.name ??
         "Anonymous";
 
-      const { error: insertError } = await supabase
-        .from("profiles")
-        .insert({
-          id: userData.user.id,
-          email: userData.user.email ?? "",
-          fullName,
-          credits: 2000,
-        });
+      const { error: insertError } = await supabase.from("profiles").insert({
+        id: userData.user.id,
+        email: userData.user.email ?? "",
+        fullName,
+        credits: 2000,
+      });
 
       if (insertError) {
         console.error("❌ Failed to create profile:", insertError.message);
@@ -58,7 +57,6 @@ export default async function DashboardPage() {
     console.error("❌ Profile sync failed:", syncError);
   }
 
-  
   // Fetch policies with error handling
   const { data: policies, error: policiesError } = await supabase
     .from("Policy")
@@ -85,10 +83,10 @@ export default async function DashboardPage() {
   const credits = creditsData?.credits ?? 0;
 
   return (
-    <DashboardClient
-      user={userData.user}
-      policies={policies || []}
-      credits={credits}
-    />
+    <>
+      <DashboardNavbar user={userData.user} credits={credits} />
+
+      <DashboardPolicyList policies={policies || []} credits={credits} />
+    </>
   );
 }

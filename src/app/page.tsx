@@ -119,7 +119,7 @@ export default function LandingPage() {
       price: "₹49",
       period: "",
       features: [
-        "10,000 credits",
+        "5,000 credits",
         "Policy generation",
         "Copy as text",
         "Live link hosting",
@@ -133,7 +133,7 @@ export default function LandingPage() {
       price: "₹149",
       period: "",
       features: [
-        "50,000 credits",
+        "20,000 credits",
         "Policy generation",
         "Copy as text",
         "Live link hosting",
