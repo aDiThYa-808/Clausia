@@ -5,14 +5,14 @@ import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   // Move environment check inside the function
-  if (!process.env.RAZORPAY_KEY_ID || !process.env.RAZORPAY_KEY_SECRET) {
+  if (!process.env.RAZORPAY_KEY_ID_TEST || !process.env.RAZORPAY_KEY_SECRET_TEST) {  //these razorpay keys are for test mode. change them for prod!!!
     console.error("Razorpay credentials are missing in environment variables.");
     return NextResponse.json({ error: "Payment service unavailable" }, { status: 503 });
   }
 
   const razorpay = new Razorpay({
-    key_id: process.env.RAZORPAY_KEY_ID,
-    key_secret: process.env.RAZORPAY_KEY_SECRET,
+    key_id: process.env.RAZORPAY_KEY_ID_TEST,
+    key_secret: process.env.RAZORPAY_KEY_SECRET_TEST,
   });
 
   const supabase = await createSupabaseServerClient();
@@ -77,7 +77,7 @@ export async function POST(req: Request) {
       amount: order.amount,
       currency: order.currency,
       credits: pack.credits,
-      key: process.env.RAZORPAY_KEY_ID, // public key for checkout
+      key: process.env.RAZORPAY_KEY_ID_TEST, // public key for checkout
     }, { status: 200 });
     
   } catch (error: unknown) {

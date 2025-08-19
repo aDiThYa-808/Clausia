@@ -32,7 +32,7 @@ export async function POST(req: Request) {
     const encoder = new TextEncoder();
     const key = await crypto.subtle.importKey(
       "raw",
-      encoder.encode(process.env.RAZORPAY_KEY_SECRET!),
+      encoder.encode(process.env.RAZORPAY_KEY_SECRET_TEST!),
       { name: "HMAC", hash: "SHA-256" },
       false,
       ["sign"]
@@ -53,7 +53,7 @@ export async function POST(req: Request) {
     }
 
     // Get order details from Razorpay
-    const auth = Buffer.from(`${process.env.RAZORPAY_KEY_ID}:${process.env.RAZORPAY_KEY_SECRET}`).toString('base64');
+    const auth = Buffer.from(`${process.env.RAZORPAY_KEY_ID_TEST}:${process.env.RAZORPAY_KEY_SECRET_TEST}`).toString('base64');
     
     const response = await fetch(`https://api.razorpay.com/v1/orders/${razorpay_order_id}`, {
       headers: { Authorization: `Basic ${auth}` }
@@ -102,9 +102,9 @@ export async function POST(req: Request) {
         user_id: userData.user.id,
         razorpay_order_id,
         razorpay_payment_id,
-        amount: order.amount,
+        amount: order.amount/100,
         currency: order.currency,
-        status: "success"
+        status: "paid"
       });
 
     if (insertError) {
