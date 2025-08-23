@@ -79,6 +79,10 @@ export default function DashboardNavbar({ user, credits }: Props) {
                     src={user.user_metadata.avatar_url}
                     alt="Profile"
                     className="w-8 h-8 rounded-full object-cover ring-2 ring-purple-200"
+                    onError={(e) => {
+                      const target = e.currentTarget as HTMLImageElement;
+                      target.src = "/icons/default-avatar.svg"; // fallback image
+                    }}
                   />
                 ) : (
                   <div className="w-8 h-8 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-full flex items-center justify-center text-sm font-medium shadow-sm">

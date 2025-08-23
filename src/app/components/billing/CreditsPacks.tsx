@@ -2,6 +2,8 @@
 
 import { CheckCircle } from "lucide-react";
 import { useState, useEffect } from "react";
+import { Toaster,toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 type Pack = {
   id?: number;
@@ -43,9 +45,9 @@ declare global {
 }
 
 export default function CreditPacks() {
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [razorpayLoaded, setRazorpayLoaded] = useState(false);
 
   const packs: (Pack & { id: number })[] = [
@@ -66,7 +68,7 @@ export default function CreditPacks() {
       name: "Business Pack",
       credits: 20000,
       price: 149,
-      gradient: "from-indigo-500 to-purple-500",
+      gradient: "from-purple-500 to-pink-500",
       features: [
         "20000 Credits instantly",
         "Best value for teams",
@@ -98,6 +100,7 @@ export default function CreditPacks() {
         };
         script.onerror = () => {
           setError('Failed to load payment system. Please refresh the page and try again.');
+          toast.error(error)
           resolve(false);
         };
         document.body.appendChild(script);
@@ -123,6 +126,7 @@ export default function CreditPacks() {
   async function handlePurchase(packIndex: number) {
     if (!razorpayLoaded || !window.Razorpay) {
       setError("Payment system is still loading. Please try again in a moment.");
+      toast.warning(error)
       return;
     }
 
@@ -130,7 +134,6 @@ export default function CreditPacks() {
 
     setLoading(true);
     setError(null);
-    setSuccessMessage(null);
 
     try {
       // Call your backend to create the order
@@ -178,17 +181,23 @@ export default function CreditPacks() {
             if (!verifyRes.ok) {
               const err = await verifyRes.json();
               setError(err.error || "Payment verification failed");
+              toast.error(error)
               setLoading(false);
               return;
             }
 
-            const verifyData = await verifyRes.json();
-            setSuccessMessage(
-              `Payment successful! Credits added: ${verifyData.creditsAdded}. Total credits: ${verifyData.newTotal}`
-            );
+            toast.success("Payment Successful!", {
+              description: `${pack.credits.toLocaleString()} credits added to your account`,
+              duration: 6000,
+              action: {
+                label: "View Credits",
+                  onClick: () => router.push("/dashboard"),
+                },
+              });
             setLoading(false);
           } catch (err) {
             setError("Payment verification failed. Please contact support if amount was deducted.");
+            toast.error(error)
             console.error(err);
             setLoading(false);
           }
@@ -206,81 +215,146 @@ export default function CreditPacks() {
     } catch (err: unknown) {
       if (err instanceof Error) setError(err.message);
       else setError("An unknown error occurred");
+      toast.error(error)
       setLoading(false);
     }
   }
 
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-purple-50">
-      {!razorpayLoaded && !error && (
-        <div className="fixed top-4 right-4 bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded z-50">
-          Loading payment system...
+return (
+  <div className="min-h-screen bg-gray-50">
+    <Toaster richColors/>
+    <main className="max-w-5xl mx-auto px-4 py-12">
+      {/* Header */}
+      <div className="text-center mb-12">
+        <h1 className="text-4xl font-bold text-gray-900 mb-4">
+          Buy Credits
+        </h1>
+        <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          Choose a credit pack that fits your needs. Your credits will be added instantly after payment.
+        </p>
+      </div>
+
+      {/* Loading overlay */}
+      {loading && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+          <div className="bg-white rounded-lg p-6 shadow-lg">
+            <div className="text-center">
+              <div className="w-8 h-8 border-4 border-gray-300 border-t-blue-600 rounded-full animate-spin mx-auto mb-4"></div>
+              <p className="text-gray-700">Processing payment...</p>
+            </div>
+          </div>
         </div>
       )}
-      
-      <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent mb-4">
-            Buy Credits
-          </h1>
-          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-            Choose a credit pack that fits your needs. Your credits will be
-            added instantly after payment.
-          </p>
-          {error && (
-            <div className="mt-4 bg-red-50 border border-red-200 rounded-md p-4">
-              <p className="text-red-600 font-semibold">{error}</p>
-            </div>
-          )}
-          {successMessage && (
-            <div className="mt-4 bg-green-50 border border-green-200 rounded-md p-4">
-              <p className="text-green-600 font-semibold">{successMessage}</p>
-            </div>
-          )}
-        </div>
 
-        {/* Packs Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {packs.map((pack, index) => (
-            <div
-              key={index}
-              className="bg-white/70 backdrop-blur-sm rounded-2xl border border-purple-200/30 shadow-lg hover:shadow-xl hover:border-purple-300/50 transition p-8 flex flex-col"
-            >
-              <div className="mb-6">
-                <h2 className="text-2xl font-bold text-slate-900 mb-2">
-                  {pack.name}
-                </h2>
-                <p
-                  className={`text-4xl font-extrabold bg-gradient-to-r ${pack.gradient} bg-clip-text text-transparent`}
-                >
-                  ₹{pack.price}
-                </p>
-                <p className="text-slate-600 mt-1">
-                  {pack.credits.toLocaleString()} credits
-                </p>
+      {/* Credit Packs Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        {packs.map((pack, index) => (
+          <div
+            key={index}
+            className="bg-white rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow p-6"
+          >
+            {/* Pack Header */}
+            <div className="text-center mb-6">
+              <h2 className="text-xl font-semibold text-gray-900 mb-2">
+                {pack.name}
+              </h2>
+              <div className="mb-2">
+                <span className={`text-3xl font-bold bg-gradient-to-r ${pack.gradient} bg-clip-text text-transparent`}>
+                  ₹{pack.price.toLocaleString()}
+                </span>
               </div>
-
-              <ul className="space-y-3 mb-6">
-                {pack.features.map((feature, idx) => (
-                  <li key={idx} className="flex items-center text-slate-700">
-                    <CheckCircle className="w-5 h-5 text-green-500 mr-2" />
-                    {feature}
-                  </li>
-                ))}
-              </ul>
-
-              <button
-                className={`mt-auto inline-flex items-center justify-center px-6 py-3 rounded-xl text-white font-semibold shadow-lg hover:shadow-xl bg-gradient-to-r ${pack.gradient} hover:opacity-90 transition disabled:opacity-50 disabled:cursor-not-allowed`}
-                disabled={loading || !razorpayLoaded}
-                onClick={() => handlePurchase(index)}
-              >
-                {loading ? "Processing..." : !razorpayLoaded ? "Loading..." : "Buy Now"}
-              </button>
+              <p className="text-gray-600">
+                {pack.credits.toLocaleString()} credits
+              </p>
+             <p className="text-sm text-gray-500 mt-1">
+                {index === 0 ? (
+                  "Standard pack"
+                ) : (
+                  `Save ${Math.round(((packs[0].price / packs[0].credits) - (pack.price / pack.credits)) / (packs[0].price / packs[0].credits) * 100)}% off`
+                )}
+              </p>
             </div>
-          ))}
+
+            {/* Features */}
+            <ul className="space-y-2 mb-6">
+              {pack.features.map((feature, idx) => (
+                <li key={idx} className="flex items-start text-sm text-gray-700">
+                  <CheckCircle className="w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                  {feature}
+                </li>
+              ))}
+            </ul>
+
+            {/* Buy Button */}
+            <button
+              className={`w-full px-6 py-3 rounded-lg font-medium text-white shadow-sm hover:shadow-md bg-gradient-to-r ${pack.gradient} hover:opacity-90 transition-all disabled:opacity-50 disabled:cursor-not-allowed`}
+              disabled={loading || !razorpayLoaded}
+              onClick={() => handlePurchase(index)}
+            >
+              {loading ? (
+                <span className="flex items-center justify-center">
+                  <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="m4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                  Processing...
+                </span>
+              ) : !razorpayLoaded ? (
+                "Loading..."
+              ) : (
+                "Buy Now"
+              )}
+            </button>
+
+            {/* Payment info */}
+            <p className="text-xs text-gray-500 text-center mt-3">
+              Secure payment via Razorpay
+            </p>
+          </div>
+        ))}
+      </div>
+
+      {/* Legal links and footer info */}
+      <div className="text-center mt-12">
+        <div className="inline-flex items-center space-x-6 text-sm text-gray-500 mb-4">
+          <span className="flex items-center">
+            <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+            </svg>
+            Secure Payment
+          </span>
+          <span className="flex items-center">
+            <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+            Instant Delivery
+          </span>
         </div>
-      </main>
-    </div>
-  );
+        
+        <div className="flex flex-col sm:flex-row items-center justify-center space-y-2 sm:space-y-0 sm:space-x-4 text-xs text-gray-400 px-4">
+          <span>By purchasing, you agree to our</span>
+          <div className="flex items-center space-x-4">
+            <a 
+              href="/legal/termsofservice"
+              className="text-blue-600 hover:text-blue-700 underline"
+              target="_blank" 
+              rel="noopener noreferrer"
+            >
+              Terms of Service
+            </a>
+            <span>and</span>
+            <a 
+              href="/legal/privacypolicy"
+              className="text-blue-600 hover:text-blue-700 underline"
+              target="_blank" 
+              rel="noopener noreferrer"
+            >
+              Privacy Policy
+            </a>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+);
 }
