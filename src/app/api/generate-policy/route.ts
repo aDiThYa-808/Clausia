@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import OpenAI from 'openai'
 import { generatePrivacyPrompt, PolicyInput } from '@/lib/openai/generatePrompt'
-import { parseRawPolicy } from '@/lib/parsing/parseRawPolicy'
+import { parseRawPolicy } from '@/lib/openai/parseRawPolicy'
 import { createSupabaseServerClient } from '@/lib/supabase/supabaseServerClient'
 
 export async function POST(req: Request) {

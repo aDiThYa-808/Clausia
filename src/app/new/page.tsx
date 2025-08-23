@@ -1,4 +1,4 @@
-import FormWizard from "@/app/components/QuestionForms/FormWizard";
+import FormWizard from "@/app/components/forms/FormWizard";
 
 export default function FormPage(){
   return (

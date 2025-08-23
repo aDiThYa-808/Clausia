@@ -1,7 +1,7 @@
 import { createSupabaseServerClient } from "@/lib/supabase/supabaseServerClient";
-import DashboardPolicyList from "../components/MainDashboard/DashboardPolicyList";
+import DashboardPolicyList from "../components/dashboard/DashboardPolicyList";
 import { redirect } from "next/navigation";
-import DashboardNavbar from "../components/MainDashboard/DashboardNavbar";
+import DashboardNavbar from "../components/dashboard/DashboardNavbar";
 
 export default async function DashboardPage() {
   const supabase = await createSupabaseServerClient();

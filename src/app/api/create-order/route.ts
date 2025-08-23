@@ -1,5 +1,5 @@
 import Razorpay from "razorpay";
-import { creditPacks } from "@/lib/types/creditPackType";
+import { creditPacks } from "@/types/creditPackType";
 import { createSupabaseServerClient } from "@/lib/supabase/supabaseServerClient";
 import { NextResponse } from "next/server";
 

@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import { Policy } from "@/lib/types/policyType";
+import { Policy } from "@/types/policyType";
 
 type Props = {
   data: Policy;

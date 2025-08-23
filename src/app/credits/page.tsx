@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
-import DashboardNavbar from "../components/MainDashboard/DashboardNavbar";
+import DashboardNavbar from "../components/dashboard/DashboardNavbar";
 import { createSupabaseServerClient } from "@/lib/supabase/supabaseServerClient";
-import CreditPacks from "../components/MainDashboard/CreditsPacks";
+import CreditPacks from "../components/billing/CreditsPacks";
 
 export default async function CreditsPage() {
   const supabase = await createSupabaseServerClient();

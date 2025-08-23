@@ -1,5 +1,5 @@
 "use client";
-import { supabase } from "@/lib/supabase/auth/supabaseClient";
+import { supabase } from "@/lib/supabase/supabaseBrowserClient";
 import { User } from "@supabase/supabase-js";
 import { LogOut } from "lucide-react";
 import { useState } from "react";

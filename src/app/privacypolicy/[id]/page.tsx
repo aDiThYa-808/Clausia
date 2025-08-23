@@ -1,4 +1,4 @@
-import PolicyRenderer from "@/app/components/PolicyRenderer";
+import PolicyRenderer from "@/app/components/preview/PolicyRenderer";
 import { createSupabaseServerClient } from "@/lib/supabase/supabaseServerClient";
 
 export default async function PolicyPage(props: { params: Promise<{ id: string }> }) {

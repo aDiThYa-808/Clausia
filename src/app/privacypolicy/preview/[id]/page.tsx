@@ -1,6 +1,6 @@
 import { createSupabaseServerClient } from "@/lib/supabase/supabaseServerClient";
-import EditorDashboardLayout from "@/app/components/EditorDashboard";
-import PolicyRenderer from "@/app/components/PolicyRenderer";
+import EditorDashboardLayout from "@/app/components/preview/EditorDashboard";
+import PolicyRenderer from "@/app/components/preview/PolicyRenderer";
 import { redirect } from "next/navigation";
 
 export default async function PolicyPreviewPage(props: { params: Promise<{ id: string }> }) {

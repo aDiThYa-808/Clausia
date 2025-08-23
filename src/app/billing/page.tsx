@@ -1,8 +1,8 @@
 import { createSupabaseServerClient } from "@/lib/supabase/supabaseServerClient";
 import { redirect } from "next/navigation";
-import DashboardNavbar from "../components/MainDashboard/DashboardNavbar";
-import BillingHistory from "../components/MainDashboard/BillingHistory";
-import { Transaction } from "@/lib/types/transactionType";
+import DashboardNavbar from "../components/dashboard/DashboardNavbar";
+import BillingHistory from "../components/billing/BillingHistory";
+import { Transaction } from "@/types/transactionType";
 
 export default async function BillingHistoryPage() {
   const supabase = await createSupabaseServerClient();

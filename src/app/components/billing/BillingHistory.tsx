@@ -1,6 +1,6 @@
 "use client";
 
-import { Transaction } from "@/lib/types/transactionType";
+import { Transaction } from "@/types/transactionType";
 
 export default function BillingHistory({
   transactions,

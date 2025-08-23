@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect } from "react";
-import { supabase } from "@/lib/supabase/auth/supabaseClient";
-import { useUser } from "@/lib/supabase/auth/useUser";
+import { supabase } from "@/lib/supabase/supabaseBrowserClient";
+import { useUser } from "@/lib/supabase/useUser";
 
 export default function LoginPage() {
   const { user, loading } = useUser();

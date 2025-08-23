@@ -10,7 +10,7 @@ import StepTwo from "./StepTwo";
 import {
   fullSchema,
   FullFormData,
-} from "@/lib/zod/formSchemas";
+} from "@/lib/validation/formSchemas";
 import StepThree from "./StepThree";
 import StepFour from "./StepFour";
 import StepFive from "./StepFive";
