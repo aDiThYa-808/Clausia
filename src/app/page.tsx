@@ -95,7 +95,7 @@ export default function LandingPage() {
       number: "03",
       title: "Preview, Publish & Export",
       description:
-        "Review the policy, share it via public link, or export it as plain text.",
+        "Review the policy, share it via a public link.",
     },
   ];
 
@@ -107,7 +107,6 @@ export default function LandingPage() {
       features: [
         "2,000 free credits",
         "Policy generation",
-        "Copy as text",
         "Live link hosting",
       ],
       popular: false,
@@ -121,7 +120,6 @@ export default function LandingPage() {
       features: [
         "5,000 credits",
         "Policy generation",
-        "Copy as text",
         "Live link hosting",
       ],
       popular: true,
@@ -135,7 +133,6 @@ export default function LandingPage() {
       features: [
         "20,000 credits",
         "Policy generation",
-        "Copy as text",
         "Live link hosting",
       ],
       popular: false,
