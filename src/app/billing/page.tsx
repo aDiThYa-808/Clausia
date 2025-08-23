@@ -1,39 +1,50 @@
 import { createSupabaseServerClient } from "@/lib/supabase/supabaseServerClient";
 import { redirect } from "next/navigation";
 import DashboardNavbar from "../components/MainDashboard/DashboardNavbar";
+import BillingHistory from "../components/MainDashboard/BillingHistory";
+import { Transaction } from "@/lib/types/transactionType";
 
 export default async function BillingHistoryPage() {
   const supabase = await createSupabaseServerClient();
 
   const { data: userData, error: userError } = await supabase.auth.getUser();
 
-  // Handle auth errors
   if (userError) {
     console.error("Auth error:", userError);
     redirect("/login");
   }
 
-  // Redirect if not authenticated
-  if (!userData?.user) {
-    redirect("/login");
-  }
+  if (!userData?.user) redirect("/login");
 
-  // Fetch credits (should work now that profile exists)
+  // Fetch transaction history
+  const { data: transactionData, error: transactionError } = await supabase
+    .from("transactions")
+    .select("id, razorpay_order_id, razorpay_payment_id, amount, currency, status, created_at")
+    .eq("user_id", userData.user.id)
+    .order("created_at", { ascending: false });
+
+  if (transactionError) console.error("Error fetching transactions:", transactionError);
+  
+
+  const transactions: Transaction[] = (transactionData as Transaction[]) || [];
+
+  console.log("transactions: ",transactions)
+
+  // Fetch credits
   const { data: creditsData, error: creditsError } = await supabase
     .from("profiles")
     .select("credits")
     .eq("id", userData.user.id)
     .single();
 
-  if (creditsError && !creditsData) {
-    console.error("error fetching credits:", creditsError);
-  }
+  if (creditsError) console.error("Error fetching credits:", creditsError);
 
-  const credits = creditsData?.credits ?? 0;
+  const credits: number = creditsData?.credits ?? 0;
 
   return (
     <>
       <DashboardNavbar user={userData.user} credits={credits} />
+      <BillingHistory transactions={transactions} />
     </>
   );
 }

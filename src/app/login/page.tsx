@@ -39,6 +39,8 @@ export default function LoginPage() {
     if (error) console.error("GitHub login error:", error);
   };
 
+
+
   return (
     <main className="relative flex min-h-screen items-center justify-center bg-gradient-to-br from-slate-50 via-white to-purple-50 px-4">
       {/* Background Elements */}
