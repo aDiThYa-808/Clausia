@@ -280,7 +280,7 @@ export default function BillingHistory({
               </thead>
               <tbody className="divide-y divide-gray-100">
                 {transactions.length ? (
-                  transactions.map((tx, i) => (
+                  transactions.map((tx) => (
                     <tr
                       key={tx.id}
                       className="hover:bg-gray-50 transition-colors duration-200 group"
