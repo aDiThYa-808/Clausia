@@ -36,6 +36,7 @@ export default async function PolicyPreviewPage(props: { params: Promise<{ id: s
   }
 
   return (
+    
     <EditorDashboardLayout
       productName={PolicyData.product_name}
       policyId={PolicyData.id}
@@ -45,5 +46,6 @@ export default async function PolicyPreviewPage(props: { params: Promise<{ id: s
     >
       <PolicyRenderer data={PolicyData} />
     </EditorDashboardLayout>
+    
   );
 }

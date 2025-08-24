@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import DashboardNavbar from "../components/dashboard/DashboardNavbar";
 import { createSupabaseServerClient } from "@/lib/supabase/supabaseServerClient";
 import CreditPacks from "../components/billing/CreditsPacks";
+import DashboardFooter from "../components/dashboard/DashboardFooter";
 
 export default async function CreditsPage() {
   const supabase = await createSupabaseServerClient();
@@ -37,6 +38,7 @@ export default async function CreditsPage() {
     <>
       <DashboardNavbar user={userData.user} credits={credits} />
       <CreditPacks />
+      <DashboardFooter/>
     </>
   );
 }

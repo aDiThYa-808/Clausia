@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import DashboardNavbar from "../components/dashboard/DashboardNavbar";
 import BillingHistory from "../components/billing/BillingHistory";
 import { Transaction } from "@/types/transactionType";
+import DashboardFooter from "../components/dashboard/DashboardFooter";
 
 export default async function BillingHistoryPage() {
   const supabase = await createSupabaseServerClient();
@@ -45,6 +46,7 @@ export default async function BillingHistoryPage() {
     <>
       <DashboardNavbar user={userData.user} credits={credits} />
       <BillingHistory transactions={transactions} />
+      <DashboardFooter/>
     </>
   );
 }

@@ -144,7 +144,7 @@ export default function LandingPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-purple-50 text-slate-900 overflow-x-hidden">
       {/* Enhanced Navbar */}
-      <header
+<header
         className={`fixed top-0 w-full z-50 transition-all duration-300 ${
           isScrolled
             ? "bg-white/80 backdrop-blur-md border-b border-white/20 shadow-lg"
@@ -185,6 +185,19 @@ export default function LandingPage() {
           </nav>
 
           <div className="hidden lg:flex items-center gap-4">
+            <a
+              href="https://github.com/aDiThYa-808/Clausia"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2 text-slate-700 hover:text-purple-600 transition-colors group"
+              title="View on GitHub"
+            >
+              <img 
+                src="/icons/github-dark.svg" 
+                alt="GitHub" 
+                className="w-5 h-5 group-hover:scale-110 transition-transform"
+              />
+            </a>
             <a
               href="/login"
               className="px-4 py-2 text-sm font-medium text-slate-700 hover:text-purple-600 transition-colors"
@@ -238,6 +251,15 @@ export default function LandingPage() {
               Pricing
             </a>
             <div className="pt-4 border-t border-slate-200 space-y-3">
+              <a
+                href="https://github.com/aDiThYa-808/Clausia"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 py-2 text-slate-700 hover:text-purple-600 transition-colors"
+              >
+                <img src="/icons/github-dark.svg" alt="GitHub" className="w-5 h-5" />
+                View on GitHub
+              </a>
               <a
                 href="/login"
                 className="block py-2 text-slate-700 hover:text-purple-600 transition-colors"

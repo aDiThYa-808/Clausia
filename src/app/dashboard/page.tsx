@@ -2,6 +2,7 @@ import { createSupabaseServerClient } from "@/lib/supabase/supabaseServerClient"
 import DashboardPolicyList from "../components/dashboard/DashboardPolicyList";
 import { redirect } from "next/navigation";
 import DashboardNavbar from "../components/dashboard/DashboardNavbar";
+import DashboardFooter from "../components/dashboard/DashboardFooter";
 
 export default async function DashboardPage() {
   const supabase = await createSupabaseServerClient();
@@ -84,6 +85,8 @@ export default async function DashboardPage() {
       <DashboardNavbar user={userData.user} credits={credits} />
 
       <DashboardPolicyList policies={policies || []} credits={credits} />
+
+      <DashboardFooter/>
     </>
   );
 }

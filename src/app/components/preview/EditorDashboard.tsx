@@ -6,6 +6,7 @@ import { toast } from "sonner";
 import { Toaster } from "sonner";
 import { ArrowLeft, FileText, Coins, CheckCircle, Eye } from "lucide-react";
 import dayjs from "dayjs";
+import DashboardFooter from "../dashboard/DashboardFooter";
 
 export default function EditorDashboardLayout({
   productName,
@@ -231,6 +232,7 @@ export default function EditorDashboardLayout({
           </div>
         </div>
       </main>
+      <DashboardFooter/>
     </div>
   );
 }
