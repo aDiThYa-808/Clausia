@@ -1,9 +1,25 @@
+//verifies the razorpay order, updates user's credits and stores transaction history in the table
+
 import { createSupabaseServerClient } from "@/lib/supabase/supabaseServerClient";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
+
+  const RazorpayKeyId = process.env.RAZORPAY_KEY_ID;  // add _TEST to use razorpay in test mode
+  const RazorpayKeySecret = process.env.RAZORPAY_KEY_SECRET; //add _TEST to use razorpay in test mode
+
+    //check if environment variables are present before doing anything
+  if (!RazorpayKeyId || !RazorpayKeySecret) {
+    //console.error("Razorpay credentials are missing in environment variables.");
+    return NextResponse.json(
+      { error: "Could'nt verify payment" },
+      { status: 503 }
+    );
+  }
+
   const supabase = await createSupabaseServerClient();
 
+  //get logged in user info
   const { data: userData, error: userError } = await supabase.auth.getUser();
   if (userError || !userData.user) {
     return NextResponse.json({ error: userError?.message || "Unauthorized" }, { status: 401 });
@@ -32,7 +48,7 @@ export async function POST(req: Request) {
     const encoder = new TextEncoder();
     const key = await crypto.subtle.importKey(
       "raw",
-      encoder.encode(process.env.RAZORPAY_KEY_SECRET!),
+      encoder.encode(RazorpayKeySecret!),
       { name: "HMAC", hash: "SHA-256" },
       false,
       ["sign"]
@@ -53,7 +69,7 @@ export async function POST(req: Request) {
     }
 
     // Get order details from Razorpay
-    const auth = Buffer.from(`${process.env.RAZORPAY_KEY_ID}:${process.env.RAZORPAY_KEY_SECRET}`).toString('base64');
+    const auth = Buffer.from(`${RazorpayKeyId}:${RazorpayKeySecret}`).toString('base64');
     
     const response = await fetch(`https://api.razorpay.com/v1/orders/${razorpay_order_id}`, {
       headers: { Authorization: `Basic ${auth}` }
@@ -109,7 +125,6 @@ export async function POST(req: Request) {
 
     if (insertError) {
       console.error("Failed to record transaction:", insertError);
-      // Credits are already added, so we'll just log this error
     }
 
     return NextResponse.json({ 

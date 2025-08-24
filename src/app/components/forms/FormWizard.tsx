@@ -3,7 +3,7 @@
 import { useForm, FormProvider } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
-
+import { Toaster,toast } from "sonner";
 import StepOne from "./StepOne";
 import StepTwo from "./StepTwo";
 
@@ -98,7 +98,7 @@ export default function FormWizard() {
 
   //called when generate policy is clicked
   const onFinalSubmit = async (data: FullFormData) => {
-    //console.log("✅ Final Submission Data:", data)
+    //console.log("Final Submission Data:", data)
 
     try {
       setLoading(true);
@@ -110,7 +110,10 @@ export default function FormWizard() {
 
       if (!res.ok) {
         const errorText = await res.text();
-        console.error("❌ Server Error:", errorText);
+        toast.error("Server Error", {description:
+          errorText
+        })
+        //console.error("Server Error:", errorText);
         setLoading(false);
         return;
       }
@@ -119,10 +122,9 @@ export default function FormWizard() {
 
       router.push(`/privacypolicy/preview/${id}`);
     } catch (err) {
-      console.error("❌ Network or Unexpected Error:", err);
-    } //finally {
-    //   setLoading(false);
-    // }
+      toast.error("Network Error")
+      console.error(err);
+    }
   };
 
   const steps = [
@@ -174,6 +176,7 @@ export default function FormWizard() {
     return (
       <FormProvider {...methods}>
         <div className="space-y-12 max-w-3xl mx-auto">
+          <Toaster richColors/>
           {/* Progress */}
           <div className="space-y-2 mb-8">
             <div className="flex justify-between text-sm font-medium text-slate-600">

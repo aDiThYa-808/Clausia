@@ -10,7 +10,7 @@ export default async function DashboardPage() {
 
   // Handle auth errors
   if (userError) {
-    console.error("Auth error:", userError);
+    //console.error("Auth error:", userError);
     redirect("/login");
   }
 
@@ -19,9 +19,9 @@ export default async function DashboardPage() {
     redirect("/login");
   }
 
-  // SYNC PROFILE LOGIC
+  // sync profile
   try {
-    console.log("🔄 Checking/syncing profile for user:", userData.user.id);
+    //console.log("Checking/syncing profile for user:", userData.user.id);
 
     const { data: existingProfile, error: fetchError } = await supabase
       .from("profiles")
@@ -30,7 +30,7 @@ export default async function DashboardPage() {
       .single();
 
     if (fetchError && fetchError.code !== "PGRST116") {
-      console.error("❌ Failed to fetch profile:", fetchError.message);
+      console.error("Failed to fetch profile:", fetchError.message);
     } else if (!existingProfile) {
       // Profile doesn't exist, create it
       const fullName =
@@ -46,15 +46,12 @@ export default async function DashboardPage() {
       });
 
       if (insertError) {
-        console.error("❌ Failed to create profile:", insertError.message);
-      } else {
-        console.log("✅ Profile created successfully with 2000 credits");
-      }
-    } else {
-      console.log("✅ Profile already exists");
+        console.error("Failed to create profile:", insertError.message);
+      } 
+
     }
   } catch (syncError) {
-    console.error("❌ Profile sync failed:", syncError);
+    console.error("Profile sync failed:", syncError);
   }
 
   // Fetch policies with error handling

@@ -1,3 +1,4 @@
+
 import { redirect } from "next/navigation";
 import DashboardNavbar from "../components/dashboard/DashboardNavbar";
 import { createSupabaseServerClient } from "@/lib/supabase/supabaseServerClient";
@@ -10,7 +11,7 @@ export default async function CreditsPage() {
 
   // Handle auth errors
   if (userError) {
-    console.error("Auth error:", userError);
+    //console.error("Auth error:", userError);
     redirect("/login");
   }
 

@@ -1,4 +1,3 @@
-// app/auth/callback/route.ts
 import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 import { NextRequest, NextResponse } from 'next/server'
@@ -30,7 +29,7 @@ export async function GET(request: NextRequest) {
     const { error } = await supabase.auth.exchangeCodeForSession(code)
     
     if (!error) {
-      console.log('✅ Session established, redirecting to dashboard')
+      //console.log('Session established, redirecting to dashboard')
       
       const forwardedHost = request.headers.get('x-forwarded-host')
       const isLocalEnv = process.env.NODE_ENV === 'development'

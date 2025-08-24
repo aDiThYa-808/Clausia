@@ -1,3 +1,4 @@
+
 import { createSupabaseServerClient } from "@/lib/supabase/supabaseServerClient";
 import { redirect } from "next/navigation";
 import DashboardNavbar from "../components/dashboard/DashboardNavbar";
@@ -10,7 +11,7 @@ export default async function BillingHistoryPage() {
   const { data: userData, error: userError } = await supabase.auth.getUser();
 
   if (userError) {
-    console.error("Auth error:", userError);
+    //console.error("Auth error:", userError);
     redirect("/login");
   }
 
@@ -28,7 +29,6 @@ export default async function BillingHistoryPage() {
 
   const transactions: Transaction[] = (transactionData as Transaction[]) || [];
 
-  console.log("transactions: ",transactions)
 
   // Fetch credits
   const { data: creditsData, error: creditsError } = await supabase

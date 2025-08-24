@@ -1,3 +1,5 @@
+//parses raw text response given by gpt
+
 export type ParsedPolicy = {
     productName: string;
     productType: string;

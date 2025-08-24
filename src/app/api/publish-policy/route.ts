@@ -1,10 +1,10 @@
-// api/generate-policy/route.ts
+// updates user's credits and policy's status after publishing
 
 import { createSupabaseServerClient } from "@/lib/supabase/supabaseServerClient";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
-    const { policyId } = await req.json(); // ✅ JSON 
+    const { policyId } = await req.json(); 
   
     if (!policyId) {
       return NextResponse.json({ error: "Missing policyId" }, { status: 400 });
@@ -12,6 +12,7 @@ export async function POST(req: NextRequest) {
   
     const supabase = await createSupabaseServerClient();
 
+    //get logged in user info
     const {
       data: userData,
       error: userError,
@@ -21,6 +22,7 @@ export async function POST(req: NextRequest) {
 
     const userId = userData.user?.id
   
+    //get tokens used, policy status and users id from Policy table
     const{data:tokensData,error:tokensError} = await supabase
     .from("Policy")
     .select("tokens_used , status , profile_id")
@@ -32,6 +34,7 @@ export async function POST(req: NextRequest) {
     if(!tokensData) return NextResponse.json({error: "failed to retrive tokensData"},{status:404})
     if(tokensData?.profile_id != userId) return NextResponse.json({error: "Unauthorized"},{status:403})
 
+    //get credits that the logged in user has  
     const{data:creditsData, error:creditsError} = await supabase
     .from("profiles")
     .select("credits")
@@ -44,10 +47,12 @@ export async function POST(req: NextRequest) {
 
     if(tokensData?.tokens_used == null || creditsData?.credits == null) return NextResponse.json({error:"Missing tokens or credits data"},{status:500})
 
+      //deduct user credits
     const updatedCredits = creditsData?.credits - tokensData?.tokens_used;
 
     if(updatedCredits < 0) return NextResponse.json({ error: "You don’t have enough credits to publish this policy. Please purchase more to continue." }, { status: 400 });
 
+    //update the users credits with the deducted value
     const{error:creditsUpdateError} =await supabase
     .from("profiles")
     .update({
@@ -57,6 +62,7 @@ export async function POST(req: NextRequest) {
 
     if(creditsUpdateError) return NextResponse.json({ error: creditsUpdateError.message }, { status: 500 });
 
+    //change policy status to completed after publishing
     const { error: policyError } = await supabase
     .from("Policy")
     .update({

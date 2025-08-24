@@ -52,7 +52,7 @@ export default function CreditPacks() {
 
   const packs: (Pack & { id: number })[] = [
     {
-      id: 1, // This matches your creditPacks key '1'
+      id: 1, // This matches creditPacks key '1'
       name: "Pro Pack",
       credits: 5000,
       price: 49,
@@ -64,7 +64,7 @@ export default function CreditPacks() {
       ],
     },
     {
-      id: 2, // This matches your creditPacks key '2'
+      id: 2, // This matches creditPacks key '2'
       name: "Business Pack",
       credits: 20000,
       price: 149,
@@ -204,7 +204,7 @@ export default function CreditPacks() {
         },
         modal: {
           ondismiss: () => {
-            console.log("Payment popup dismissed");
+            //console.log("Payment popup dismissed");
             setLoading(false);
           },
         },

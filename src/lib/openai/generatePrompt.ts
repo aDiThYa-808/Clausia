@@ -1,3 +1,5 @@
+//the prompt that will be sent to gpt 4.1 mini in api/generate-policy
+
 export type PolicyInput = {
     productName: string;
     productType: string;
