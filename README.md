@@ -1,116 +1,128 @@
-# Clausia 
+# Clausia (Beta)
 
-**Generate professional privacy policies for your apps and games in minutes, not hours.**
+**Generate professional privacy policies for your apps and games in minutes.**
 
 Clausia is a smart privacy policy generator designed specifically for Indian indie app and game developers. Born from the frustration of manually creating privacy policies for Play Store submissions, Clausia turns a tedious legal process into a simple questionnaire.
 
 ---
 
-## 🎯 Why Clausia?
+## Why Clausia?
 
 As an indie developer, you've probably been there:
-- ⏰ **Hours wasted** cobbling together privacy policies from templates
-- 🤔 **Legal confusion** about what clauses you actually need
-- 🔄 **Constant back-and-forth** between ChatGPT for text and Google Sites for formatting
-- 😰 **Play Store rejections** due to incomplete or invalid privacy policies
+- **Hours wasted** cobbling together privacy policies from templates
+- **Legal confusion** about what clauses you actually need
+- **Constant back-and-forth** between ChatGPT for text and Google Sites for formatting
+- **Play Store rejections** due to incomplete or invalid privacy policies
 
 **Clausia solves this.** Answer a few simple questions about your app, and get a legally compliant privacy policy with a live link ready for your Play Store submission.
 
 ---
 
-## ✨ Features
+## Features
 
-🎮 **App & Game Focused**
+**App & Game Focused**
 - Tailored specifically for mobile apps and games
-- Covers common scenarios like ads, analytics, in-app purchases
+- Covers common scenarios like ads, third party SDKs and in-app purchases
 
-🤖 **AI-Powered Intelligence**
+**AI-Powered Intelligence**
 - Powered by GPT-4.1-mini for accurate, relevant policy generation
-- Smart question flow that adapts based on your app type
+- Smart question flow based on your app type
 
-📝 **Simple Question Flow**
-- No legal jargon - just plain English questions
+**Simple Question Flow**
+- No legal jargon, just plain English questions
 - Quick setup in under 10 minutes
 
-🔗 **Instant Live Links**
+**Instant Live Links**
 - Get a hosted privacy policy URL immediately
 - Perfect for Play Store, App Store, and website requirements
 
-📄 **Multiple Formats**
-- Download as PDF for offline use
-- Live web link for easy sharing and compliance
+---
 
-✏️ **AI-Powered Editing**
-- Preview your policy before finalizing
-- Make quick edits with AI assistance
+## How It Works
+
+1. **Sign Up** - Quick authentication to get started
+2. **Answer Questions** - Simple questionnaire about your app's data usage
+3. **Preview** - Review your generated policy before publishing
+4. **Get Your Policy** - Purchase credits and publish your policy
 
 ---
 
-## 🚀 How It Works
+## Tech Stack
 
-1. **🔐 Sign Up** - Quick authentication to get started
-2. **📋 Answer Questions** - Simple questionnaire about your app's data usage
-3. **👀 Preview & Edit** - Review your generated policy and make AI-powered adjustments
-4. **💳 Get Your Policy** - Purchase credits and receive your live link + PDF
-
----
-
-## 🛠️ Tech Stack
-
-- **Frontend**: Next.js with Tailwind CSS
-- **Backend**: Supabase (Auth & Database)
-- **AI Engine**: GPT-4.1-mini
-- **Deployment**: Vercel
+- **Framework** : Next.js 15.3.5 with TypeScript 5
+- **Styling** : Tailwind CSS 4
+- **AI Integration** : OpenAI API 5.10.1
+- **Database & Auth** : Supabase
+- **Payment Processing** : Razorpay 2.9.6
+- **Validation** : Zod 4.0.5
+- **Analytics** : Vercel Analytics & Speed Insights
+- **UI Components** : Lucide React icons, Sonner toast notifications
+- **Date Handling** : Day.js 1.11.13
+- **Deployment** : Vercel
 
 ---
 
-## 💡 Perfect For
+## Installation
+```bash
+# Clone the repository
+git clone https://github.com/aDiThYa-808/clausia.git
+cd clausia
 
-- 📱 **Mobile App Developers** releasing on Google Play Store
-- 🎮 **Indie Game Developers** who need compliance documentation
-- 🚀 **Startup Teams** without dedicated legal resources
-- 🇮🇳 **Indian Developers** familiar with local compliance requirements
+# Install dependencies
+npm install
+
+# Set up environment variables
+touch .env.local
+
+# Add the API keys
+
+# Run development server
+npm run dev
+
+# Run Linting
+npm run lint
+
+```
+---
+
+## Environment Variables Required
+```
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
+OPENAI_SECRET_KEY=
+RAZORPAY_KEY_ID=
+RAZORPAY_KEY_SECRET=
+```
 
 ---
 
-## 🎯 Target Scenarios
-
-✅ Apps with advertising networks  
-✅ Games with analytics tracking  
-✅ Apps collecting user data  
-✅ Social features and user accounts  
-✅ In-app purchases and subscriptions  
-✅ Location-based services  
-
----
-
-## 🔒 Compliance Ready
-
-Generated policies are designed to meet requirements for:
-- Google Play Store submissions
-- Apple App Store guidelines
-- GDPR considerations for global users
-- Indian data protection standards
+## Project Structure
+```
+clausia/
+├── src/
+│   ├── app/             # Next.js 15 app directory, components and APIs
+│   ├── lib/             # Utilities and configurations
+│   └── types/           # TypeScript type definitions
+└── public/              # Static assets
+```
 
 ---
 
-## 🚧 Development Status
-
-Clausia is currently in active development. We're building something that we wish existed when we were struggling with privacy policies for our own game releases.
-
----
-
-## 💭 The Story Behind Clausia
-
-This project was born from personal frustration. Like many indie developers, I hit the privacy policy wall when releasing my games on the Play Store. Hours were spent switching between ChatGPT for content and Google Sites for the live link, only to wonder if the result was actually compliant.
-
-There had to be a better way. Clausia is that better way.
+## Development Timeline
+**Started**: July 14, 2024  
+**Status**: Active development with core features complete
 
 ---
 
-## 🤝 Built for Developers, by Developers
+## Upcoming Features
+- **Export Options**: Download policies as PDF or copy as formatted text
+- **Extended Policy Types**: Terms of Service and Refund Policy generators
+- **Enhanced Customization**: Advanced policy modification options
+- **Analytics Dashboard**: Usage insights for generated policies
+---
 
-We understand the indie developer struggle because we've lived it. Clausia isn't just another legal tool - it's built specifically for the mobile app and game development community in India.
+## Contributing
+This project is open for contributions. Please feel free to submit issues and enhancement requests.
 
 ---
 
@@ -118,19 +130,18 @@ We understand the indie developer struggle because we've lived it. Clausia isn't
 
 Questions? Suggestions? We'd love to hear from you!
 
-- 📧 Email: adithyas824@gmail.com
+- 📧 Email: support@clausia.app
 - 📸 Instagram: a_d_i_.x
 
 ---
 
 <div align="center">
 
-**Stop wasting time on privacy policies. Start building amazing apps.**
+**Build for developers, Build by Developers.**
 
-[Get Started →](#) | [Learn More](#) | [Pricing](#)
+[Get Started →](clausia.app)
 
 </div>
 
 ---
 
-*Made with ❤️ for the Indian indie developer community*
