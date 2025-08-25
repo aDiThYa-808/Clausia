@@ -49,16 +49,27 @@ As an indie developer, you've probably been there:
 
 ## Tech Stack
 
-- **Framework** : Next.js 15.3.5 with TypeScript 5
-- **Styling** : Tailwind CSS 4
-- **AI Integration** : OpenAI API 5.10.1
+- **Framework** : Next.js with TypeScript 
+- **AI Integration** : OpenAI API
 - **Database & Auth** : Supabase
-- **Payment Processing** : Razorpay 2.9.6
-- **Validation** : Zod 4.0.5
+- **Payment Processing** : Razorpay
+- **Validation** : Zod
 - **Analytics** : Vercel Analytics & Speed Insights
 - **UI Components** : Lucide React icons, Sonner toast notifications
-- **Date Handling** : Day.js 1.11.13
+- **Date Handling** : Day.js
 - **Deployment** : Vercel
+
+---
+
+## Project Structure
+```
+clausia/
+├── src/
+│   ├── app/             # Next.js 15 app directory, components and APIs
+│   ├── lib/             # Utilities and configurations
+│   └── types/           # TypeScript type definitions
+└── public/              # Static assets
+```
 
 ---
 
@@ -79,9 +90,6 @@ touch .env.local
 # Run development server
 npm run dev
 
-# Run Linting
-npm run lint
-
 ```
 ---
 
@@ -92,18 +100,6 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=
 OPENAI_SECRET_KEY=
 RAZORPAY_KEY_ID=
 RAZORPAY_KEY_SECRET=
-```
-
----
-
-## Project Structure
-```
-clausia/
-├── src/
-│   ├── app/             # Next.js 15 app directory, components and APIs
-│   ├── lib/             # Utilities and configurations
-│   └── types/           # TypeScript type definitions
-└── public/              # Static assets
 ```
 
 ---
@@ -122,7 +118,15 @@ clausia/
 ---
 
 ## Contributing
-This project is open for contributions. Please feel free to submit issues and enhancement requests.
+**Contributions are welcome!**
+
+- Fork the repo and create a feature branch
+
+- Submit a PR with clear commit messages
+
+- Open issues for bug reports or feature requests
+
+See CONTRIBUTING.md
 
 ---
 
