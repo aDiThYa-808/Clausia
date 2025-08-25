@@ -143,7 +143,7 @@ Questions? Suggestions? We'd love to hear from you!
 
 **Build for developers, Build by Developers.**
 
-[Get Started →](clausia.app)
+[Get Started →](https://clausia.app)
 
 </div>
 
