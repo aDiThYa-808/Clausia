@@ -81,12 +81,14 @@ export default async function DashboardPage() {
   const credits = creditsData?.credits ?? 0;
 
   return (
-    <>
+    <div className="min-h-screen flex flex-col">
       <DashboardNavbar user={userData.user} credits={credits} />
 
+    <main className="flex-1">
       <DashboardPolicyList policies={policies || []} credits={credits} />
-
+    </main>
+    
       <DashboardFooter/>
-    </>
+    </div>
   );
 }

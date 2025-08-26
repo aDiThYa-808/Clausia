@@ -5,6 +5,7 @@ import { LogOut } from "lucide-react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 
 type Props = {
   user: User | null;
@@ -75,9 +76,11 @@ export default function DashboardNavbar({ user, credits }: Props) {
                 className="flex items-center space-x-2 text-slate-700 hover:text-slate-900 p-2 rounded-xl hover:bg-gradient-to-r hover:from-purple-50 hover:to-pink-50 border border-transparent hover:border-purple-200/50 hover:shadow-sm"
               >
                 {user?.user_metadata?.avatar_url ? (
-                  <img
+                  <Image
                     src={user.user_metadata.avatar_url}
                     alt="Profile"
+                    height={96}
+                    width={96}
                     className="w-8 h-8 rounded-full object-cover ring-2 ring-purple-200"
                     onError={(e) => {
                       const target = e.currentTarget as HTMLImageElement;

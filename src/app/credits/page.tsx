@@ -35,10 +35,13 @@ export default async function CreditsPage() {
   const credits = creditsData?.credits ?? 0;
 
   return (
-    <>
+    <div className="min-h-screen flex flex-col">
       <DashboardNavbar user={userData.user} credits={credits} />
-      <CreditPacks />
+      <main className="flex-1">
+          <CreditPacks />    
+      </main>
+
       <DashboardFooter/>
-    </>
+    </div>
   );
 }

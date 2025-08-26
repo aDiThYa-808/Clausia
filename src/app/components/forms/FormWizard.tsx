@@ -152,7 +152,7 @@ export default function FormWizard() {
     }, 2500);
 
     return () => clearInterval(interval);
-  }, [loading]);
+  }, [loading,messages.length]);
 
   //conditional redendering the ui.
   if (loading) {

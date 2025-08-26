@@ -43,10 +43,14 @@ export default async function BillingHistoryPage() {
   const credits: number = creditsData?.credits ?? 0;
 
   return (
-    <>
+    <div className="min-h-screen flex flex-col">
       <DashboardNavbar user={userData.user} credits={credits} />
+  
+    <main className="flex-1">
       <BillingHistory transactions={transactions} />
-      <DashboardFooter/>
-    </>
+    </main>
+  
+    <DashboardFooter />
+</div>
   );
 }

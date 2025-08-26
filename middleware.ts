@@ -21,7 +21,7 @@ export async function middleware(request: NextRequest) {
     }
   )
 
-  // 🧠 This is what refreshes the session
+  //refreshes the session
   const {
     data: { user },
   } = await supabase.auth.getUser()

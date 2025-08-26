@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import { supabase } from "@/lib/supabase/supabaseBrowserClient";
 import { useUser } from "@/lib/supabase/useUser";
+import Image from "next/image";
 
 export default function LoginPage() {
   const { user, loading } = useUser();
@@ -54,9 +55,11 @@ export default function LoginPage() {
         {/* Left Side - Illustration */}
         <div className="hidden lg:flex items-center justify-center">
           <div className="relative max-w-lg w-full">
-            <img
+            <Image
               src="illustrations/hero-image.svg"
               alt="Clausia Illustration"
+              height={500}
+              width = {500}
               className="w-full h-auto"
             />
           </div>
@@ -91,7 +94,7 @@ export default function LoginPage() {
                 onClick={signInWithGoogle}
                 className="w-full flex items-center justify-center gap-2 px-4 py-3 border-2 border-slate-200 rounded-xl text-sm font-medium text-slate-700 bg-white hover:bg-slate-50 hover:border-purple-300 hover:shadow-md transition-all duration-200"
               >
-                <img src="/icons/google.svg" alt="Google" className="w-5 h-5" />
+                <Image src="/icons/google.svg" alt="Google" height={48} width={48} className="w-5 h-5" />
                 Continue with Google
               </button>
   
@@ -108,7 +111,7 @@ export default function LoginPage() {
                 onClick={signInWithGitHub}
                 className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-sm font-medium text-white bg-gradient-to-r from-slate-800 to-slate-900 hover:from-slate-900 hover:to-black hover:shadow-md transition-all duration-200"
               >
-                <img src="/icons/github.svg" alt="GitHub" className="w-5 h-5" />
+                <Image src="/icons/github.svg" alt="GitHub" height={96} width={98} className="w-5 h-5" />
                 Continue with GitHub
               </button>
             </div>

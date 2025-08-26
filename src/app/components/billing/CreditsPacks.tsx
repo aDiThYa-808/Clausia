@@ -99,8 +99,8 @@ export default function CreditPacks() {
           resolve(true);
         };
         script.onerror = () => {
-          setError('Failed to load payment system. Please refresh the page and try again.');
-          toast.error(error)
+          //setError('Failed to load payment system. Please refresh the page and try again.');
+          toast.error('Failed to load payment system. Please refresh the page and try again.')
           resolve(false);
         };
         document.body.appendChild(script);

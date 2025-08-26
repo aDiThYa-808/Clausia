@@ -15,6 +15,7 @@ import {
   Globe,
 } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function LandingPage() {
   const router = useRouter();
@@ -192,9 +193,11 @@ export default function LandingPage() {
               className="p-2 text-slate-700 hover:text-purple-600 transition-colors group"
               title="View on GitHub"
             >
-              <img 
+              <Image
                 src="/icons/github-dark.svg" 
                 alt="GitHub" 
+                height={96}
+                width={98}
                 className="w-5 h-5 group-hover:scale-110 transition-transform"
               />
             </a>
@@ -257,7 +260,7 @@ export default function LandingPage() {
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 py-2 text-slate-700 hover:text-purple-600 transition-colors"
               >
-                <img src="/icons/github-dark.svg" alt="GitHub" className="w-5 h-5" />
+                <Image src="/icons/github-dark.svg" alt="GitHub" height={96} width={98} className="w-5 h-5" />
                 View on GitHub
               </a>
               <a
