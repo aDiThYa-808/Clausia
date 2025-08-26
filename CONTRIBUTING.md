@@ -8,7 +8,14 @@ Thank you for your interest in contributing. This document outlines the process 
 - Report bugs by opening a GitHub Issue.  
 - Suggest features via Issues or Discussions.  
 - Improve documentation.  
-- Submit code contributions through Pull Requests.  
+- Submit code contributions through Pull Requests.
+
+---
+
+## Branching
+- Submit all pull requests to the **dev** branch.  
+- The `master` branch is reserved for production releases.  
+- I will merge `dev` into `master` after review and testing.  
 
 ---
 
