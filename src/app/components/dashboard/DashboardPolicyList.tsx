@@ -85,7 +85,7 @@ export default function DashboardPolicyList({ policies, credits }: Props) {
         <div className="mb-8 sm:mb-12">
           <div className="mb-8">
             <div className="space-y-3">
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-purple-700 bg-clip-text text-transparent leading-tight">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold bg-clip-text text-slate-700 leading-tight">
                 Dashboard
               </h1>
               <p className="text-base sm:text-lg text-slate-600 max-w-md">
