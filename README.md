@@ -117,19 +117,6 @@ RAZORPAY_KEY_SECRET=
 - **Analytics Dashboard**: Usage insights for generated policies
 ---
 
-## Contributing
-**Contributions are welcome!**
-
-- Fork the repo and create a feature branch
-
-- Submit a PR with clear commit messages
-
-- Open issues for bug reports or feature requests
-
-See CONTRIBUTING.md
-
----
-
 ## 📬 Contact & Support
 
 Questions? Suggestions? We'd love to hear from you!
