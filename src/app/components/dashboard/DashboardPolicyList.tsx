@@ -4,14 +4,11 @@ import { useRouter } from "next/navigation";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { useState } from "react";
 import {
   Plus,
   Calendar,
   Tag,
   CheckCircle,
-  Clock,
-  TrendingUp,
   FileText,
   Zap,
 } from "lucide-react";
@@ -29,7 +26,6 @@ type Props = {
 
 export default function DashboardPolicyList({ policies, credits }: Props) {
   const router = useRouter();
-  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const handleNewPolicy = () => {
     router.push("/new");
@@ -68,193 +64,119 @@ export default function DashboardPolicyList({ policies, credits }: Props) {
     return `${diffMonths} months ago`;
   };
 
-  const completedPolicies =
-    policies?.filter((p) => p.status === "completed").length || 0;
+  const completedPolicies = policies?.filter((p) => p.status === "completed").length || 0;
   const totalPolicies = policies?.length || 0;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-purple-50/30">
-      {/* Background decoration */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-80 h-80 rounded-full bg-gradient-to-br from-purple-200/20 to-pink-200/20 blur-3xl"></div>
-        <div className="absolute top-1/2 -left-40 w-80 h-80 rounded-full bg-gradient-to-br from-pink-200/20 to-purple-200/20 blur-3xl"></div>
-      </div>
+    <div className="min-h-screen bg-gray-50">
 
-      <main className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
-        {/* Header Section */}
-        <div className="mb-8 sm:mb-12">
-          <div className="mb-8">
-            <div className="space-y-3">
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold bg-clip-text text-slate-700 leading-tight">
-                Dashboard
-              </h1>
-              <p className="text-base sm:text-lg text-slate-600 max-w-md">
-                Manage and monitor your privacy policies with ease
-              </p>
-            </div>
-          </div>
-
-          {/* Stats Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-            <div className="relative overflow-hidden bg-white/70 backdrop-blur-sm rounded-xl sm:rounded-2xl border border-white/20 p-5 sm:p-6 shadow-sm hover:shadow-md transition-all duration-200">
-              <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-pink-500/5"></div>
-              <div className="relative flex items-center">
-                <div className="p-2.5 sm:p-3 bg-gradient-to-br from-purple-100 to-pink-100 rounded-lg sm:rounded-xl mr-3 sm:mr-4 flex-shrink-0">
-                  <FileText className="w-5 h-5 sm:w-6 sm:h-6 text-purple-600" />
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        {/* Stats Section */}
+        <div className="mb-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {/* Total Policies */}
+            <div className="bg-white rounded-lg border border-gray-200 p-6 hover:shadow-md transition-shadow">
+              <div className="flex items-center">
+                <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                  <FileText className="w-5 h-5 text-blue-600" />
                 </div>
-                <div className="min-w-0">
-                  <p className="text-sm font-medium text-slate-600">
-                    Total Policies
-                  </p>
-                  <p className="text-xl sm:text-2xl font-bold text-slate-900">
-                    {totalPolicies}
-                  </p>
+                <div className="ml-4">
+                  <p className="text-sm font-medium text-gray-600">Total Policies</p>
+                  <p className="text-2xl font-semibold text-gray-900">{totalPolicies}</p>
                 </div>
               </div>
             </div>
 
-            <div className="relative overflow-hidden bg-white/70 backdrop-blur-sm rounded-xl sm:rounded-2xl border border-white/20 p-5 sm:p-6 shadow-sm hover:shadow-md transition-all duration-200">
-              <div className="absolute inset-0 bg-gradient-to-br from-green-500/5 to-emerald-500/5"></div>
-              <div className="relative flex items-center">
-                <div className="p-2.5 sm:p-3 bg-gradient-to-br from-green-100 to-emerald-100 rounded-lg sm:rounded-xl mr-3 sm:mr-4 flex-shrink-0">
-                  <TrendingUp className="w-5 h-5 sm:w-6 sm:h-6 text-green-600" />
+            {/* Published */}
+            <div className="bg-white rounded-lg border border-gray-200 p-6 hover:shadow-md transition-shadow">
+              <div className="flex items-center">
+                <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
+                  <CheckCircle className="w-5 h-5 text-green-600" />
                 </div>
-                <div className="min-w-0">
-                  <p className="text-sm font-medium text-slate-600">
-                    Published
-                  </p>
-                  <p className="text-xl sm:text-2xl font-bold text-slate-900">
-                    {completedPolicies}
-                  </p>
+                <div className="ml-4">
+                  <p className="text-sm font-medium text-gray-600">Published</p>
+                  <p className="text-2xl font-semibold text-gray-900">{completedPolicies}</p>
                 </div>
               </div>
             </div>
 
-            <div className="relative overflow-hidden bg-white/70 backdrop-blur-sm rounded-xl sm:rounded-2xl border border-white/20 p-5 sm:p-6 shadow-sm hover:shadow-md transition-all duration-200 sm:col-span-2 lg:col-span-1">
-              <div className="absolute inset-0 bg-gradient-to-br from-amber-500/5 to-orange-500/5"></div>
-
-              
-              <div className="relative flex items-center justify-between">
-                {/* Left: Icon + Credits */}
+            {/* Credits */}
+            <div className="bg-white rounded-lg border border-gray-200 p-6 sm:col-span-2 lg:col-span-1 hover:shadow-md transition-shadow">
+              <div className="flex items-center justify-between">
                 <div className="flex items-center">
-                  <div className="p-2.5 sm:p-3 bg-gradient-to-br from-amber-100 to-orange-100 rounded-lg sm:rounded-xl mr-3 sm:mr-4 flex-shrink-0">
-                    <Zap className="w-5 h-5 sm:w-6 sm:h-6 text-amber-600" />
+                  <div className="w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center">
+                    <Zap className="w-5 h-5 text-amber-600" />
                   </div>
-                  <div className="min-w-0">
-                    <p className="text-sm font-medium text-slate-600">
-                      Credits Remaining
-                    </p>
-                    <p className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-                      {credits ?? 0}
-                    </p>
+                  <div className="ml-4">
+                    <p className="text-sm font-medium text-gray-600">Credits</p>
+                    <p className="text-2xl font-semibold text-gray-900">{credits ?? 0}</p>
                   </div>
                 </div>
-
-                {/* Right: Button */}
                 <button
                   onClick={handleCreditsPurchase}
-                  className="px-3 py-2 bg-gradient-to-r from-purple-50 to-pink-50 hover:from-purple-100 hover:to-pink-100 text-purple-700 text-sm font-medium rounded-lg border border-purple-200/50 hover:border-purple-300/50 transition-all duration-200 flex-shrink-0"
+                  className="px-3 py-1.5 text-sm font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 rounded-md transition-colors"
                 >
-                  Purchase More
+                  Buy More
                 </button>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Policies Grid */}
-        {policies && policies.length > 0 ? (
-          <div className="space-y-5 sm:space-y-6">
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
-              <div className="space-y-1">
-                <h2 className="text-xl sm:text-2xl font-bold text-slate-900">
-                  Your Policies
-                </h2>
-                <div className="text-sm text-slate-500">
-                  {totalPolicies} {totalPolicies === 1 ? "policy" : "policies"}{" "}
-                  total
-                </div>
+        {/* Policies Section */}
+        <div className="bg-white rounded-lg border border-gray-200">
+          <div className="px-6 py-4 border-b border-gray-200">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+              <div>
+                <h2 className="text-lg font-semibold text-gray-900">Privacy Policies</h2>
               </div>
               <button
                 onClick={handleNewPolicy}
-                className="relative group inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 transform hover:-translate-y-0.5 w-full sm:w-auto"
+                className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white text-sm font-medium rounded-md transition-all duration-200"
               >
-                <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-purple-600 to-pink-600 opacity-20 group-hover:opacity-30 blur-lg transition-opacity"></div>
-                <Plus className="relative w-5 h-5 mr-2" />
-                <span className="relative">Create Policy</span>
+                <Plus className="w-4 h-4 mr-2" />
+                New Policy
               </button>
             </div>
+          </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6">
+          {policies && policies.length > 0 ? (
+            <div className="divide-y divide-gray-200">
               {policies.map((policy) => (
                 <div
                   key={policy.id}
                   onClick={() => handlePolicyClick(policy.id)}
-                  className="group relative overflow-hidden bg-white/70 backdrop-blur-sm rounded-xl sm:rounded-2xl border border-white/20 p-5 sm:p-6 lg:p-7 shadow-sm hover:shadow-xl cursor-pointer transition-all duration-300 transform hover:-translate-y-1"
+                  className="p-6 hover:bg-gray-50 cursor-pointer transition-colors"
                 >
-                  {/* Gradient overlay on hover */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-purple-500/0 via-pink-500/0 to-purple-500/0 group-hover:from-purple-500/5 group-hover:via-pink-500/5 group-hover:to-purple-500/5 transition-all duration-300"></div>
-
-                  {/* Status indicator */}
-                  <div className="absolute top-4 right-4 sm:top-5 sm:right-5">
-                    {policy.status === "completed" ? (
-                      <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-gradient-to-r from-green-400 to-green-600 rounded-full shadow-lg shadow-green-500/25"></div>
-                    ) : (
-                      <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-gradient-to-r from-amber-400 to-amber-600 rounded-full shadow-lg shadow-amber-500/25 animate-pulse"></div>
-                    )}
-                  </div>
-
-                  <div className="relative space-y-3.5 sm:space-y-4">
-                    {/* Header */}
-                    <div className="space-y-2 sm:space-y-2.5 pr-6 sm:pr-8">
-                      <h3 className="font-bold text-lg sm:text-xl text-slate-900 group-hover:bg-gradient-to-r group-hover:from-purple-600 group-hover:to-pink-600 group-hover:bg-clip-text group-hover:text-transparent transition-all duration-200 leading-tight line-clamp-2">
-                        {policy.product_name}
-                      </h3>
-                      <div className="flex items-center text-sm">
-                        <div className="flex items-center text-slate-600">
-                          <div className="p-1.5 bg-slate-100 rounded-lg mr-2 flex-shrink-0">
-                            <Tag className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
-                          </div>
-                          <span className="capitalize font-medium truncate">
-                            {policy.product_type}
-                          </span>
+                  <div className="flex items-start justify-between">
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center justify-between mb-2">
+                        <h3 className="text-base font-medium text-gray-900 truncate pr-4">
+                          {policy.product_name}
+                        </h3>
+                        <div className="flex-shrink-0">
+                          {policy.status === "completed" ? (
+                            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                              <div className="w-1.5 h-1.5 bg-green-400 rounded-full mr-1.5"></div>
+                              Published
+                            </span>
+                          ) : (
+                            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-100 text-amber-800">
+                              <div className="w-1.5 h-1.5 bg-amber-400 rounded-full mr-1.5"></div>
+                              Draft
+                            </span>
+                          )}
                         </div>
                       </div>
-                    </div>
-
-                    {/* Metadata */}
-                    <div className="flex items-center text-sm text-slate-500">
-                      <Calendar className="w-4 h-4 mr-2 flex-shrink-0" />
-                      <span className="truncate">
-                        Updated {getRelativeTime(policy.last_updated)}
-                      </span>
-                    </div>
-
-                    {/* Status badge */}
-                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-2 pt-1 sm:pt-2">
-                      <span
-                        className={`inline-flex items-center px-3 py-1.5 sm:py-2 text-xs font-semibold rounded-full self-start ${
-                          policy.status === "completed"
-                            ? "bg-gradient-to-r from-green-50 to-emerald-50 text-green-700 border border-green-200/50"
-                            : "bg-gradient-to-r from-amber-50 to-orange-50 text-amber-700 border border-amber-200/50"
-                        }`}
-                      >
-                        {policy.status === "completed" ? (
-                          <>
-                            <CheckCircle className="w-3 h-3 sm:w-3.5 sm:h-3.5 mr-1.5" />
-                            Completed
-                          </>
-                        ) : (
-                          <>
-                            <Clock className="w-3 h-3 sm:w-3.5 sm:h-3.5 mr-1.5" />
-                            In Progress
-                          </>
-                        )}
-                      </span>
-
-                      <div className="hidden sm:block opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                        <div className="text-xs text-slate-400 bg-slate-100/50 px-2 py-1 rounded-md whitespace-nowrap">
-                          Click to view →
+                      
+                      <div className="flex items-center text-sm text-gray-500 space-x-4">
+                        <div className="flex items-center">
+                          <Tag className="w-4 h-4 mr-1" />
+                          <span className="capitalize">{policy.product_type}</span>
+                        </div>
+                        <div className="flex items-center">
+                          <Calendar className="w-4 h-4 mr-1" />
+                          <span>Updated {getRelativeTime(policy.last_updated)}</span>
                         </div>
                       </div>
                     </div>
@@ -262,63 +184,29 @@ export default function DashboardPolicyList({ policies, credits }: Props) {
                 </div>
               ))}
             </div>
-          </div>
-        ) : (
-          /* Empty State */
-          <div className="relative text-center py-12 sm:py-16 lg:py-20 px-4">
-            <div className="relative z-10 max-w-lg mx-auto">
-              {/* Icon */}
-              <div className="mb-6 sm:mb-8">
-                <div className="relative w-24 h-24 sm:w-28 sm:h-28 lg:w-32 lg:h-32 mx-auto">
-                  <div className="absolute inset-0 bg-gradient-to-br from-purple-100 via-pink-100 to-purple-100 rounded-full"></div>
-                  <div className="absolute inset-3 sm:inset-4 bg-gradient-to-br from-white to-purple-50/50 rounded-full flex items-center justify-center">
-                    <svg
-                      className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 text-purple-400"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={1.5}
-                        d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                      />
-                    </svg>
-                  </div>
-                </div>
+          ) : (
+            /* Empty State */
+            <div className="p-12 text-center">
+              <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                <FileText className="w-6 h-6 text-gray-400" />
               </div>
-
-              <div className="space-y-3 sm:space-y-4 mb-8 sm:mb-10">
-                <h3 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent">
-                  Ready to get started?
-                </h3>
-                <p className="text-base sm:text-lg text-slate-600 leading-relaxed px-4">
-                  Create your first privacy policy with our AI-powered
-                  generator. Professional, compliant policies in minutes.
-                </p>
-              </div>
-
+              <h3 className="text-lg font-medium text-gray-900 mb-2">
+                No policies yet
+              </h3>
+              <p className="text-gray-600 mb-6 max-w-sm mx-auto">
+                Get started by creating your first privacy policy. It only takes a few minutes.
+              </p>
               <button
                 onClick={handleNewPolicy}
-                className="relative group inline-flex items-center justify-center w-full sm:w-auto px-8 sm:px-10 py-4 sm:py-5 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold text-base sm:text-lg rounded-xl sm:rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1"
+                className="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-md transition-colors"
               >
-                <div className="absolute inset-0 rounded-xl sm:rounded-2xl bg-gradient-to-r from-purple-600 to-pink-600 opacity-20 group-hover:opacity-30 blur-lg transition-opacity"></div>
-                <Plus className="relative w-5 h-5 sm:w-6 sm:h-6 mr-2 sm:mr-3" />
-                <span className="relative">Create Your First Policy</span>
+                <Plus className="w-4 h-4 mr-2" />
+                Create First Policy
               </button>
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </main>
-
-      {/* Click outside to close dropdown */}
-      {dropdownOpen && (
-        <div
-          className="fixed inset-0 z-40"
-          onClick={() => setDropdownOpen(false)}
-        />
-      )}
     </div>
   );
 }
