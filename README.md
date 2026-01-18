@@ -121,7 +121,7 @@ RAZORPAY_KEY_SECRET=
 
 Questions? Suggestions? We'd love to hear from you!
 
-- 📧 Email: support@clausia.app
+- 📧 Email: clausia.app@gmail.com OR contactadiiiii@gmail.com
 - 📸 Instagram: a_d_i_.x
 
 ---
