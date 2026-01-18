@@ -78,7 +78,7 @@ return (
           Clausia
         </Link>
         <a
-          href="mailto:support@clausia.app"
+          href="mailto:clausia.app@gmail.com"
           className="group px-6 py-2.5 rounded-full bg-cyan-500 text-white font-medium text-sm hover:shadow-lg hover:scale-105 transition-all duration-200 flex items-center gap-2"
         >
           Contact Us
@@ -133,10 +133,10 @@ return (
                 <p className="text-slate-400">
                   Support:{" "}
                   <a
-                    href="mailto:support@clausia.app"
+                    href="mailto:clausia.app@gmail.com"
                     className="text-cyan-400 hover:text-cyan-300 transition-colors"
                   >
-                    support@clausia.app
+                    clausia.app@gmail.com
                   </a>
                 </p>
               </div>

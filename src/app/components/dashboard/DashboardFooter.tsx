@@ -24,10 +24,10 @@ export default function Footer(){
                 Terms of Service
               </a>
               <a
-                href="mailto:support@clausia.app"
+                href="mailto:clausia.app@gmail.com"
                 className="hover:text-blue-600 transition-colors"
               >
-                support@clausia.app
+                clausia.app@gmail.com
               </a>
             </div>
           </div>

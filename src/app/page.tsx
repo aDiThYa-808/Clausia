@@ -695,10 +695,10 @@ return (
                 <p className="text-slate-400">
                   Support:{" "}
                   <a
-                    href="mailto:support@clausia.app"
+                    href="mailto:clausia.app@gmail.com"
                     className="text-cyan-400 hover:text-cyan-300 transition-colors"
                   >
-                    support@clausia.app
+                    clausia.app@gmail.com
                   </a>
                 </p>
               </div>
