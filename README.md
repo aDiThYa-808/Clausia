@@ -128,7 +128,7 @@ Questions? Suggestions? We'd love to hear from you!
 
 <div align="center">
 
-**Build for developers, Build by Developers.**
+**Built for developers, Built by Developers.**
 
 [Get Started →](https://clausia.app)
 
