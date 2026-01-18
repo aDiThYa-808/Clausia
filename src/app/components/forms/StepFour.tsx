@@ -15,7 +15,7 @@ export default function StepFour() {
   const radioOptions = ["yes", "no"];
   const contactOptions = ["Email", "In-app support", "Web contact form", "Other"];
 
-  return (
+return (
     <div className="space-y-20">
       {/* Q1: Supports data deletion */}
       <div className="space-y-4">
@@ -29,8 +29,8 @@ export default function StepFour() {
               <label
                 key={option}
                 className={`inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium cursor-pointer transition
-                  hover:border-[#BC3FDE] hover:text-[#BC3FDE]
-                  ${isSelected ? "border-[#BC3FDE] bg-[#BC3FDE]/10" : "border-slate-300"}`}
+                  hover:border-blue-600 hover:text-blue-600
+                  ${isSelected ? "border-blue-600 bg-blue-600/10" : "border-slate-300"}`}
               >
                 <input
                   type="radio"
@@ -64,7 +64,7 @@ export default function StepFour() {
               <label
                 key={method}
                 className={`flex items-center gap-2 text-sm px-3 py-2 rounded-md border cursor-pointer transition
-                  ${isChecked ? "border-[#BC3FDE] bg-[#BC3FDE]/10" : "border-slate-300 hover:border-[#BC3FDE] hover:bg-[#BC3FDE]/10"}`}
+                  ${isChecked ? "border-blue-600 bg-blue-600/10" : "border-slate-300 hover:border-blue-600 hover:bg-blue-600/10"}`}
               >
                 <input
                   type="checkbox"
@@ -83,7 +83,7 @@ export default function StepFour() {
             type="text"
             placeholder="e.g., Telegram @handle"
             {...register("otherContactMethod")}
-            className="w-full text-base px-3 py-2 border rounded-md border-slate-300 focus:outline-none focus:border-[#BC3FDE] bg-white placeholder-slate-400"
+            className="w-full text-base px-3 py-2 border rounded-md border-slate-300 focus:outline-none focus:border-blue-600 bg-white placeholder-slate-400"
           />
         )}
 

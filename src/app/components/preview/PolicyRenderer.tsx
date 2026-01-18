@@ -6,7 +6,7 @@ type Props = {
 };
 
 export default function PolicyRenderer({ data }: Props) {
-  return (
+return (
     <div className="px-6 md:px-12 py-16 max-w-4xl mx-auto">
       <div className="mb-16">
         <h1 className="text-5xl font-extrabold tracking-tight text-black mb-4">Privacy Policy</h1>
@@ -32,7 +32,7 @@ export default function PolicyRenderer({ data }: Props) {
       {data.section_titles?.map((title: string, idx: number) => (
         <section
           key={idx}
-          className="mb-16 border-l-4 border-indigo-500 pl-6 transition-all duration-300 ease-in-out"
+          className="mb-16 border-l-4 border-blue-600 pl-6 transition-all duration-300 ease-in-out"
         >
           <h2 className="text-2xl font-semibold text-black mb-3">{title}</h2>
           <p className="text-base text-slate-800 leading-relaxed whitespace-pre-line">

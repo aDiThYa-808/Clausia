@@ -142,8 +142,8 @@ export default function LandingPage() {
     },
   ];
 
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-purple-50 text-slate-900 overflow-x-hidden">
+return (
+    <div className="min-h-screen bg-slate-50 text-slate-900 overflow-x-hidden">
       {/* Enhanced Navbar */}
 <header
         className={`fixed top-0 w-full z-50 transition-all duration-300 ${
@@ -155,7 +155,7 @@ export default function LandingPage() {
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <Link
             href="/"
-            className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent"
+            className="text-2xl font-bold text-blue-600"
             style={{ fontFamily: "chillax" }}
           >
             Clausia
@@ -164,24 +164,24 @@ export default function LandingPage() {
           <nav className="hidden lg:flex items-center gap-8 text-sm font-medium text-slate-700">
             <a
               href="#how-it-works"
-              className="hover:text-purple-600 transition-colors relative group"
+              className="hover:text-blue-600 transition-colors relative group"
             >
               How it works
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-600 transition-all group-hover:w-full"></span>
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all group-hover:w-full"></span>
             </a>
             <a
               href="#benefits"
-              className="hover:text-purple-600 transition-colors relative group"
+              className="hover:text-blue-600 transition-colors relative group"
             >
               Features
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-600 transition-all group-hover:w-full"></span>
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all group-hover:w-full"></span>
             </a>
             <a
               href="#pricing"
-              className="hover:text-purple-600 transition-colors relative group"
+              className="hover:text-blue-600 transition-colors relative group"
             >
               Pricing
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-600 transition-all group-hover:w-full"></span>
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all group-hover:w-full"></span>
             </a>
           </nav>
 
@@ -190,7 +190,7 @@ export default function LandingPage() {
               href="https://github.com/aDiThYa-808/Clausia"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 text-slate-700 hover:text-purple-600 transition-colors group"
+              className="p-2 text-slate-700 hover:text-blue-600 transition-colors group"
               title="View on GitHub"
             >
               <Image
@@ -203,13 +203,13 @@ export default function LandingPage() {
             </a>
             <a
               href="/login"
-              className="px-4 py-2 text-sm font-medium text-slate-700 hover:text-purple-600 transition-colors"
+              className="px-4 py-2 text-sm font-medium text-slate-700 hover:text-blue-600 transition-colors"
             >
               Sign in
             </a>
             <a
               href="/dashboard"
-              className="group px-6 py-2.5 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-medium text-sm hover:shadow-lg hover:scale-105 transition-all duration-200 flex items-center gap-2"
+              className="group px-6 py-2.5 rounded-full bg-cyan-500 text-white font-medium text-sm hover:shadow-lg hover:scale-105 transition-all duration-200 flex items-center gap-2"
             >
               Get Started
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -237,19 +237,19 @@ export default function LandingPage() {
           <div className="px-6 py-4 space-y-4">
             <a
               href="#how-it-works"
-              className="block py-2 text-slate-700 hover:text-purple-600 transition-colors"
+              className="block py-2 text-slate-700 hover:text-blue-600 transition-colors"
             >
               How it works
             </a>
             <a
               href="#benefits"
-              className="block py-2 text-slate-700 hover:text-purple-600 transition-colors"
+              className="block py-2 text-slate-700 hover:text-blue-600 transition-colors"
             >
               Features
             </a>
             <a
               href="#pricing"
-              className="block py-2 text-slate-700 hover:text-purple-600 transition-colors"
+              className="block py-2 text-slate-700 hover:text-blue-600 transition-colors"
             >
               Pricing
             </a>
@@ -258,20 +258,20 @@ export default function LandingPage() {
                 href="https://github.com/aDiThYa-808/Clausia"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 py-2 text-slate-700 hover:text-purple-600 transition-colors"
+                className="flex items-center gap-2 py-2 text-slate-700 hover:text-blue-600 transition-colors"
               >
                 <Image src="/icons/github-dark.svg" alt="GitHub" height={96} width={98} className="w-5 h-5" />
                 View on GitHub
               </a>
               <a
                 href="/login"
-                className="block py-2 text-slate-700 hover:text-purple-600 transition-colors"
+                className="block py-2 text-slate-700 hover:text-blue-600 transition-colors"
               >
                 Sign in
               </a>
               <a
                 href="/login"
-                className="block px-6 py-3 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-medium text-center"
+                className="block px-6 py-3 rounded-full bg-cyan-500 text-white font-medium text-center"
               >
                 Get Started
               </a>
@@ -281,13 +281,13 @@ export default function LandingPage() {
       </header>
 
       {/* Enhanced Hero Section */}
-      <section className="relative pt-24 pb-16 px-6 overflow-hidden bg-gradient-to-br from-slate-50 to-white">
+      <section className="relative pt-24 pb-16 px-6 overflow-hidden bg-white">
         {/* Refined Background Elements */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-1/3 -left-8 w-48 h-48 bg-purple-100/40 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-1/3 -right-8 w-64 h-64 bg-pink-100/30 rounded-full blur-3xl animate-pulse delay-1000"></div>
+          <div className="absolute top-1/3 -left-8 w-48 h-48 bg-blue-100/40 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-1/3 -right-8 w-64 h-64 bg-cyan-100/30 rounded-full blur-3xl animate-pulse delay-1000"></div>
           <div
-            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-gradient-conic from-purple-50/20 via-transparent to-pink-50/20 rounded-full blur-xl animate-spin"
+            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-blue-50/20 rounded-full blur-xl animate-spin"
             style={{ animationDuration: "30s" }}
           ></div>
         </div>
@@ -301,21 +301,21 @@ export default function LandingPage() {
                   : "translate-y-8 opacity-0"
               }`}
             >
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-purple-50 border border-purple-100 text-purple-700 text-sm font-medium">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-50 border border-blue-100 text-blue-700 text-sm font-medium">
                 <Star className="w-3.5 h-3.5 fill-current" />
                 Built with feedback from Indian founders
               </div>
 
               <h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight text-slate-900">
                 Generate{" "}
-                <span className="bg-gradient-to-r from-purple-600 via-pink-600 to-purple-700 bg-clip-text text-transparent">
+                <span className="text-blue-600">
                   AI-powered
                 </span>{" "}
                 privacy policies{" "}
                 <span className="relative inline-block">
                   instantly
                   <svg
-                    className="absolute -bottom-1 left-0 w-full h-2 text-purple-200"
+                    className="absolute -bottom-1 left-0 w-full h-2 text-cyan-200"
                     viewBox="0 0 300 8"
                     fill="none"
                   >
@@ -338,14 +338,14 @@ export default function LandingPage() {
               <div className="flex flex-col sm:flex-row gap-3">
                 <a
                   href="/login"
-                  className="group inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold hover:shadow-lg hover:scale-105 transition-all duration-200"
+                  className="group inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-cyan-500 text-white font-semibold hover:shadow-lg hover:scale-105 transition-all duration-200"
                 >
                   Start Creating Now
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
                 </a>
                 <a
                   href="#how-it-works"
-                  className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full border border-slate-200 text-slate-700 font-semibold hover:border-purple-300 hover:text-purple-600 hover:bg-purple-50 transition-all duration-200"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full border border-slate-200 text-slate-700 font-semibold hover:border-blue-300 hover:text-blue-600 hover:bg-blue-50 transition-all duration-200"
                 >
                   See How It Works
                   <ChevronDown className="w-4 h-4" />
@@ -383,7 +383,7 @@ export default function LandingPage() {
                 <div className="relative bg-white rounded-2xl shadow-xl border border-slate-100 p-6 transform rotate-3 hover:rotate-0 transition-transform duration-500">
                   {/* Document Header */}
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
+                    <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
                       <Shield className="w-4 h-4 text-white" />
                     </div>
                     <div>
@@ -403,7 +403,7 @@ export default function LandingPage() {
                     <div className="h-2 bg-slate-100 rounded w-4/5"></div>
                     <div className="h-2 bg-slate-200 rounded w-3/4"></div>
                     <div className="h-2 bg-slate-100 rounded w-5/6"></div>
-                    <div className="h-2 bg-purple-100 rounded w-2/3"></div>
+                    <div className="h-2 bg-cyan-100 rounded w-2/3"></div>
                   </div>
 
                   {/* Feature Icons */}
@@ -424,16 +424,16 @@ export default function LandingPage() {
                 </div>
 
                 {/* Floating Elements */}
-                <div className="absolute -top-2 -right-2 w-12 h-12 bg-gradient-to-br from-green-400 to-green-500 rounded-full flex items-center justify-center animate-bounce delay-500">
+                <div className="absolute -top-2 -right-2 w-12 h-12 bg-green-500 rounded-full flex items-center justify-center animate-bounce delay-500">
                   <CheckCircle className="w-6 h-6 text-white" />
                 </div>
 
-                <div className="absolute -bottom-3 -left-3 w-10 h-10 bg-gradient-to-br from-purple-400 to-purple-500 rounded-full flex items-center justify-center animate-pulse">
+                <div className="absolute -bottom-3 -left-3 w-10 h-10 bg-cyan-500 rounded-full flex items-center justify-center animate-pulse">
                   <Zap className="w-5 h-5 text-white" />
                 </div>
 
                 {/* Background Accent */}
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl -z-10 transform -rotate-6"></div>
+                <div className="absolute inset-0 bg-blue-50 rounded-2xl -z-10 transform -rotate-6"></div>
 
                 {/* Decorative Dots */}
                 <div className="absolute top-1/4 -right-8">
@@ -441,7 +441,7 @@ export default function LandingPage() {
                     {Array.from({ length: 9 }).map((_, i) => (
                       <div
                         key={i}
-                        className="w-1 h-1 bg-purple-200 rounded-full animate-pulse"
+                        className="w-1 h-1 bg-blue-200 rounded-full animate-pulse"
                         style={{ animationDelay: `${i * 100}ms` }}
                       ></div>
                     ))}
@@ -454,7 +454,7 @@ export default function LandingPage() {
       </section>
 
       {/* Features Section */}
-      <section id="benefits" className="py-20 px-6 bg-white/50">
+      <section id="benefits" className="py-20 px-6 bg-white">
         <div className="max-w-7xl mx-auto">
           <div
             className={`text-center mb-16 transform transition-all duration-1000 ${
@@ -465,7 +465,7 @@ export default function LandingPage() {
           >
             <h2 className="text-4xl lg:text-5xl font-bold mb-6">
               Why choose{" "}
-              <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+              <span className="text-blue-600">
                 Clausia?
               </span>
             </h2>
@@ -479,14 +479,14 @@ export default function LandingPage() {
             {features.map((feature, index) => (
               <div
                 key={index}
-                className={`group p-8 rounded-2xl bg-gradient-to-br from-white to-purple-50/30 border border-purple-100/50 hover:shadow-xl hover:scale-105 transition-all duration-300 transform ${
+                className={`group p-8 rounded-2xl bg-white border border-blue-100 hover:shadow-xl hover:scale-105 transition-all duration-300 transform ${
                   animatedElements.features
                     ? "translate-y-0 opacity-100"
                     : "translate-y-10 opacity-0"
                 }`}
                 style={{ transitionDelay: `${index * 100}ms` }}
               >
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform">
+                <div className="w-12 h-12 rounded-xl bg-blue-600 flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform">
                   {feature.icon}
                 </div>
                 <h3 className="text-xl font-semibold mb-3 text-slate-900">
@@ -502,7 +502,7 @@ export default function LandingPage() {
       </section>
 
       {/* How it Works */}
-      <section id="how-it-works" className="py-20 px-6">
+      <section id="how-it-works" className="py-20 px-6 bg-slate-50">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl lg:text-5xl font-bold mb-6">
@@ -515,11 +515,11 @@ export default function LandingPage() {
 
           <div className="grid md:grid-cols-3 gap-12 relative">
             {/* Connection lines */}
-            <div className="hidden md:block absolute top-20 left-1/3 right-1/3 h-0.5 bg-gradient-to-r from-purple-300 to-pink-300"></div>
+            <div className="hidden md:block absolute top-20 left-1/3 right-1/3 h-0.5 bg-cyan-300"></div>
 
             {steps.map((step, index) => (
               <div key={index} className="text-center relative">
-                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 text-white text-xl font-bold flex items-center justify-center mx-auto mb-6 shadow-lg">
+                <div className="w-16 h-16 rounded-full bg-blue-600 text-white text-xl font-bold flex items-center justify-center mx-auto mb-6 shadow-lg">
                   {step.number}
                 </div>
                 <h3 className="text-xl font-semibold mb-4">{step.title}</h3>
@@ -535,7 +535,7 @@ export default function LandingPage() {
       {/* Enhanced Pricing */}
       <section
         id="pricing"
-        className="py-20 px-6 bg-gradient-to-br from-slate-50 to-purple-50"
+        className="py-20 px-6 bg-white"
       >
         <div className="max-w-7xl mx-auto">
           <div
@@ -547,7 +547,7 @@ export default function LandingPage() {
           >
             <h2 className="text-4xl lg:text-5xl font-bold mb-6">
               Simple, transparent{" "}
-              <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+              <span className="text-blue-600">
                 pricing
               </span>
             </h2>
@@ -567,13 +567,13 @@ export default function LandingPage() {
                     : "translate-y-10 opacity-0"
                 } ${
                   plan.popular
-                    ? "border-purple-500 bg-gradient-to-br from-purple-600 to-pink-600 text-white shadow-2xl scale-105"
-                    : "border-slate-200 bg-white hover:border-purple-300 hover:shadow-xl"
+                    ? "border-blue-500 bg-blue-600 text-white shadow-2xl scale-105"
+                    : "border-slate-200 bg-white hover:border-blue-300 hover:shadow-xl"
                 }`}
                 style={{ transitionDelay: `${index * 100}ms` }}
               >
                 {plan.popular && (
-                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 px-6 py-2 bg-gradient-to-r from-yellow-400 to-orange-400 text-black text-sm font-bold rounded-full">
+                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 px-6 py-2 bg-amber-400 text-slate-900 text-sm font-bold rounded-full">
                     Most Popular
                   </div>
                 )}
@@ -597,7 +597,7 @@ export default function LandingPage() {
                     {plan.period && (
                       <span
                         className={`text-lg ${
-                          plan.popular ? "text-purple-100" : "text-slate-500"
+                          plan.popular ? "text-blue-100" : "text-slate-500"
                         }`}
                       >
                         {plan.period}
@@ -616,7 +616,7 @@ export default function LandingPage() {
                       />
                       <span
                         className={`text-sm ${
-                          plan.popular ? "text-purple-100" : "text-slate-600"
+                          plan.popular ? "text-blue-100" : "text-slate-600"
                         }`}
                       >
                         {feature}
@@ -628,8 +628,8 @@ export default function LandingPage() {
                 <button
                   className={`w-full py-4 rounded-xl font-semibold transition-all duration-200 ${
                     plan.popular
-                      ? "bg-white text-purple-600 hover:shadow-lg hover:scale-105"
-                      : "bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:shadow-lg hover:scale-105"
+                      ? "bg-white text-blue-600 hover:shadow-lg hover:scale-105"
+                      : "bg-cyan-500 text-white hover:shadow-lg hover:scale-105"
                   }`}
                   onClick={() => router.push(plan.actionRoute)}
                 >
@@ -642,17 +642,17 @@ export default function LandingPage() {
       </section>
 
       {/* Enhanced CTA */}
-      <section className="py-20 px-6 bg-gradient-to-r from-purple-600 via-pink-600 to-purple-700 text-white relative overflow-hidden">
+      <section className="py-20 px-6 bg-blue-600 text-white relative overflow-hidden">
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-white/20 to-transparent"></div>
+          <div className="absolute top-0 left-0 w-full h-full bg-white/20"></div>
         </div>
 
         <div className="max-w-4xl mx-auto text-center relative">
           <h2 className="text-4xl lg:text-5xl font-bold mb-6">
             Ready to protect your users?
           </h2>
-          <p className="text-xl text-purple-100 mb-10 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-xl text-blue-100 mb-10 max-w-2xl mx-auto leading-relaxed">
           Helping Indian developers publish clear, compliant privacy policies. 
           Start creating your professional policy today.
           </p>
@@ -660,7 +660,7 @@ export default function LandingPage() {
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <a
               href="/login"
-              className="group inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-white text-purple-600 font-semibold text-lg hover:shadow-xl hover:scale-105 transition-all duration-200"
+              className="group inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-white text-blue-600 font-semibold text-lg hover:shadow-xl hover:scale-105 transition-all duration-200"
             >
               Create Policy Now
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -673,11 +673,6 @@ export default function LandingPage() {
             </a>
           </div>
 
-          <div className="mt-12 text-center">
-            <p className="text-purple-200 text-sm">
-              ⚡ Generate your first policy in under 3 minutes
-            </p>
-          </div>
         </div>
       </section>
 
@@ -687,7 +682,7 @@ export default function LandingPage() {
           <div className="grid md:grid-cols-4 gap-12">
             <div className="md:col-span-2">
               <h4
-                className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-4"
+                className="text-2xl font-bold text-cyan-400 mb-4"
                 style={{ fontFamily: "chillax" }}
               >
                 Clausia
@@ -701,7 +696,7 @@ export default function LandingPage() {
                   Support:{" "}
                   <a
                     href="mailto:support@clausia.app"
-                    className="text-purple-400 hover:text-purple-300 transition-colors"
+                    className="text-cyan-400 hover:text-cyan-300 transition-colors"
                   >
                     support@clausia.app
                   </a>

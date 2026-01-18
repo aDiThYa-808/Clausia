@@ -259,7 +259,7 @@ return (
                 {pack.name}
               </h2>
               <div className="mb-2">
-                <span className={`text-3xl font-bold bg-gradient-to-r ${pack.gradient} bg-clip-text text-transparent`}>
+                <span className="text-3xl font-bold text-blue-600">
                   ₹{pack.price.toLocaleString()}
                 </span>
               </div>
@@ -287,7 +287,7 @@ return (
 
             {/* Buy Button */}
             <button
-              className={`w-full px-6 py-3 rounded-lg font-medium text-white shadow-sm hover:shadow-md bg-gradient-to-r ${pack.gradient} hover:opacity-90 transition-all disabled:opacity-50 disabled:cursor-not-allowed`}
+              className="w-full px-6 py-3 rounded-lg font-medium text-white shadow-sm hover:shadow-md bg-cyan-500 hover:bg-cyan-600 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
               disabled={loading || !razorpayLoaded}
               onClick={() => handlePurchase(index)}
             >

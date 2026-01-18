@@ -14,7 +14,7 @@ export default function StepThree() {
   const thirdPartySDKs = useWatch({ control, name: "thirdPartySDKs" }) || [];
   const productType = watch("productType") || "app";
 
-  return (
+return (
     <div className="space-y-20">
       {/* Q1: Uses third-party SDKs? */}
       <div className="space-y-2">
@@ -32,7 +32,7 @@ export default function StepThree() {
                 })}
                 className="peer sr-only"
               />
-              <div className="px-4 py-1.5 text-sm rounded-full border border-slate-300 peer-checked:border-[#BC3FDE] peer-checked:bg-[#F7E9FB] peer-checked:text-[#BC3FDE] hover:border-[#BC3FDE] cursor-pointer transition">
+              <div className="px-4 py-1.5 text-sm rounded-full border border-slate-300 peer-checked:border-blue-600 peer-checked:bg-blue-50 peer-checked:text-blue-600 hover:border-blue-600 cursor-pointer transition">
                 {option === "yes" ? "Yes" : "No"}
               </div>
             </label>
@@ -68,7 +68,7 @@ export default function StepThree() {
                   {...register("thirdPartySDKs")}
                   className="peer sr-only"
                 />
-                <div className="px-3 py-1.5 text-sm rounded-full border border-slate-300 peer-checked:border-[#BC3FDE] peer-checked:bg-[#F7E9FB] peer-checked:text-[#BC3FDE] hover:border-[#BC3FDE] cursor-pointer transition">
+                <div className="px-3 py-1.5 text-sm rounded-full border border-slate-300 peer-checked:border-blue-600 peer-checked:bg-blue-50 peer-checked:text-blue-600 hover:border-blue-600 cursor-pointer transition">
                   {sdk}
                 </div>
               </label>
@@ -80,7 +80,7 @@ export default function StepThree() {
               type="text"
               placeholder="e.g. Supabase"
               {...register("otherthirdPartySDKs")}
-              className="w-full text-base px-3 py-1.5 border-b border-slate-300 focus:outline-none focus:border-[#BC3FDE] bg-transparent placeholder-slate-400"
+              className="w-full text-base px-3 py-1.5 border-b border-slate-300 focus:outline-none focus:border-blue-600 bg-transparent placeholder-slate-400"
             />
           )}
         </div>
@@ -96,7 +96,7 @@ export default function StepThree() {
             {...register("dataStorageRegion", {
               required: "Please select a data region",
             })}
-            className="w-full appearance-none text-base px-4 py-2 pr-10 border border-slate-300 rounded-full bg-transparent text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#BC3FDE] focus:border-[#BC3FDE] hover:border-[#BC3FDE] transition"
+            className="w-full appearance-none text-base px-4 py-2 pr-10 border border-slate-300 rounded-full bg-transparent text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 hover:border-blue-600 transition"
           >
             <option value="">-- Select a region --</option>
             <option value="India">India</option>

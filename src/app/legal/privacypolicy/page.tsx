@@ -66,20 +66,20 @@ Please review the privacy policies of these providers to understand how they han
     ],
   };
 
-  return (
+return (
     <>
       {/* Navbar */}
       <nav className="w-full px-6 md:px-12 py-4 border-b border-slate-200 flex justify-between items-center">
       <Link
             href="/"
-            className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent"
+            className="text-2xl font-bold text-blue-600"
             style={{ fontFamily: "chillax" }}
           >
             Clausia
           </Link>
           <a
               href="mailto:support@clausia.app"
-              className="group px-6 py-2.5 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-medium text-sm hover:shadow-lg hover:scale-105 transition-all duration-200 flex items-center gap-2"
+              className="group px-6 py-2.5 rounded-full bg-cyan-500 text-white font-medium text-sm hover:shadow-lg hover:scale-105 transition-all duration-200 flex items-center gap-2"
             >
               Contact Us
             </a>
@@ -102,7 +102,7 @@ Please review the privacy policies of these providers to understand how they han
             <span className="font-semibold text-black">
               {data.product_name}
             </span>
-            ’s Privacy Policy. Please read it carefully to understand how your
+            -Privacy Policy. Please read it carefully to understand how your
             data is collected and used.
           </p>
         </div>
@@ -119,7 +119,7 @@ Please review the privacy policies of these providers to understand how they han
         {data.section_titles?.map((title, idx) => (
           <section
             key={idx}
-            className="mb-16 border-l-4 border-purple-600 pl-6 transition-all duration-300 ease-in-out"
+            className="mb-16 border-l-4 border-blue-600 pl-6 transition-all duration-300 ease-in-out"
           >
             <h2 className="text-2xl font-semibold text-black mb-3">{title}</h2>
             <p className="text-base text-slate-800 leading-relaxed whitespace-pre-line">
@@ -134,7 +134,7 @@ Please review the privacy policies of these providers to understand how they han
           <div className="grid md:grid-cols-4 gap-12">
             <div className="md:col-span-2">
               <h4
-                className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-4"
+                className="text-2xl font-bold text-cyan-400 mb-4"
                 style={{ fontFamily: "chillax" }}
               >
                 Clausia
@@ -148,7 +148,7 @@ Please review the privacy policies of these providers to understand how they han
                   Support:{" "}
                   <a
                     href="mailto:support@clausia.app"
-                    className="text-purple-400 hover:text-purple-300 transition-colors"
+                    className="text-cyan-400 hover:text-cyan-300 transition-colors"
                   >
                     support@clausia.app
                   </a>

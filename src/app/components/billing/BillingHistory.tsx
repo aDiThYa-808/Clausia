@@ -101,7 +101,7 @@ export default function BillingHistory({
     );
   }
 
-  return (
+return (
     <div className="flex justify-center p-4 mt-8">
       <div className="w-full max-w-6xl">
         {/* Header Section */}
@@ -260,7 +260,7 @@ export default function BillingHistory({
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
-                <tr className="bg-gradient-to-r from-gray-50 to-gray-100 border-b border-gray-200">
+                <tr className="bg-gray-50 border-b border-gray-200">
                   <th className="text-left px-6 py-4 text-sm font-semibold text-gray-700 uppercase tracking-wider">
                     Date & Time
                   </th>

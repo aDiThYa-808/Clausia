@@ -17,7 +17,7 @@ export default function StepFive() {
   const showAdsFields = monetizationMethod === "ads";
   const showOtherField = monetizationMethod === "other";
 
-  return (
+return (
     <div className="space-y-20">
       {/* Q1: Monetization method */}
       <div className="space-y-2">
@@ -40,8 +40,8 @@ export default function StepFive() {
                 key={val}
                 className={`px-4 py-2 rounded-full border text-sm cursor-pointer transition-colors ${
                   isSelected
-                    ? "border-[#BC3FDE] bg-[#BC3FDE]/10 text-[#BC3FDE]"
-                    : "border-slate-300 hover:border-[#BC3FDE]"
+                    ? "border-blue-600 bg-blue-600/10 text-blue-600"
+                    : "border-slate-300 hover:border-blue-600"
                 }`}
               >
                 <input
@@ -74,13 +74,13 @@ export default function StepFive() {
             {["AdMob", "Unity Ads", "Facebook Audience Network"].map((sdk) => (
               <label
                 key={sdk}
-                className="flex items-center gap-2 px-4 py-2 border border-slate-300 rounded-lg text-sm cursor-pointer transition-colors hover:border-[#BC3FDE]"
+                className="flex items-center gap-2 px-4 py-2 border border-slate-300 rounded-lg text-sm cursor-pointer transition-colors hover:border-blue-600"
               >
                 <input
                   type="checkbox"
                   value={sdk}
                   {...register("adPlatforms")}
-                  className="accent-[#BC3FDE]"
+                  className="accent-blue-600"
                 />
                 {sdk}
               </label>
@@ -115,8 +115,8 @@ export default function StepFive() {
                   key={val}
                   className={`px-4 py-2 rounded-full border text-sm cursor-pointer transition-colors ${
                     isSelected
-                      ? "border-[#BC3FDE] bg-[#BC3FDE]/10 text-[#BC3FDE]"
-                      : "border-slate-300 hover:border-[#BC3FDE]"
+                      ? "border-blue-600 bg-blue-600/10 text-blue-600"
+                      : "border-slate-300 hover:border-blue-600"
                   }`}
                 >
                   <input
@@ -148,7 +148,7 @@ export default function StepFive() {
             type="text"
             placeholder="e.g., Paid app with email-based access"
             {...register("otherMonetizationExplanation")}
-            className="w-full text-base px-3 py-1.5 border-b border-slate-300 focus:outline-none focus:border-[#BC3FDE] bg-transparent placeholder-slate-400"
+            className="w-full text-base px-3 py-1.5 border-b border-slate-300 focus:outline-none focus:border-blue-600 bg-transparent placeholder-slate-400"
           />
           {errors.otherMonetizationExplanation && (
             <p className="text-red-500 text-sm">

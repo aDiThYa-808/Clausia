@@ -154,12 +154,12 @@ export default function FormWizard() {
     return () => clearInterval(interval);
   }, [loading,messages.length]);
 
-  //conditional redendering the ui.
+//conditional redendering the ui.
   if (loading) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-slate-50 text-center px-6 space-y-6">
         {/* Spinner with brand color */}
-        <div className="h-12 w-12 border-4 border-[#BC3FDE] border-t-transparent rounded-full animate-spin" />
+        <div className="h-12 w-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin" />
 
         {/* Rotating fun message */}
         <h2 className="text-xl font-medium text-slate-800">
@@ -168,7 +168,7 @@ export default function FormWizard() {
 
         {/* Subtext */}
         <p className="text-slate-500 text-sm">
-          Hang tight, this won’t take long.
+          Hang tight, this will not take long.
         </p>
       </div>
     );
@@ -187,7 +187,7 @@ export default function FormWizard() {
             </div>
             <div className="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
               <div
-                className="h-full bg-[#BC3FDE] transition-all duration-300 ease-in-out"
+                className="h-full bg-blue-600 transition-all duration-300 ease-in-out"
                 style={{ width: `${(step / steps.length) * 100}%` }}
               />
             </div>
@@ -217,7 +217,7 @@ export default function FormWizard() {
                 <button
                   type="button"
                   onClick={handleNext}
-                  className="bg-[#BC3FDE] text-white text-sm font-medium px-5 py-2.5 rounded-lg hover:bg-[#a930c9] transition"
+                  className="bg-cyan-500 text-white text-sm font-medium px-5 py-2.5 rounded-lg hover:bg-cyan-600 transition"
                 >
                   Next
                 </button>

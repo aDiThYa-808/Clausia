@@ -40,15 +40,13 @@ export default function LoginPage() {
     if (error) console.error("GitHub login error:", error);
   };
 
-
-
-  return (
-    <main className="relative flex min-h-screen items-center justify-center bg-gradient-to-br from-slate-50 via-white to-purple-50 px-4">
+return (
+    <main className="relative flex min-h-screen items-center justify-center bg-slate-50 px-4">
       {/* Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 -left-12 w-72 h-72 bg-purple-200/30 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-1/4 -right-12 w-96 h-96 bg-pink-200/20 rounded-full blur-3xl"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-conic from-purple-200/10 via-transparent to-pink-200/10 rounded-full blur-2xl"></div>
+        <div className="absolute top-1/4 -left-12 w-72 h-72 bg-blue-200/30 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-1/4 -right-12 w-96 h-96 bg-cyan-200/20 rounded-full blur-3xl"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-blue-200/10 rounded-full blur-2xl"></div>
       </div>
   
       <div className="relative w-full max-w-6xl grid lg:grid-cols-2 gap-12 items-center">
@@ -67,11 +65,11 @@ export default function LoginPage() {
   
         {/* Right Side - Auth Card */}
         <div className="flex items-center justify-center">
-          <div className="w-full max-w-sm bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl px-6 py-8 space-y-6 border border-purple-200/30">
+          <div className="w-full max-w-sm bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl px-6 py-8 space-y-6 border border-blue-200/30">
             {/* Wordmark Logo */}
             <div className="text-center">
               <h1
-                className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent"
+                className="text-3xl font-bold text-blue-600"
                 style={{ fontFamily: "chillax" }}
               >
                 Clausia
@@ -92,7 +90,7 @@ export default function LoginPage() {
             <div className="space-y-3">
               <button
                 onClick={signInWithGoogle}
-                className="w-full flex items-center justify-center gap-2 px-4 py-3 border-2 border-slate-200 rounded-xl text-sm font-medium text-slate-700 bg-white hover:bg-slate-50 hover:border-purple-300 hover:shadow-md transition-all duration-200"
+                className="w-full flex items-center justify-center gap-2 px-4 py-3 border-2 border-slate-200 rounded-xl text-sm font-medium text-slate-700 bg-white hover:bg-slate-50 hover:border-blue-300 hover:shadow-md transition-all duration-200"
               >
                 <Image src="/icons/google.svg" alt="Google" height={48} width={48} className="w-5 h-5" />
                 Continue with Google
@@ -100,16 +98,16 @@ export default function LoginPage() {
   
               {/* Divider */}
               <div className="flex items-center gap-3">
-                <div className="h-px flex-1 bg-gradient-to-r from-transparent via-slate-300 to-transparent" />
+                <div className="h-px flex-1 bg-slate-300" />
                 <span className="text-xs text-slate-500 uppercase tracking-wide font-medium">
                   or
                 </span>
-                <div className="h-px flex-1 bg-gradient-to-r from-transparent via-slate-300 to-transparent" />
+                <div className="h-px flex-1 bg-slate-300" />
               </div>
   
               <button
                 onClick={signInWithGitHub}
-                className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-sm font-medium text-white bg-gradient-to-r from-slate-800 to-slate-900 hover:from-slate-900 hover:to-black hover:shadow-md transition-all duration-200"
+                className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-sm font-medium text-white bg-slate-800 hover:bg-slate-900 hover:shadow-md transition-all duration-200"
               >
                 <Image src="/icons/github.svg" alt="GitHub" height={96} width={98} className="w-5 h-5" />
                 Continue with GitHub
@@ -120,11 +118,11 @@ export default function LoginPage() {
             <div className="pt-2">
               <div className="space-y-2 text-center">
                 <div className="flex items-center justify-center gap-2 text-xs text-slate-600">
-                  <div className="w-1 h-1 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full"></div>
+                  <div className="w-1 h-1 bg-cyan-500 rounded-full"></div>
                   Generate policies in minutes
                 </div>
                 <div className="flex items-center justify-center gap-2 text-xs text-slate-600">
-                  <div className="w-1 h-1 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full"></div>
+                  <div className="w-1 h-1 bg-cyan-500 rounded-full"></div>
                   100% compliant with Indian regulations
                 </div>
               </div>
@@ -134,13 +132,13 @@ export default function LoginPage() {
             <div className="pt-3 border-t border-slate-100">
               <p className="text-xs text-center text-slate-500 leading-relaxed">
                 By signing in, you agree to our{" "}
-                <span className="font-medium text-purple-600 hover:text-purple-700 cursor-pointer underline underline-offset-2">
+                <span className="font-medium text-blue-600 hover:text-blue-700 cursor-pointer underline underline-offset-2">
                   <a href="/legal/termsofservice">
                   Terms
                   </a>
                 </span>{" "}
                 and{" "}
-                <span className="font-medium text-purple-600 hover:text-purple-700 cursor-pointer underline underline-offset-2">
+                <span className="font-medium text-blue-600 hover:text-blue-700 cursor-pointer underline underline-offset-2">
                   <a href="/legal/privacypolicy">
                   Privacy Policy
                   </a>

@@ -13,7 +13,7 @@ export default function StepTwo() {
   const collectsData = useWatch({ control, name: 'collectsData' });
   const productType = watch("productType") || "app";
 
-  return (
+return (
     <div className="space-y-20">
   
       {/* Q1: Collects data? */}
@@ -27,8 +27,8 @@ export default function StepTwo() {
               key={option}
               className={`cursor-pointer px-5 py-2 rounded-full border text-sm font-medium transition
                 ${collectsData === option
-                  ? "border-[#BC3FDE] bg-[#BC3FDE]/10 text-[#BC3FDE]"
-                  : "border-slate-200 text-slate-600 hover:border-[#BC3FDE] hover:text-[#BC3FDE]"
+                  ? "border-blue-600 bg-blue-600/10 text-blue-600"
+                  : "border-slate-200 text-slate-600 hover:border-blue-600 hover:text-blue-600"
                 }`}
             >
               <input
@@ -60,13 +60,13 @@ export default function StepTwo() {
             {["Name", "Email", "Phone", "Location", "Device ID", "Usage Data"].map((item) => (
               <label
                 key={item}
-                className="flex items-center gap-2 text-sm px-4 py-2 rounded-xl border border-slate-200 hover:border-[#BC3FDE] cursor-pointer"
+                className="flex items-center gap-2 text-sm px-4 py-2 rounded-xl border border-slate-200 hover:border-blue-600 cursor-pointer"
               >
                 <input
                   type="checkbox"
                   value={item}
                   {...register("collectedDataTypes")}
-                  className="accent-[#BC3FDE]"
+                  className="accent-blue-600"
                 />
                 {item}
               </label>
@@ -85,13 +85,13 @@ export default function StepTwo() {
             {["User input", "Automatically", "Via 3rd party SDKs"].map((item) => (
               <label
                 key={item}
-                className="flex items-center gap-2 text-sm px-4 py-2 rounded-xl border border-slate-200 hover:border-[#BC3FDE] cursor-pointer"
+                className="flex items-center gap-2 text-sm px-4 py-2 rounded-xl border border-slate-200 hover:border-blue-600 cursor-pointer"
               >
                 <input
                   type="checkbox"
                   value={item}
                   {...register("dataCollectionMethods")}
-                  className="accent-[#BC3FDE]"
+                  className="accent-blue-600"
                 />
                 {item}
               </label>
@@ -102,7 +102,4 @@ export default function StepTwo() {
   
     </div>
   );
-  
-  
-  
 }

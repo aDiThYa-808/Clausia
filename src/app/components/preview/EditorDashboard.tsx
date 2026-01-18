@@ -57,8 +57,8 @@ export default function EditorDashboardLayout({
     router.push("/dashboard");
   };
 
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-purple-50">
+return (
+    <div className="min-h-screen bg-slate-50">
       <Toaster richColors />
       {/* Top Navigation */}
       <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-white/20 shadow-lg">
@@ -68,7 +68,7 @@ export default function EditorDashboardLayout({
             <div className="flex items-center space-x-2 sm:space-x-4 min-w-0 flex-1">
               <button
                 onClick={handleBackToDashboard}
-                className="flex items-center text-slate-600 hover:text-purple-600 p-2 rounded-xl hover:bg-gradient-to-r hover:from-purple-50 hover:to-pink-50 border border-transparent hover:border-purple-200/50 hover:shadow-sm flex-shrink-0"
+                className="flex items-center text-slate-600 hover:text-blue-600 p-2 rounded-xl hover:bg-blue-50 border border-transparent hover:border-blue-200/50 hover:shadow-sm flex-shrink-0"
               >
                 <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2" />
                 <span className="text-xs sm:text-sm font-medium hidden xs:block">
@@ -78,10 +78,10 @@ export default function EditorDashboardLayout({
                   Dashboard
                 </span>
               </button>
-              <div className="h-4 sm:h-6 w-px bg-gradient-to-b from-purple-300 to-pink-300 flex-shrink-0" />
+              <div className="h-4 sm:h-6 w-px bg-cyan-300 flex-shrink-0" />
               <div className="flex items-center space-x-1 sm:space-x-2 min-w-0">
                 <h1
-                  className="text-lg sm:text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent flex-shrink-0"
+                  className="text-lg sm:text-2xl font-bold text-blue-600 flex-shrink-0"
                   style={{ fontFamily: "chillax" }}
                 >
                   Clausia
@@ -96,13 +96,13 @@ export default function EditorDashboardLayout({
                 <div
                   className={`flex items-center px-4 py-2 rounded-full border ${
                     tokensUsed > credits
-                      ? "bg-gradient-to-r from-red-50 to-red-100 border-red-200 text-red-700"
-                      : "bg-gradient-to-r from-purple-100 to-pink-100 border-purple-200/50 text-slate-700"
+                      ? "bg-red-50 border-red-200 text-red-700"
+                      : "bg-blue-100 border-blue-200/50 text-slate-700"
                   }`}
                 >
                   <Coins
                     className={`w-4 h-4 mr-2 ${
-                      tokensUsed > credits ? "text-red-500" : "text-purple-600"
+                      tokensUsed > credits ? "text-red-500" : "text-blue-600"
                     }`}
                   />
                   <span className="font-medium text-sm">
@@ -115,7 +115,7 @@ export default function EditorDashboardLayout({
               <button
                 onClick={handlePublish}
                 disabled={loading}
-                className="inline-flex items-center px-3 sm:px-6 py-2 sm:py-2.5 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 disabled:from-slate-400 disabled:to-slate-400 text-white font-semibold rounded-lg sm:rounded-xl shadow-lg hover:shadow-xl disabled:shadow-sm text-sm"
+                className="inline-flex items-center px-3 sm:px-6 py-2 sm:py-2.5 bg-cyan-500 hover:bg-cyan-600 disabled:bg-slate-400 text-white font-semibold rounded-lg sm:rounded-xl shadow-lg hover:shadow-xl disabled:shadow-sm text-sm"
               >
                 {loading ? (
                   <>
@@ -137,24 +137,24 @@ export default function EditorDashboardLayout({
       </nav>
 
       {/* Preview Header */}
-      <div className="bg-gradient-to-r from-white/70 to-purple-50/70 backdrop-blur-sm border-b border-purple-200/30">
+      <div className="bg-white/70 backdrop-blur-sm border-b border-blue-200/30">
         <div className="w-full px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
           <div className="flex items-start sm:items-center space-x-3 mb-2">
-            <div className="w-6 h-6 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5 sm:mt-0">
+            <div className="w-6 h-6 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5 sm:mt-0">
               <FileText className="w-4 h-4 text-white" />
             </div>
-            <h2 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent">
+            <h2 className="text-xl sm:text-2xl font-bold text-slate-800">
               Privacy Policy Preview
             </h2>
           </div>
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-2 sm:space-y-0">
             <p className="text-slate-600 text-sm sm:text-base">
               Review your generated privacy policy for{" "}
-              <span className="font-semibold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+              <span className="font-semibold text-blue-600">
                 {productName}
               </span>
             </p>
-            <div className="flex items-center px-3 py-1.5 bg-gradient-to-r from-slate-100 to-slate-200 rounded-full border border-slate-300/50 text-xs sm:text-sm text-slate-600">
+            <div className="flex items-center px-3 py-1.5 bg-slate-100 rounded-full border border-slate-300/50 text-xs sm:text-sm text-slate-600">
               <Eye className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
               Preview Mode
             </div>
@@ -163,9 +163,9 @@ export default function EditorDashboardLayout({
       </div>
 
       {/* Mobile Credits Info */}
-      <div className="md:hidden bg-gradient-to-r from-purple-50/50 to-pink-50/50 border-b border-purple-200/30 px-4 py-3">
+      <div className="md:hidden bg-blue-50/50 border-b border-blue-200/30 px-4 py-3">
         <div className="flex items-center text-sm">
-          <Coins className="w-4 h-4 text-purple-600 mr-2" />
+          <Coins className="w-4 h-4 text-blue-600 mr-2" />
           <span className="font-medium text-slate-700">
             {tokensUsed} / {credits} credits used
           </span>
@@ -175,12 +175,12 @@ export default function EditorDashboardLayout({
       {/* Main Content - Document Style */}
       <main className="w-full px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
         <div className="max-w-4xl mx-auto">
-          <div className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl border border-purple-200/30 overflow-hidden">
+          <div className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl border border-blue-200/30 overflow-hidden">
             {/* Document Header */}
-            <div className="bg-gradient-to-r from-slate-50 to-purple-50/50 border-b border-purple-200/30 px-4 sm:px-8 py-4 sm:py-6">
+            <div className="bg-slate-50 border-b border-blue-200/30 px-4 sm:px-8 py-4 sm:py-6">
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-2 sm:space-y-0">
                 <div>
-                  <h3 className="text-lg sm:text-xl font-bold bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent">
+                  <h3 className="text-lg sm:text-xl font-bold text-slate-800">
                     Privacy Policy
                   </h3>
                   <p className="text-slate-600 mt-1 text-sm sm:text-base font-medium">
@@ -188,7 +188,7 @@ export default function EditorDashboardLayout({
                   </p>
                 </div>
                 <div className="text-left sm:text-right text-xs sm:text-sm">
-                  <div className="px-3 py-1.5 bg-gradient-to-r from-purple-100 to-pink-100 rounded-full border border-purple-200/50">
+                  <div className="px-3 py-1.5 bg-blue-100 rounded-full border border-blue-200/50">
                     <p className="text-slate-700 font-medium">
                       Created: {dayjs(date).format("MMMM D, YYYY")}
                     </p>
@@ -202,7 +202,7 @@ export default function EditorDashboardLayout({
           </div>
 
           {/* Bottom Actions */}
-          <div className="mt-6 sm:mt-8 flex flex-col space-y-4 p-4 sm:p-6 bg-white/90 backdrop-blur-sm rounded-2xl border border-purple-200/30 shadow-lg">
+          <div className="mt-6 sm:mt-8 flex flex-col space-y-4 p-4 sm:p-6 bg-white/90 backdrop-blur-sm rounded-2xl border border-blue-200/30 shadow-lg">
             <div className="text-sm text-slate-600 text-center">
               <p className="font-semibold text-slate-800 mb-2">
                 Ready to publish?
@@ -215,7 +215,7 @@ export default function EditorDashboardLayout({
             <button
               onClick={handlePublish}
               disabled={loading}
-              className="w-full inline-flex items-center justify-center px-6 sm:px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 disabled:from-slate-400 disabled:to-slate-400 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl disabled:shadow-sm"
+              className="w-full inline-flex items-center justify-center px-6 sm:px-8 py-4 bg-cyan-500 hover:bg-cyan-600 disabled:bg-slate-400 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl disabled:shadow-sm"
             >
               {loading ? (
                 <>

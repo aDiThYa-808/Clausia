@@ -13,7 +13,7 @@ export default function StepOne() {
 
   
 
-  return (
+return (
     <div className="space-y-16">
       {/* Product Type */}
       <div className="space-y-4">
@@ -25,7 +25,7 @@ export default function StepOne() {
               className={`px-4 py-2 rounded-full border text-sm font-medium transition cursor-pointer
                 ${
                   productType === type
-                    ? "bg-[#BC3FDE] text-white border-[#BC3FDE]"
+                    ? "bg-blue-600 text-white border-blue-600"
                     : "bg-white text-slate-700 border-slate-300 hover:border-slate-400"
                 }`}
             >
@@ -53,7 +53,7 @@ export default function StepOne() {
         </label>
         <input
           {...register("productName", { required: "Product name is required" })}
-          className="w-full px-4 py-2 text-sm rounded-xl border border-slate-300 focus:outline-none focus:border-[#BC3FDE] bg-white placeholder-slate-400"
+          className="w-full px-4 py-2 text-sm rounded-xl border border-slate-300 focus:outline-none focus:border-blue-600 bg-white placeholder-slate-400"
           placeholder="e.g. Whatsapp"
         />
         {errors.productName && (
@@ -71,7 +71,7 @@ export default function StepOne() {
             required: "Description is required",
           })}
           rows={3}
-          className="w-full px-4 py-2 text-sm rounded-xl border border-slate-300 focus:outline-none focus:border-[#BC3FDE] placeholder-slate-400"
+          className="w-full px-4 py-2 text-sm rounded-xl border border-slate-300 focus:outline-none focus:border-blue-600 placeholder-slate-400"
           placeholder="e.g. A group chat app for close friends"
         />
         {errors.productDescription && (
@@ -95,7 +95,7 @@ export default function StepOne() {
               className={`px-4 py-2 rounded-full border text-sm font-medium transition cursor-pointer
                 ${
                   watch("ageGroup") === value
-                    ? "bg-[#BC3FDE] text-white border-[#BC3FDE]"
+                    ? "bg-blue-600 text-white border-blue-600"
                     : "bg-white text-slate-700 border-slate-300 hover:border-slate-400"
                 }`}
             >
@@ -123,7 +123,7 @@ export default function StepOne() {
           type="email"
           {...register("contactEmail", { required: "Email is required" })}
           placeholder="you@example.com"
-          className="w-full px-4 py-2 text-sm rounded-xl border border-slate-300 focus:outline-none focus:border-[#BC3FDE] bg-white placeholder-slate-400"
+          className="w-full px-4 py-2 text-sm rounded-xl border border-slate-300 focus:outline-none focus:border-blue-600 bg-white placeholder-slate-400"
         />
         {errors.contactEmail && (
           <p className="text-sm text-red-500">{errors.contactEmail.message as string}</p>

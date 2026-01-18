@@ -5,7 +5,7 @@ export default function Footer(){
           <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-slate-600">
             <div className="flex items-center gap-1">
               <span>&copy; 2025</span>
-              <span className="font-semibold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+              <span className="font-semibold text-blue-600 bg-clip-text">
                 Clausia
               </span>
             </div>
@@ -13,19 +13,19 @@ export default function Footer(){
             <div className="flex flex-wrap items-center justify-center gap-6">
               <a
                 href="/legal/privacypolicy"
-                className="hover:text-purple-600 transition-colors"
+                className="hover:text-blue-600 transition-colors"
               >
                 Privacy Policy
               </a>
               <a
                 href="/legal/termsofservice"
-                className="hover:text-purple-600 transition-colors"
+                className="hover:text-blue-600 transition-colors"
               >
                 Terms of Service
               </a>
               <a
                 href="mailto:support@clausia.app"
-                className="hover:text-purple-600 transition-colors"
+                className="hover:text-blue-600 transition-colors"
               >
                 support@clausia.app
               </a>

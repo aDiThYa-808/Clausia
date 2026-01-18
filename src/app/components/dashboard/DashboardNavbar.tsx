@@ -45,7 +45,7 @@ export default function DashboardNavbar({ user, credits }: Props) {
     }
   };
 
-  return (
+return (
     <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-white/20 shadow-lg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
@@ -53,7 +53,7 @@ export default function DashboardNavbar({ user, credits }: Props) {
           <div className="flex items-center">
             <Link href="/dashboard">
               <h1
-                className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent cursor-pointer"
+                className="text-2xl font-bold text-blue-600 cursor-pointer"
                 style={{ fontFamily: "Chillax" }}
               >
                 Clausia
@@ -63,8 +63,8 @@ export default function DashboardNavbar({ user, credits }: Props) {
 
           {/* Right side - User menu */}
           <div className="flex items-center space-x-4">
-            <div className="hidden sm:flex items-center px-4 py-2 bg-gradient-to-r from-purple-100 to-pink-100 rounded-full border border-purple-200/50">
-              <div className="w-2 h-2 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full mr-2"></div>
+            <div className="hidden sm:flex items-center px-4 py-2 bg-blue-100 rounded-full border border-blue-200/50">
+              <div className="w-2 h-2 bg-cyan-500 rounded-full mr-2"></div>
               <span className="text-sm font-medium text-slate-700">
                 {credits ?? 0} credits
               </span>
@@ -73,7 +73,7 @@ export default function DashboardNavbar({ user, credits }: Props) {
             <div className="relative">
               <button
                 onClick={() => setDropdownOpen(!dropdownOpen)}
-                className="flex items-center space-x-2 text-slate-700 hover:text-slate-900 p-2 rounded-xl hover:bg-gradient-to-r hover:from-purple-50 hover:to-pink-50 border border-transparent hover:border-purple-200/50 hover:shadow-sm"
+                className="flex items-center space-x-2 text-slate-700 hover:text-slate-900 p-2 rounded-xl hover:bg-blue-50 border border-transparent hover:border-blue-200/50 hover:shadow-sm"
               >
                 {user?.user_metadata?.avatar_url ? (
                   <Image
@@ -81,14 +81,14 @@ export default function DashboardNavbar({ user, credits }: Props) {
                     alt="Profile"
                     height={96}
                     width={96}
-                    className="w-8 h-8 rounded-full object-cover ring-2 ring-purple-200"
+                    className="w-8 h-8 rounded-full object-cover ring-2 ring-blue-200"
                     onError={(e) => {
                       const target = e.currentTarget as HTMLImageElement;
                       target.src = "/icons/default-avatar.svg"; // fallback image
                     }}
                   />
                 ) : (
-                  <div className="w-8 h-8 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-full flex items-center justify-center text-sm font-medium shadow-sm">
+                  <div className="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-medium shadow-sm">
                     {user?.user_metadata?.full_name
                       ? getUserInitials(user.user_metadata.full_name)
                       : "?"}
@@ -114,7 +114,7 @@ export default function DashboardNavbar({ user, credits }: Props) {
 
               {/* Dropdown Menu */}
               {dropdownOpen && (
-                <div className="absolute right-0 mt-2 w-52 bg-white rounded-xl shadow-lg border border-purple-200/50 py-1 z-50">
+                <div className="absolute right-0 mt-2 w-52 bg-white rounded-xl shadow-lg border border-blue-200/50 py-1 z-50">
                   <div className="px-4 py-3 border-b border-slate-100">
                     <p className="text-sm font-medium text-slate-800">
                       {user?.user_metadata?.full_name || "User"}
@@ -127,7 +127,7 @@ export default function DashboardNavbar({ user, credits }: Props) {
                       onClick={() => {
                         handleCreditsPurchase();
                       }}
-                      className="flex items-center w-full px-4 py-2 text-sm text-slate-700 hover:bg-purple-50 rounded-lg mx-1"
+                      className="flex items-center w-full px-4 py-2 text-sm text-slate-700 hover:bg-blue-50 rounded-lg mx-1"
                     >
                       <svg
                         className="w-4 h-4 mr-2"
@@ -149,7 +149,7 @@ export default function DashboardNavbar({ user, credits }: Props) {
                       onClick={() => {
                         handleBillingHistory()
                       }}
-                      className="flex items-center w-full px-4 py-2 text-sm text-slate-700 hover:bg-purple-50 rounded-lg mx-1"
+                      className="flex items-center w-full px-4 py-2 text-sm text-slate-700 hover:bg-blue-50 rounded-lg mx-1"
                     >
                       <svg
                         className="w-4 h-4 mr-2"

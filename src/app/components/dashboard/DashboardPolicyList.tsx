@@ -67,7 +67,7 @@ export default function DashboardPolicyList({ policies, credits }: Props) {
   const completedPolicies = policies?.filter((p) => p.status === "completed").length || 0;
   const totalPolicies = policies?.length || 0;
 
-  return (
+return (
     <div className="min-h-screen bg-gray-50">
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
@@ -132,7 +132,7 @@ export default function DashboardPolicyList({ policies, credits }: Props) {
               </div>
               <button
                 onClick={handleNewPolicy}
-                className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white text-sm font-medium rounded-md transition-all duration-200"
+                className="inline-flex items-center px-4 py-2 bg-cyan-500 hover:bg-cyan-600 text-white text-sm font-medium rounded-md transition-all duration-200"
               >
                 <Plus className="w-4 h-4 mr-2" />
                 New Policy
