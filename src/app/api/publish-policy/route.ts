@@ -1,9 +1,19 @@
 // updates user's credits and policy's status after publishing
 
+import { rateLimiter } from "@/lib/rate-limiter/rateLimiter";
 import { createSupabaseServerClient } from "@/lib/supabase/supabaseServerClient";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
+
+    let allowed = await rateLimiter(req)
+    if(!allowed){
+      return NextResponse.json(
+        {error:"Too many requests"},
+        {status:429}
+      )
+    }
+
     const { policyId } = await req.json(); 
   
     if (!policyId) {

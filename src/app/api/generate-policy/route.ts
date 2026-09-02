@@ -1,6 +1,6 @@
 //sends prompt to openai's gpt 4.1 mini, parses the response and inserts it into the table
 
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import OpenAI from "openai";
 import {
   generatePrivacyPrompt,
@@ -8,8 +8,18 @@ import {
 } from "@/lib/openai/generatePrompt";
 import { parseRawPolicy } from "@/lib/openai/parseRawPolicy";
 import { createSupabaseServerClient } from "@/lib/supabase/supabaseServerClient";
+import { rateLimiter } from "@/lib/rate-limiter/rateLimiter";
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
+  
+  let allowed = await rateLimiter(req)
+  if(!allowed){
+    return NextResponse.json(
+      {error:"Too many requests"},
+      {status:429}
+    )
+  }
+
   try {
     const openaiKey = process.env.OPENAI_SECRET_KEY;
 
