@@ -10,17 +10,12 @@ const luaScript = fs.readFileSync(
     'utf-8'
 )
 
-const capacity = 10;
-const refillPerSecond = 2;
+const capacity = 5;
+const refillPerSecond = 1/600;
 
-export async function rateLimiter(req: NextRequest): Promise<boolean> {
-    let forwardedFor = req.headers.get('x-forwarded-for')
-    let clientId = (forwardedFor)? forwardedFor.split(",")[0].trim() : 'unknown'
+export async function rateLimiter(userId: string): Promise<boolean> {
 
-    if(clientId == 'unknown'){
-        console.log("bad request")
-        return false
-    }
+    let clientId = userId
 
     let res = await redis.eval(luaScript,[`bucket:${clientId}`],[capacity,refillPerSecond,Date.now()])
 
