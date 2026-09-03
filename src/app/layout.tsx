@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { Analytics } from '@vercel/analytics/next';
-import {SpeedInsights} from '@vercel/speed-insights/next'
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Toaster } from "sonner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,8 +16,10 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Clausia - Instantly Generate Privacy Policies For Indian Apps and Games",
-  description: "Clausia helps Indian developers generate privacy policies in minutes. Built for apps, games & websites. Legally sound, AI-powered, fast.",
+  title:
+    "Clausia - Instantly Generate Privacy Policies For Indian Apps and Games",
+  description:
+    "Clausia helps Indian developers generate privacy policies in minutes. Built for apps, games & websites. Legally sound, AI-powered, fast.",
 };
 
 export default function RootLayout({
@@ -30,8 +33,9 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
-        <Analytics/>
-        <SpeedInsights/>
+        <Toaster richColors />
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

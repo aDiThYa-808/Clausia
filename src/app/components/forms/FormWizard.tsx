@@ -3,14 +3,11 @@
 import { useForm, FormProvider } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
-import { Toaster,toast } from "sonner";
+import { toast } from "sonner";
 import StepOne from "./StepOne";
 import StepTwo from "./StepTwo";
 
-import {
-  fullSchema,
-  FullFormData,
-} from "@/lib/validation/formSchemas";
+import { fullSchema, FullFormData } from "@/lib/validation/formSchemas";
 import StepThree from "./StepThree";
 import StepFour from "./StepFour";
 import StepFive from "./StepFive";
@@ -109,11 +106,10 @@ export default function FormWizard() {
       });
 
       if (!res.ok) {
-        const errorText = await res.text();
-        toast.error("Server Error", {description:
-          errorText
-        })
-        //console.error("Server Error:", errorText);
+        const errorText = await res.json();
+        toast.error("Failed to generate policy", {
+          description: errorText.error,
+        });
         setLoading(false);
         return;
       }
@@ -122,7 +118,7 @@ export default function FormWizard() {
 
       router.push(`/privacypolicy/preview/${id}`);
     } catch (err) {
-      toast.error("Network Error")
+      toast.error("Network Error");
       console.error(err);
     }
   };
@@ -152,9 +148,9 @@ export default function FormWizard() {
     }, 2500);
 
     return () => clearInterval(interval);
-  }, [loading,messages.length]);
+  }, [loading, messages.length]);
 
-//conditional redendering the ui.
+  //conditional redendering the ui.
   if (loading) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-slate-50 text-center px-6 space-y-6">
@@ -176,7 +172,6 @@ export default function FormWizard() {
     return (
       <FormProvider {...methods}>
         <div className="space-y-12 max-w-3xl mx-auto">
-          <Toaster richColors/>
           {/* Progress */}
           <div className="space-y-2 mb-8">
             <div className="flex justify-between text-sm font-medium text-slate-600">
