@@ -5,8 +5,20 @@ import { createSupabaseServerClient } from "@/lib/supabase/supabaseServerClient"
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
+  
+    const supabase = await createSupabaseServerClient();
 
-    let allowed = await rateLimiter(req)
+    //get logged in user info
+    const {
+      data: userData,
+      error: userError,
+    } = await supabase.auth.getUser();
+
+    if(userError || !userData.user) return NextResponse.json({ error:userError?.message }, { status: 401 });
+    const userId = userData.user?.id
+    
+    //check ratelimit
+    let allowed = await rateLimiter(userId)
     if(!allowed){
       return NextResponse.json(
         {error:"Too many requests"},
@@ -19,19 +31,7 @@ export async function POST(req: NextRequest) {
     if (!policyId) {
       return NextResponse.json({ error: "Missing policyId" }, { status: 400 });
     }
-  
-    const supabase = await createSupabaseServerClient();
-
-    //get logged in user info
-    const {
-      data: userData,
-      error: userError,
-    } = await supabase.auth.getUser();
-
-    if(userError || !userData.user) return NextResponse.json({ error:userError?.message }, { status: 401 });
-
-    const userId = userData.user?.id
-  
+    
     //get tokens used, policy status and users id from Policy table
     const{data:tokensData,error:tokensError} = await supabase
     .from("Policy")

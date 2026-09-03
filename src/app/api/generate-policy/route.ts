@@ -11,25 +11,8 @@ import { createSupabaseServerClient } from "@/lib/supabase/supabaseServerClient"
 import { rateLimiter } from "@/lib/rate-limiter/rateLimiter";
 
 export async function POST(req: NextRequest) {
-  
-  let allowed = await rateLimiter(req)
-  if(!allowed){
-    return NextResponse.json(
-      {error:"Too many requests"},
-      {status:429}
-    )
-  }
 
   try {
-    const openaiKey = process.env.OPENAI_SECRET_KEY;
-
-    if (!openaiKey) {
-      //console.error('Missing OPENAI_SECRET_KEY')
-      return new NextResponse("Server misconfiguration.", { status: 500 });
-    }
-
-    const openai = new OpenAI({ apiKey: openaiKey });
-
     const supabase = await createSupabaseServerClient();
 
     //get logged in user info
@@ -42,6 +25,25 @@ export async function POST(req: NextRequest) {
       //console.warn("Unauthorized request");
       return new NextResponse("Unauthorized", { status: 401 });
     }
+
+    //check ratelimit
+    let allowed = await rateLimiter(user.id)
+    if(!allowed){
+      return NextResponse.json(
+        {error:"Too many requests"},
+        {status:429}
+      )
+    }
+
+    const openaiKey = process.env.OPENAI_SECRET_KEY;
+
+    if (!openaiKey) {
+      //console.error('Missing OPENAI_SECRET_KEY')
+      return new NextResponse("Server misconfiguration.", { status: 500 });
+    }
+
+    const openai = new OpenAI({ apiKey: openaiKey });
+
 
     //user input 
     const data: PolicyInput = await req.json();
