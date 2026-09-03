@@ -1,4 +1,3 @@
-import { NextRequest} from "next/server";
 import { Redis } from "@upstash/redis"
 import fs from "fs"
 import path from "path"
@@ -11,7 +10,7 @@ const luaScript = fs.readFileSync(
 )
 
 const capacity = 5;
-const refillPerSecond = 1/600;
+const refillPerSecond = 1/120;
 
 export async function rateLimiter(userId: string): Promise<boolean> {
 
