@@ -121,8 +121,7 @@ RAZORPAY_KEY_SECRET=
 
 Questions? Suggestions? We'd love to hear from you!
 
-- 📧 Email: clausia.app@gmail.com OR contactadiiiii@gmail.com
-- 📸 Instagram: a_d_i_.x
+- 📧 Email: adithyas824@gmail.com
 
 ---
 
@@ -130,7 +129,7 @@ Questions? Suggestions? We'd love to hear from you!
 
 **Built for developers, Built by Developers.**
 
-[Get Started →](https://clausia.app)
+[Get Started →](https://useclausia.vercel.app)
 
 </div>
 
