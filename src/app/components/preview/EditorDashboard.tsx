@@ -57,9 +57,8 @@ export default function EditorDashboardLayout({
     router.push("/dashboard");
   };
 
-return (
+  return (
     <div className="min-h-screen bg-slate-50">
-      <Toaster richColors />
       {/* Top Navigation */}
       <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-white/20 shadow-lg">
         <div className="w-full px-4 sm:px-6 lg:px-8">
@@ -150,9 +149,7 @@ return (
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-2 sm:space-y-0">
             <p className="text-slate-600 text-sm sm:text-base">
               Review your generated privacy policy for{" "}
-              <span className="font-semibold text-blue-600">
-                {productName}
-              </span>
+              <span className="font-semibold text-blue-600">{productName}</span>
             </p>
             <div className="flex items-center px-3 py-1.5 bg-slate-100 rounded-full border border-slate-300/50 text-xs sm:text-sm text-slate-600">
               <Eye className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
@@ -232,7 +229,7 @@ return (
           </div>
         </div>
       </main>
-      <DashboardFooter/>
+      <DashboardFooter />
     </div>
   );
 }
