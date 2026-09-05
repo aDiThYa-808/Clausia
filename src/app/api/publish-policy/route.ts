@@ -1,14 +1,10 @@
 // updates user's credits and policy's status after publishing
 
+import { rateLimiter } from "@/lib/rate-limiter/rateLimiter";
 import { createSupabaseServerClient } from "@/lib/supabase/supabaseServerClient";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
-    const { policyId } = await req.json(); 
-  
-    if (!policyId) {
-      return NextResponse.json({ error: "Missing policyId" }, { status: 400 });
-    }
   
     const supabase = await createSupabaseServerClient();
 
@@ -19,9 +15,23 @@ export async function POST(req: NextRequest) {
     } = await supabase.auth.getUser();
 
     if(userError || !userData.user) return NextResponse.json({ error:userError?.message }, { status: 401 });
-
     const userId = userData.user?.id
+    
+    //check ratelimit
+    let allowed = await rateLimiter(userId)
+    if(!allowed){
+      return NextResponse.json(
+        {error:"Too many requests"},
+        {status:429}
+      )
+    }
+
+    const { policyId } = await req.json(); 
   
+    if (!policyId) {
+      return NextResponse.json({ error: "Missing policyId" }, { status: 400 });
+    }
+    
     //get tokens used, policy status and users id from Policy table
     const{data:tokensData,error:tokensError} = await supabase
     .from("Policy")

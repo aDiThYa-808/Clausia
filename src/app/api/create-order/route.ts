@@ -1,11 +1,10 @@
 //creates a razorpay order
-
 import Razorpay from "razorpay";
 import { creditPacks } from "@/types/creditPackType";
 import { createSupabaseServerClient } from "@/lib/supabase/supabaseServerClient";
-import { NextResponse } from "next/server";
+import { NextRequest,NextResponse } from "next/server";
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
   const RazorpayKeyId = process.env.RAZORPAY_KEY_ID; // add '_TEST' to the key to use razorpay in test mode
   const RazorpayKeySecret = process.env.RAZORPAY_KEY_SECRET; // add '_TEST' to the key to use razorpay in test mode
 

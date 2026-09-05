@@ -1,9 +1,9 @@
 //verifies the razorpay order, updates user's credits and stores transaction history in the table
 
 import { createSupabaseServerClient } from "@/lib/supabase/supabaseServerClient";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
 
   const RazorpayKeyId = process.env.RAZORPAY_KEY_ID;  // add _TEST to use razorpay in test mode
   const RazorpayKeySecret = process.env.RAZORPAY_KEY_SECRET; //add _TEST to use razorpay in test mode
@@ -33,17 +33,6 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Missing payment verification fields" }, { status: 400 });
     }
 
-    // Check if this payment was already processed
-    const { data: existingTransaction } = await supabase
-      .from("transactions")
-      .select("id")
-      .eq("razorpay_payment_id", razorpay_payment_id)
-      .maybeSingle();
-
-    if (existingTransaction) {
-      return NextResponse.json({ success: true, message: "Payment already processed" });
-    }
-
     // Verify Razorpay signature
     const encoder = new TextEncoder();
     const key = await crypto.subtle.importKey(
@@ -66,6 +55,17 @@ export async function POST(req: Request) {
 
     if (generatedSignature !== razorpay_signature) {
       return NextResponse.json({ error: "Invalid payment signature" }, { status: 400 });
+    }
+
+    // Check if this payment was already processed
+    const { data: existingTransaction } = await supabase
+    .from("transactions")
+    .select("id")
+    .eq("razorpay_payment_id", razorpay_payment_id)
+    .maybeSingle();
+  
+    if (existingTransaction) {
+      return NextResponse.json({ success: true, message: "Payment already processed" });
     }
 
     // Get order details from Razorpay
