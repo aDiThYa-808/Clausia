@@ -130,11 +130,11 @@ export const stepThreeSchema = z.object({
   
   
 
-export const fullSchema = stepOneSchema
-  .merge(stepTwoSchema)
-  .merge(stepThreeSchema)
-  .merge(stepFourSchema)
-  .merge(stepFiveSchema);
+    export const fullSchema = stepOneSchema
+    .safeExtend(stepTwoSchema.shape)
+    .safeExtend(stepThreeSchema.shape)
+    .safeExtend(stepFourSchema.shape)
+    .safeExtend(stepFiveSchema.shape);
 
 
 export type StepOneData = z.infer<typeof stepOneSchema>;
