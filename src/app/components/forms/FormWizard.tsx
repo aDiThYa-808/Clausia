@@ -118,8 +118,11 @@ export default function FormWizard() {
 
       router.push(`/privacypolicy/preview/${id}`);
     } catch (err) {
-      toast.error("Network Error");
+      toast.error("Failed to generate policy", {
+        description: "please try again later.",
+      });
       console.error(err);
+      setLoading(false)
     }
   };
 
