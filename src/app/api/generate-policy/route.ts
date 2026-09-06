@@ -71,7 +71,7 @@ export async function POST(req: NextRequest) {
     const choice = response.choices?.[0]?.message?.content;
     if (!choice) {
       //console.error("Invalid AI response:", response);
-      return new NextResponse("No response from AI", { status: 500 });
+      return new NextResponse("Couldnt generate policy", { status: 500 });
     }
 
     const raw = choice.trim();
@@ -85,7 +85,7 @@ export async function POST(req: NextRequest) {
     } catch (parseError) {
       //console.error("Failed to parse AI response:", raw);
       console.error(parseError);
-      return new NextResponse("Parsing error", { status: 500 });
+      return new NextResponse("Parsing failed, please try again", { status: 500 });
     }
 
     // Supabase insert 
